@@ -1,0 +1,58 @@
+import { type Circle } from "@/lib/types";
+
+export const mockCircles: Circle[] = [
+  {
+    id: "circle-1",
+    name: "Park Slope Moms",
+    description: "The OG neighborhood circle. Swap meetups every Saturday at the Prospect Park playground. New members always welcome!",
+    cover_image: "https://picsum.photos/seed/parkslope/800/400",
+    neighborhood: "Park Slope",
+    member_count: 89,
+    created_at: "2024-01-01T10:00:00Z",
+  },
+  {
+    id: "circle-2",
+    name: "Brooklyn Heights Parents",
+    description: "Parents in the Heights — swapping, sharing tips, and meeting up at the Promenade. From newborns to school-age, all welcome.",
+    cover_image: "https://picsum.photos/seed/bkheights/800/400",
+    neighborhood: "Brooklyn Heights",
+    member_count: 64,
+    created_at: "2024-01-15T10:00:00Z",
+  },
+  {
+    id: "circle-3",
+    name: "DUMBO Families",
+    description: "DUMBO and Vinegar Hill families connecting over swaps and playdates. We love the waterfront parks and supporting local.",
+    cover_image: "https://picsum.photos/seed/dumbo/800/400",
+    neighborhood: "DUMBO",
+    member_count: 42,
+    created_at: "2024-02-01T10:00:00Z",
+  },
+  {
+    id: "circle-4",
+    name: "Sustainable Baby Club",
+    description: "For eco-conscious parents who believe in buying less, swapping more, and teaching our kids about sustainability from day one.",
+    cover_image: "https://picsum.photos/seed/ecobaby/800/400",
+    neighborhood: "All Brooklyn",
+    member_count: 156,
+    created_at: "2024-01-20T10:00:00Z",
+  },
+  {
+    id: "circle-5",
+    name: "First-Time Moms Support",
+    description: "A safe, supportive space for first-time moms to ask all the questions, share the wins, and swap those newborn sizes they grew out of overnight.",
+    cover_image: "https://picsum.photos/seed/firsttime/800/400",
+    neighborhood: "All Brooklyn",
+    member_count: 203,
+    created_at: "2024-02-14T10:00:00Z",
+  },
+  {
+    id: "circle-6",
+    name: "Cobble Hill & Carroll Gardens",
+    description: "Neighbors swapping across Smith Street. Monthly meetups at the Carroll Park playground. Gear swaps especially popular here!",
+    cover_image: "https://picsum.photos/seed/cobblehill/800/400",
+    neighborhood: "Cobble Hill",
+    member_count: 71,
+    created_at: "2024-03-01T10:00:00Z",
+  },
+];
