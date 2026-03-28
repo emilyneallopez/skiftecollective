@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -45,17 +46,10 @@ export default function AuthPage() {
     <div className="min-h-screen bg-cream flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-block">
-            <span className="font-heading text-3xl font-bold">
-              <span className="text-terracotta">S</span>
-              <span className="text-forest">k</span>
-              <span className="text-terracotta-600">i</span>
-              <span className="text-forest-600">f</span>
-              <span className="text-terracotta">t</span>
-              <span className="text-forest">e</span>
-            </span>
+          <Link href="/" className="inline-block mb-4">
+            <Image src="/logo.jpg" alt="Skifte Collective" width={160} height={64} className="h-16 w-auto object-contain mx-auto" />
           </Link>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="text-sm text-muted-foreground">
             The Neighborhood Network for Modern Motherhood
           </p>
         </div>
@@ -166,11 +160,9 @@ export default function AuthPage() {
                 />
               </div>
 
-              <Link href="/browse">
-                <Button className="w-full h-11 bg-terracotta hover:bg-terracotta-600 text-white rounded-lg mt-2">
-                  {tab === "signin" ? "Sign In" : "Create Account"}
+                  <Button className="w-full h-11 bg-terracotta hover:bg-terracotta-600 text-white rounded-full mt-2 font-medium">
+                  {tab === "signin" ? "Sign In" : "Join the Collective"}
                 </Button>
-              </Link>
             </motion.form>
           </AnimatePresence>
 

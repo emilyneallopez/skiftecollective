@@ -42,7 +42,7 @@ export function LandingPageClient() {
   return (
     <div className="min-h-screen bg-warm-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-cream pb-20 md:pb-32">
+      <section className="relative overflow-hidden bg-cream bg-dots pb-20 md:pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-16">
           {/* Top nav bar */}
           <div className="flex items-center justify-between mb-16 md:mb-24">
@@ -78,19 +78,19 @@ export function LandingPageClient() {
                   <Link href="/auth?tab=signup">
                     <Button
                       size="lg"
-                      className="bg-terracotta hover:bg-terracotta-600 text-white rounded-full px-8 text-base gap-2"
+                      className="bg-terracotta hover:bg-terracotta-600 text-white rounded-full px-8 text-base gap-2 font-medium"
                     >
                       Join the collective
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <Link href="/browse">
+                  <Link href="/auth">
                     <Button
                       size="lg"
                       variant="outline"
-                      className="rounded-full px-8 text-base border-cream-300 hover:bg-cream-200"
+                      className="rounded-full px-8 text-base border-ink/20 hover:bg-cream-200 font-medium"
                     >
-                      Browse swaps
+                      Sign in
                     </Button>
                   </Link>
                 </div>
