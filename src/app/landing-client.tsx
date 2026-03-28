@@ -190,23 +190,33 @@ export function LandingPageClient() {
 
             <FadeIn delay={0.3} direction="none" duration={0.8}>
               <div className="relative">
-                {/* Organic blob shape instead of perfect rectangle */}
-                <div
-                  className="bg-sunshine aspect-[4/3] flex items-center justify-center relative"
-                  style={{ clipPath: "polygon(5% 0%, 95% 3%, 100% 95%, 3% 100%)" }}
-                >
-                  {/* Scattered dots inside */}
-                  <span className="absolute top-6 left-8 text-ink/10 text-xs select-none" aria-hidden="true">●</span>
-                  <span className="absolute top-12 right-12 text-ink/10 text-sm select-none" aria-hidden="true">●</span>
-                  <span className="absolute bottom-10 left-16 text-ink/10 text-xs select-none" aria-hidden="true">●</span>
-                  <span className="absolute bottom-16 right-8 text-ink/10 text-sm select-none" aria-hidden="true">●</span>
-                  <span className="absolute top-1/3 left-1/4 text-ink/8 text-[6px] select-none" aria-hidden="true">●</span>
-                  <span className="absolute bottom-1/4 right-1/3 text-ink/8 text-[6px] select-none" aria-hidden="true">●</span>
-
-                  <p className="font-heading text-2xl md:text-3xl font-bold text-ink/80 text-center px-8">
-                    Real swaps,<br />real moms
-                  </p>
+                {/* Real photo collage */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-3">
+                    <div className="rounded-2xl overflow-hidden aspect-square shadow-sm">
+                      <Image src="/linen-bloomers.jpg" alt="Linen bloomers" width={300} height={300} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="rounded-2xl overflow-hidden aspect-square shadow-sm">
+                      <Image src="/wooden-toy.jpg" alt="Wooden toy" width={300} height={300} className="w-full h-full object-cover" />
+                    </div>
+                  </div>
+                  <div className="space-y-3 mt-6">
+                    <div className="rounded-2xl overflow-hidden aspect-square shadow-sm">
+                      <Image src="/onesie-bundle.jpg" alt="Onesie bundle" width={300} height={300} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="rounded-2xl overflow-hidden aspect-square shadow-sm">
+                      <Image src="/board-books.jpg" alt="Board books" width={300} height={300} className="w-full h-full object-cover" />
+                    </div>
+                  </div>
                 </div>
+                {/* Floating trust badge */}
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -bottom-4 -left-2 bg-warm-white rounded-2xl shadow-lg px-4 py-3 border border-cream-200"
+                >
+                  <p className="text-xs font-medium text-terracotta">🌿 1,247 items swapped</p>
+                </motion.div>
               </div>
             </FadeIn>
           </div>

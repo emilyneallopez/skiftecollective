@@ -1,0 +1,64 @@
+You are porting a Vite/React app to Next.js 14 (App Router). The source code is in /tmp/skifte-lovable/src/. The destination is the current Next.js project.
+
+## Goal
+Make the Next.js app look and feel IDENTICAL to the Lovable app at /tmp/skifte-lovable/src/ — same fonts, same colors, same layout, same components. We want the warmth and personality of the Lovable app in the Vercel build.
+
+## Step 1: Copy the exact design system
+From /tmp/skifte-lovable/src/index.css, extract:
+- The CSS variable values for all colors (--primary, --secondary, --background, --card, etc.)
+- The font imports (Fredoka + Outfit from Google Fonts)
+- All custom brand tokens (--terracotta, --sage, --blush, --cream, etc.)
+
+Update /Users/alphaguest/Projects/skifte/src/app/globals.css to use these EXACT same CSS variable values. Replace the current values with the Lovable ones.
+
+Update /Users/alphaguest/Projects/skifte/tailwind.config.ts to match — use the CSS variables for colors.
+
+## Step 2: Port the AppLayout
+The Lovable AppLayout has:
+- FunBackground (already ported to src/components/fun-background.tsx)
+- A centered max-w-lg container with bottom padding
+- BottomNav component
+
+Port /tmp/skifte-lovable/src/components/layout/BottomNav.tsx to /Users/alphaguest/Projects/skifte/src/components/layout/bottom-nav.tsx
+- Convert React Router <Link> to Next.js <Link>
+- Convert useNavigate/useLocation to Next.js usePathname
+- Keep all styling exactly the same
+
+Update /Users/alphaguest/Projects/skifte/src/app/(app)/layout.tsx to use the BottomNav and center content in max-w-lg
+
+## Step 3: Port the Index/Home page
+Port /tmp/skifte-lovable/src/pages/Index.tsx to /Users/alphaguest/Projects/skifte/src/app/page.tsx (as a client component)
+- Convert React Router useNavigate to Next.js useRouter
+- Use /skifte-logo.png and /skifte-icon.png for images (they're in public/)
+- Use /onesie-bundle.jpg, /wooden-toy.jpg, /baby-bouncer.jpg, /board-books.jpg, /linen-bloomers.jpg for sample listing images
+- Keep all the sections: header with logo, How Skifte Works steps (with connector line), Why Skifte Exists pillars, First Year Map CTA, Browse Categories, New For You grid, Eco Impact
+- Keep exact same layout, spacing, and styling
+
+## Step 4: Port the Browse page
+Port /tmp/skifte-lovable/src/pages/BrowsePage.tsx to /Users/alphaguest/Projects/skifte/src/app/(app)/browse/page.tsx
+- Convert React Router to Next.js patterns
+- Keep the search bar, location filter with radius slider, category pills, size filter, item grid
+- Use mock data from /Users/alphaguest/Projects/skifte/src/lib/data/mock/items.ts combined with the Lovable sample listings structure
+
+## Step 5: Port ItemCard
+Replace /Users/alphaguest/Projects/skifte/src/components/item-card.tsx with the Lovable ItemCard from /tmp/skifte-lovable/src/components/items/ItemCard.tsx
+- Convert React Router to Next.js Link
+- Keep exact same visual design
+
+## Step 6: Port Auth page
+Port /tmp/skifte-lovable/src/pages/AuthPage.tsx to /Users/alphaguest/Projects/skifte/src/app/auth/page.tsx
+- Keep FunBackground, decorative circles, logo animation, form layout
+- Wire up to Supabase auth using the existing client at src/lib/supabase/client.ts
+- Keep all motion animations
+
+## Step 7: Verify build
+Run npm run build. Fix any TypeScript errors. Make sure all pages compile.
+
+## Important constraints
+- Do NOT use React Router — use Next.js navigation throughout
+- All image paths should use /public/ files (already copied)
+- Keep the Supabase client at src/lib/supabase/client.ts — do not change env var names
+- The middleware at src/middleware.ts handles auth gating — keep it
+- The FunBackground is already at src/components/fun-background.tsx
+
+When completely finished, run: openclaw system event --text "Done: Lovable app fully ported to Next.js — exact same design, fonts, colors, layout, components" --mode now
