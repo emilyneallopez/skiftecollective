@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
 
 export function SiteFooter() {
@@ -8,14 +9,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="inline-block">
-              <span className="font-heading text-xl font-bold">
-                <span className="text-terracotta">S</span>
-                <span className="text-forest">k</span>
-                <span className="text-terracotta-600">i</span>
-                <span className="text-forest-600">f</span>
-                <span className="text-terracotta">t</span>
-                <span className="text-forest">e</span>
-              </span>
+              <Image src="/logo.jpg" alt="Skifte Collective" width={120} height={48} className="h-12 w-auto object-contain" />
             </Link>
             <p className="mt-2 text-sm text-muted-foreground">{APP_TAGLINE}</p>
           </div>

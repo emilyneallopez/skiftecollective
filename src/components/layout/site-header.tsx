@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, Search, Bell, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,15 +32,8 @@ export function SiteHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-1 shrink-0">
-            <span className="font-heading text-xl font-bold">
-              <span className="text-terracotta">S</span>
-              <span className="text-forest">k</span>
-              <span className="text-terracotta-600">i</span>
-              <span className="text-forest-600">f</span>
-              <span className="text-terracotta">t</span>
-              <span className="text-forest">e</span>
-            </span>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image src="/logo.jpg" alt="Skifte Collective" width={100} height={40} className="h-10 w-auto object-contain" />
           </Link>
 
           {/* Desktop Nav */}
@@ -119,13 +113,8 @@ export function SiteHeader() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-72 bg-warm-white">
-                <SheetTitle className="font-heading text-lg">
-                  <span className="text-terracotta">S</span>
-                  <span className="text-forest">k</span>
-                  <span className="text-terracotta-600">i</span>
-                  <span className="text-forest-600">f</span>
-                  <span className="text-terracotta">t</span>
-                  <span className="text-forest">e</span>
+                <SheetTitle>
+                  <Image src="/logo.jpg" alt="Skifte Collective" width={100} height={40} className="h-10 w-auto object-contain" />
                 </SheetTitle>
                 <nav className="flex flex-col gap-1 mt-8">
                   {NAV_LINKS.map((link) => (

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,14 +47,7 @@ export function LandingPageClient() {
           {/* Top nav bar */}
           <div className="flex items-center justify-between mb-16 md:mb-24">
             <Link href="/" className="flex items-center">
-              <span className="font-heading text-2xl font-bold">
-                <span className="text-terracotta">S</span>
-                <span className="text-forest">k</span>
-                <span className="text-terracotta-600">i</span>
-                <span className="text-forest-600">f</span>
-                <span className="text-terracotta">t</span>
-                <span className="text-forest">e</span>
-              </span>
+              <Image src="/logo.jpg" alt="Skifte Collective" width={120} height={48} className="h-12 w-auto object-contain" />
             </Link>
             <div className="flex items-center gap-3">
               <Link href="/auth">
