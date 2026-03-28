@@ -43,7 +43,13 @@ export default function AuthPage() {
   const [neighborhood, setNeighborhood] = useState("");
 
   return (
-    <div className="min-h-screen bg-cream bg-dots flex items-center justify-center p-4">
+    <div
+      className="min-h-screen bg-cream bg-dots flex items-center justify-center p-4"
+      style={{
+        backgroundImage: `radial-gradient(circle, #C96A3A18 1px, transparent 1px), linear-gradient(to bottom, #FAF5EF, #FEFCFA)`,
+        backgroundSize: "24px 24px, 100% 100%",
+      }}
+    >
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block mb-4">
@@ -56,15 +62,21 @@ export default function AuthPage() {
 
         <motion.div
           layout
-          className="bg-warm-white rounded-3xl shadow-sm border border-cream-300 p-8"
+          className="bg-warm-white rounded-3xl border border-cream-300 p-8 relative"
+          style={{ boxShadow: "2px 3px 0px #C96A3A20" }}
         >
+          {/* Warm welcome message */}
+          <p className="font-heading text-2xl text-terracotta text-center mb-6 italic">
+            Welcome home.
+          </p>
+
           {/* Tab Switcher */}
-          <div className="flex gap-1 p-1 bg-cream rounded-lg mb-8">
+          <div className="flex gap-1 p-1 bg-cream rounded-2xl mb-8">
             <button
               onClick={() => setTab("signin")}
-              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
+              className={`flex-1 py-2 px-4 rounded-xl text-sm font-medium transition-all ${
                 tab === "signin"
-                  ? "bg-white shadow-sm text-ink"
+                  ? "bg-warm-white shadow-sm text-ink"
                   : "text-ink/50 hover:text-ink/70"
               }`}
             >
@@ -72,9 +84,9 @@ export default function AuthPage() {
             </button>
             <button
               onClick={() => setTab("signup")}
-              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
+              className={`flex-1 py-2 px-4 rounded-xl text-sm font-medium transition-all ${
                 tab === "signup"
-                  ? "bg-white shadow-sm text-ink"
+                  ? "bg-warm-white shadow-sm text-ink"
                   : "text-ink/50 hover:text-ink/70"
               }`}
             >
@@ -85,7 +97,7 @@ export default function AuthPage() {
           {/* Google OAuth */}
           <Button
             variant="outline"
-            className="w-full gap-3 h-11 rounded-lg border-cream-300 hover:bg-cream/50 mb-6"
+            className="w-full gap-3 h-11 rounded-2xl border-cream-300 hover:bg-cream/50 mb-6"
           >
             <GoogleIcon />
             Continue with Google
@@ -93,7 +105,7 @@ export default function AuthPage() {
 
           <div className="flex items-center gap-3 mb-6">
             <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground">or</span>
+            <span className="text-xs text-terracotta/40">or</span>
             <Separator className="flex-1" />
           </div>
 
@@ -110,45 +122,45 @@ export default function AuthPage() {
               {tab === "signup" && (
                 <>
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block">
+                    <label className="text-sm font-medium mb-1.5 block text-ink/70">
                       Full Name
                     </label>
                     <Input
                       type="text"
-                      placeholder="Sarah Chen"
+                      placeholder="Your name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="h-11 rounded-lg"
+                      className="h-11 rounded-2xl"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block">
+                    <label className="text-sm font-medium mb-1.5 block text-ink/70">
                       Neighborhood
                     </label>
                     <Input
                       type="text"
-                      placeholder="Park Slope, Brooklyn"
+                      placeholder="Your neighborhood"
                       value={neighborhood}
                       onChange={(e) => setNeighborhood(e.target.value)}
-                      className="h-11 rounded-lg"
+                      className="h-11 rounded-2xl"
                     />
                   </div>
                 </>
               )}
 
               <div>
-                <label className="text-sm font-medium mb-1.5 block">Email</label>
+                <label className="text-sm font-medium mb-1.5 block text-ink/70">Email</label>
                 <Input
                   type="email"
                   placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-11 rounded-lg"
+                  className="h-11 rounded-2xl"
                 />
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-1.5 block">
+                <label className="text-sm font-medium mb-1.5 block text-ink/70">
                   Password
                 </label>
                 <Input
@@ -156,23 +168,30 @@ export default function AuthPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-11 rounded-lg"
+                  className="h-11 rounded-2xl"
                 />
               </div>
 
-                  <Button className="w-full h-11 bg-terracotta hover:bg-terracotta-600 text-white rounded-full mt-2 font-medium">
-                  {tab === "signin" ? "Sign In" : "Join the Collective"}
-                </Button>
+              <Button className="w-full h-11 bg-terracotta hover:bg-terracotta-600 text-white rounded-full mt-2 font-medium">
+                {tab === "signin" ? "Sign In" : "Join the Collective"}
+              </Button>
             </motion.form>
           </AnimatePresence>
 
           {tab === "signin" && (
-            <p className="text-center text-xs text-muted-foreground mt-4">
+            <p className="text-center text-xs text-terracotta/50 mt-4">
               <button className="hover:text-terracotta transition-colors">
                 Forgot password?
               </button>
             </p>
           )}
+
+          {/* Decorative hand-drawn element */}
+          <div className="flex justify-center mt-6">
+            <svg width="60" height="8" viewBox="0 0 60 8" fill="none">
+              <path d="M2 4 Q15 1 30 5 Q45 1 58 4" stroke="#C96A3A" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.3"/>
+            </svg>
+          </div>
         </motion.div>
 
         <p className="text-center text-xs text-terracotta/50 mt-6">

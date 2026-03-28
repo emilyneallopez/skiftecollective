@@ -1,0 +1,72 @@
+Do a full "handmade + warm" redesign pass on the Skifte Collective landing page and auth page. The goal is to make it feel like a beloved community zine crossed with a premium lifestyle brand — NOT a tech startup, NOT AI-generated, NOT corporate. Think: hand-lettered signage, farmer's market warmth, community bulletin board energy, but elevated and beautiful.
+
+## COPY FIXES (do these everywhere)
+- Remove ALL mentions of "Brooklyn" from public-facing copy — Skifte is for any neighborhood, anywhere
+- Replace "A community for Brooklyn moms" with "A community for moms, in every neighborhood"
+- Replace "Brooklyn Heights Parents" circle with "Your Neighborhood Parents"
+- Any other city-specific references → make universal: "Find your neighborhood", "Moms near you"
+
+## HANDMADE VISUAL ELEMENTS (add these to landing-client.tsx)
+
+### 1. Hand-drawn SVG decorations
+Add these inline SVG elements throughout the page — they should feel like someone drew them with a pen:
+
+A) Wobbly underline under "things" in the hero headline:
+```
+<svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
+  <path d="M2 8 Q50 2 100 7 Q150 3 198 8" stroke="#C96A3A" strokeWidth="3" strokeLinecap="round" fill="none"/>
+</svg>
+```
+Wrap "things" in a relative span and place this SVG underneath it.
+
+B) Hand-drawn circle/highlight around "outgrew":
+Wrap "outgrew." in a span with position relative, then add an SVG oval that looks hand-drawn around it.
+
+C) Small decorative stars/asterisks scattered in the hero — use ✦ or ✿ characters in terracotta/forest, sized sm-lg, positioned absolutely at various spots
+
+D) A hand-drawn arrow pointing to the CTA button — simple curved SVG arrow in terracotta
+
+E) In the "How It Works" section, replace the numbered cards with a more organic layout — offset the cards slightly (rotate card 1 by -1deg, card 3 by +1deg), add a hand-drawn dotted line connecting them
+
+### 2. Organic shapes instead of perfect rectangles
+- The sunshine yellow hero panel (right side): change from rounded-3xl to an SVG blob shape
+  Use this blob clip-path or a CSS clip-path like: `clip-path: polygon(5% 0%, 95% 3%, 100% 95%, 3% 100%)`
+  Add some scattered small dots or a hand-drawn texture inside it
+
+- Section backgrounds: instead of hard color blocks, use slightly irregular top/bottom edges with SVG waves that look more organic and less perfect
+
+### 3. Typography personality
+- The hero h1: wrap each line in its own div, make line 1 slightly smaller, line 2 BIGGEST (the "things" line), line 3 medium — like a hand-lettered sign
+- Add a handwritten-style subheading font feel using font-style: italic on key phrases
+- Section headings: add a small illustrated element before or after — a leaf emoji 🌿, a small star ✦, something warm
+
+### 4. Texture and warmth
+- Add a subtle paper texture to the cream sections using CSS:
+  `background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='noise'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23noise)' opacity='0.03'/></svg>")`
+
+- The "How It Works" cards: give them a slight cream/off-white background with a subtle hand-drawn border feel — use `border: 2px solid` with a slightly imperfect look via box-shadow: `2px 3px 0px #C96A3A40`
+
+### 5. Community circles section
+- Instead of generic pills, make the neighborhood circles look like hand-stamped badges
+- Add a small 🌿 or 🏡 or 🌳 before each circle name (already there but make them bigger)
+- The section heading "Find your people." — add a hand-drawn underline SVG beneath it in white/cream
+
+### 6. Footer warmth
+- Add a small hand-drawn heart or leaf decoration
+- Make "Made with love in" feel more personal — "Made with 🤍 for moms everywhere"
+
+## AUTH PAGE
+- The card should feel like a beautiful notecard, not a form
+- Add a warm welcome message above the tabs: "Welcome home." in Fraunces italic, terracotta
+- The background should have the dot pattern but also maybe a subtle warm gradient from cream to white
+
+## WHAT NOT TO DO
+- No sharp corners anywhere (use rounded-2xl or rounded-3xl minimum)
+- No pure white (#fff) — use warm-white (#FEFCFA) or cream (#FAF5EF)
+- No blue links (use terracotta)
+- No gray text (use terracotta/60 or forest/60 for muted text)
+- No sans-serif headings (all headings = Fraunces)
+- No perfect symmetry — embrace slight imperfection, it feels human
+
+Run npm run build at the end.
+When done: openclaw system event --text "Done: Skifte handmade redesign — organic shapes, hand-drawn SVGs, copy fixed for global audience, warm textures" --mode now
