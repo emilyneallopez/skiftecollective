@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { FunBackground } from '@/components/fun-background';
 import { createClient } from '@/lib/supabase/client';
 
-export default function AuthPage() {
+import { Suspense } from 'react';
+
+function AuthInner() {
   const router = useRouter();
   const supabase = createClient();
-  const [isSignUp, setIsSignUp] = useState(false);
+  const searchParams = useSearchParams();
+  const [isSignUp, setIsSignUp] = useState(searchParams.get('tab') === 'signup');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -40,13 +43,15 @@ export default function AuthPage() {
           },
         });
         if (signUpError) throw signUpError;
+        router.push('/browse');
       } else {
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
         if (signInError) throw signInError;
-        router.push('/');
+        const redirect = searchParams.get('redirect') || '/browse';
+        router.push(redirect);
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Authentication failed';
@@ -205,9 +210,17 @@ export default function AuthPage() {
           transition={{ delay: 0.5 }}
           className="text-center text-[11px] text-muted-foreground/60 font-body"
         >
-          A safe, verified community for families
+          🌿 A safe, verified community for families
         </motion.p>
       </motion.div>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <AuthInner />
+    </Suspense>
   );
 }
