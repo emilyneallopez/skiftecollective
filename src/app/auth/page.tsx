@@ -43,20 +43,20 @@ export default function AuthPage() {
   const [neighborhood, setNeighborhood] = useState("");
 
   return (
-    <div className="min-h-screen bg-cream flex items-center justify-center p-4">
+    <div className="min-h-screen bg-cream bg-dots flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block mb-4">
             <Image src="/logo.jpg" alt="Skifte Collective" width={160} height={64} className="h-16 w-auto object-contain mx-auto" />
           </Link>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-terracotta/70 font-medium">
             The Neighborhood Network for Modern Motherhood
           </p>
         </div>
 
         <motion.div
           layout
-          className="bg-white rounded-2xl shadow-sm border border-cream-200 p-8"
+          className="bg-warm-white rounded-3xl shadow-sm border border-cream-300 p-8"
         >
           {/* Tab Switcher */}
           <div className="flex gap-1 p-1 bg-cream rounded-lg mb-8">
@@ -175,7 +175,7 @@ export default function AuthPage() {
           )}
         </motion.div>
 
-        <p className="text-center text-xs text-muted-foreground mt-6">
+        <p className="text-center text-xs text-terracotta/50 mt-6">
           By continuing, you agree to our Terms of Service and Privacy Policy.
         </p>
       </div>

@@ -80,7 +80,7 @@ const config: Config = {
           400: "#34D399",
         },
         "warm-white": "#FEFCFA",
-        ink: "#2C2C2C",
+        ink: "#3B1F0E",
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
