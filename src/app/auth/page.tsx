@@ -47,7 +47,7 @@ export default function AuthPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block mb-4">
-            <Image src="/logo.jpg" alt="Skifte Collective" width={160} height={64} className="h-16 w-auto object-contain mx-auto" />
+            <Image src="/logo.png" alt="Skifte Collective" width={280} height={112} className="h-24 w-auto object-contain mx-auto" />
           </Link>
           <p className="text-sm text-terracotta/70 font-medium">
             The Neighborhood Network for Modern Motherhood

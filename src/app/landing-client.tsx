@@ -45,18 +45,18 @@ export function LandingPageClient() {
       <section className="relative overflow-hidden bg-cream bg-dots pb-20 md:pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-16">
           {/* Top nav bar */}
-          <div className="flex items-center justify-between mb-16 md:mb-24">
+          <div className="flex items-center justify-between mb-12 md:mb-16">
             <Link href="/" className="flex items-center">
-              <Image src="/logo.jpg" alt="Skifte Collective" width={120} height={48} className="h-12 w-auto object-contain" />
+              <Image src="/logo.png" alt="Skifte Collective" width={180} height={72} className="h-14 w-auto object-contain" />
             </Link>
             <div className="flex items-center gap-3">
               <Link href="/auth">
-                <Button variant="ghost" className="text-sm text-ink/70 hover:text-terracotta">
+                <Button variant="ghost" className="text-sm text-terracotta/80 hover:text-terracotta font-medium">
                   Sign In
                 </Button>
               </Link>
               <Link href="/auth?tab=signup">
-                <Button className="bg-terracotta hover:bg-terracotta-600 text-white rounded-full px-6 text-sm">
+                <Button className="bg-terracotta hover:bg-terracotta-600 text-white rounded-full px-6 text-sm font-medium">
                   Join Free
                 </Button>
               </Link>
@@ -66,7 +66,11 @@ export function LandingPageClient() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <FadeIn direction="none" duration={0.8}>
               <div className="relative">
-                <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.05] text-ink mb-6">
+                {/* Big logo above headline */}
+                <div className="mb-6">
+                  <Image src="/logo.png" alt="Skifte Collective" width={400} height={160} className="h-24 md:h-32 w-auto object-contain" />
+                </div>
+                <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] text-ink mb-6">
                   Swap the{" "}
                   <span className="text-terracotta">things</span> they{" "}
                   <span className="text-forest">outgrew.</span>
