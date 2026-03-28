@@ -1,203 +1,213 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-
-function GoogleIcon() {
-  return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24">
-      <path
-        fill="#4285F4"
-        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
-      />
-      <path
-        fill="#34A853"
-        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-      />
-      <path
-        fill="#FBBC05"
-        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-      />
-      <path
-        fill="#EA4335"
-        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-      />
-    </svg>
-  );
-}
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Eye, EyeOff } from 'lucide-react';
+import { FunBackground } from '@/components/fun-background';
+import { createClient } from '@/lib/supabase/client';
 
 export default function AuthPage() {
-  const searchParams = useSearchParams();
-  const [tab, setTab] = useState<"signin" | "signup">(
-    searchParams.get("tab") === "signup" ? "signup" : "signin"
-  );
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [neighborhood, setNeighborhood] = useState("");
+  const router = useRouter();
+  const supabase = createClient();
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !password.trim()) {
+      setError('Please fill in all fields');
+      return;
+    }
+    if (isSignUp && password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      if (isSignUp) {
+        const { error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { display_name: displayName || undefined },
+          },
+        });
+        if (signUpError) throw signUpError;
+      } else {
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (signInError) throw signInError;
+        router.push('/');
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Authentication failed';
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div
-      className="min-h-screen bg-cream bg-dots flex items-center justify-center p-4"
-      style={{
-        backgroundImage: `radial-gradient(circle, #C96A3A18 1px, transparent 1px), linear-gradient(to bottom, #FAF5EF, #FEFCFA)`,
-        backgroundSize: "24px 24px, 100% 100%",
-      }}
-    >
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-4">
-            <Image src="/skifte-logo.png" alt="Skifte Collective" width={280} height={112} className="h-24 w-auto object-contain mx-auto" />
-          </Link>
-          <p className="text-sm text-terracotta/70 font-medium">
-            The Neighborhood Network for Modern Motherhood
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-background relative overflow-hidden">
+      <FunBackground />
+      {/* Decorative background shapes */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3" />
+      <div className="absolute top-1/4 right-0 w-48 h-48 bg-accent/20 rounded-full translate-x-1/2" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="w-full max-w-sm space-y-8 relative z-10"
+      >
+        {/* Brand header */}
+        <div className="text-center space-y-3">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 15 }}
+            className="w-24 h-24 rounded-2xl overflow-hidden mx-auto"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/skifte-icon.png" alt="Skifte" className="w-full h-full object-cover" />
+          </motion.div>
+          <div>
+            <h1 className="text-3xl font-heading text-foreground">Skifte Collective</h1>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={isSignUp ? 'signup' : 'signin'}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                className="text-sm text-muted-foreground font-body mt-1.5"
+              >
+                {isSignUp
+                  ? 'Join the neighborhood network for modern motherhood.'
+                  : 'The neighborhood network for modern motherhood.'}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Error display */}
+        {error && (
+          <div className="bg-destructive/10 text-destructive text-sm font-body px-4 py-2 rounded-xl text-center">
+            {error}
+          </div>
+        )}
+
+        {/* Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          className="space-y-3"
+          layout
+        >
+          <AnimatePresence>
+            {isSignUp && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                <label className="block text-xs font-body text-muted-foreground mb-1.5 ml-1">Display name</label>
+                <input
+                  type="text"
+                  placeholder="How others will see you"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  className="w-full px-4 py-3 bg-card border border-border rounded-xl text-sm font-body text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div>
+            <label className="block text-xs font-body text-muted-foreground mb-1.5 ml-1">Email</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 bg-card border border-border rounded-xl text-sm font-body text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-body text-muted-foreground mb-1.5 ml-1">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder={isSignUp ? 'At least 6 characters' : '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 pr-11 bg-card border border-border rounded-xl text-sm font-body text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+
+          <div className="pt-1">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full h-12 rounded-xl bg-primary text-primary-foreground font-body font-medium text-sm flex items-center justify-center gap-2 group disabled:opacity-60"
+            >
+              {loading ? (
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
+                  className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
+                />
+              ) : (
+                <>
+                  {isSignUp ? 'Create Account' : 'Welcome Back'}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </>
+              )}
+            </button>
+          </div>
+        </motion.form>
+
+        {/* Toggle */}
+        <div className="text-center space-y-4">
+          <p className="text-sm text-muted-foreground font-body">
+            {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
+            <button
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="text-primary font-medium hover:underline underline-offset-2"
+            >
+              {isSignUp ? 'Sign In' : 'Sign Up'}
+            </button>
           </p>
         </div>
 
-        <motion.div
-          layout
-          className="bg-warm-white rounded-3xl border border-cream-300 p-8 relative"
-          style={{ boxShadow: "2px 3px 0px #C96A3A20" }}
+        {/* Trust badge */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-center text-[11px] text-muted-foreground/60 font-body"
         >
-          {/* Warm welcome message */}
-          <p className="font-heading text-2xl text-terracotta text-center mb-6 italic">
-            Welcome home.
-          </p>
-
-          {/* Tab Switcher */}
-          <div className="flex gap-1 p-1 bg-cream rounded-2xl mb-8">
-            <button
-              onClick={() => setTab("signin")}
-              className={`flex-1 py-2 px-4 rounded-xl text-sm font-medium transition-all ${
-                tab === "signin"
-                  ? "bg-warm-white shadow-sm text-ink"
-                  : "text-ink/50 hover:text-ink/70"
-              }`}
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => setTab("signup")}
-              className={`flex-1 py-2 px-4 rounded-xl text-sm font-medium transition-all ${
-                tab === "signup"
-                  ? "bg-warm-white shadow-sm text-ink"
-                  : "text-ink/50 hover:text-ink/70"
-              }`}
-            >
-              Join Free
-            </button>
-          </div>
-
-          {/* Google OAuth */}
-          <Button
-            variant="outline"
-            className="w-full gap-3 h-11 rounded-2xl border-cream-300 hover:bg-cream/50 mb-6"
-          >
-            <GoogleIcon />
-            Continue with Google
-          </Button>
-
-          <div className="flex items-center gap-3 mb-6">
-            <Separator className="flex-1" />
-            <span className="text-xs text-terracotta/40">or</span>
-            <Separator className="flex-1" />
-          </div>
-
-          <AnimatePresence mode="wait">
-            <motion.form
-              key={tab}
-              initial={{ opacity: 0, x: tab === "signup" ? 20 : -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: tab === "signup" ? -20 : 20 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-4"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              {tab === "signup" && (
-                <>
-                  <div>
-                    <label className="text-sm font-medium mb-1.5 block text-ink/70">
-                      Full Name
-                    </label>
-                    <Input
-                      type="text"
-                      placeholder="Your name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="h-11 rounded-2xl"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium mb-1.5 block text-ink/70">
-                      Neighborhood
-                    </label>
-                    <Input
-                      type="text"
-                      placeholder="Your neighborhood"
-                      value={neighborhood}
-                      onChange={(e) => setNeighborhood(e.target.value)}
-                      className="h-11 rounded-2xl"
-                    />
-                  </div>
-                </>
-              )}
-
-              <div>
-                <label className="text-sm font-medium mb-1.5 block text-ink/70">Email</label>
-                <Input
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-11 rounded-2xl"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm font-medium mb-1.5 block text-ink/70">
-                  Password
-                </label>
-                <Input
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="h-11 rounded-2xl"
-                />
-              </div>
-
-              <Button className="w-full h-11 bg-terracotta hover:bg-terracotta-600 text-white rounded-full mt-2 font-medium">
-                {tab === "signin" ? "Sign In" : "Join the Collective"}
-              </Button>
-            </motion.form>
-          </AnimatePresence>
-
-          {tab === "signin" && (
-            <p className="text-center text-xs text-terracotta/50 mt-4">
-              <button className="hover:text-terracotta transition-colors">
-                Forgot password?
-              </button>
-            </p>
-          )}
-
-          {/* Decorative hand-drawn element */}
-          <div className="flex justify-center mt-6">
-            <svg width="60" height="8" viewBox="0 0 60 8" fill="none">
-              <path d="M2 4 Q15 1 30 5 Q45 1 58 4" stroke="#C96A3A" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.3"/>
-            </svg>
-          </div>
-        </motion.div>
-
-        <p className="text-center text-xs text-terracotta/50 mt-6">
-          By continuing, you agree to our Terms of Service and Privacy Policy.
-        </p>
-      </div>
+          A safe, verified community for families
+        </motion.p>
+      </motion.div>
     </div>
   );
 }

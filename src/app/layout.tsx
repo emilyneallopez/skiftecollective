@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(fredoka.variable, outfit.variable)}>
-      <body className="antialiased font-body bg-warm-white text-ink">
+      <body className="antialiased bg-background text-foreground font-body">
         <FunBackground />
         <div className="relative z-10">
           {children}

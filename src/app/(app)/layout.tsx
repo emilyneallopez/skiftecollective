@@ -1,6 +1,4 @@
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { MobileNav } from "@/components/layout/mobile-nav";
+import BottomNav from "@/components/layout/bottom-nav";
 
 export default function AppLayout({
   children,
@@ -9,10 +7,10 @@ export default function AppLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col">
-      <SiteHeader />
-      <main className="flex-1">{children}</main>
-      <SiteFooter />
-      <MobileNav />
+      <main className="flex-1 max-w-lg mx-auto w-full pb-20">
+        {children}
+      </main>
+      <BottomNav />
     </div>
   );
 }
