@@ -11,6 +11,14 @@ import { CONDITIONS, LISTING_TYPES } from "@/lib/constants";
 import { getInitials } from "@/lib/utils";
 import { useState } from "react";
 
+const CATEGORY_DOT_COLORS: Record<string, string> = {
+  clothing: "bg-terracotta",
+  toys: "bg-sunshine",
+  gear: "bg-sky",
+  books: "bg-mint",
+  essentials: "bg-blush",
+};
+
 interface ItemCardProps {
   item: Item;
   index?: number;
@@ -20,12 +28,13 @@ export function ItemCard({ item }: ItemCardProps) {
   const [liked, setLiked] = useState(false);
   const condition = CONDITIONS.find((c) => c.value === item.condition);
   const listingType = LISTING_TYPES.find((l) => l.value === item.listing_type);
+  const dotColor = CATEGORY_DOT_COLORS[item.category] || "bg-ink";
 
   return (
     <motion.div
-      whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}
+      whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.1)" }}
       transition={{ duration: 0.2 }}
-      className="group relative bg-white rounded-xl overflow-hidden border border-cream-200"
+      className="group relative bg-white rounded-[16px] overflow-hidden border border-cream-200"
     >
       <Link href={`/items/${item.id}`}>
         <div className="relative aspect-square overflow-hidden">
@@ -36,7 +45,9 @@ export function ItemCard({ item }: ItemCardProps) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
-          <div className="absolute top-3 left-3 flex gap-2">
+          {/* Category dot */}
+          <div className="absolute top-3 left-3 flex items-center gap-2">
+            <span className={`h-3 w-3 rounded-full ${dotColor} ring-2 ring-white`} />
             {listingType && (
               <Badge className={`${listingType.color} text-xs font-medium`}>
                 {listingType.label}

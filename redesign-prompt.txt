@@ -1,0 +1,91 @@
+You are doing a full visual redesign of the Skifte Collective Next.js app. The goal is to make it feel like Bobo Choses meets Maisonette meets Primary.com — childlike, chic, colorful, joyful, editorial. NOT a generic tech startup or marketplace.
+
+## Design Direction
+
+### Typography
+- Replace ALL instances of Playfair Display with Fraunces (Google Font — import from next/font/google)
+- Fraunces is a variable serif with personality and warmth — perfect for this brand
+- Keep Inter for body text
+- Headings should be BIG and expressive — think oversized editorial type
+
+### Color Palette (expand from current)
+Update tailwind.config.ts with these additions alongside existing colors:
+- sunshine: #F5C842 (warm yellow)
+- sky: #5B8FD4 (sky blue)
+- blush: #F2A7B0 (soft pink)
+- mint: #7EC8A4 (fresh green)
+Keep existing terracotta, cream, forest colors.
+
+### Landing Page (src/app/(marketing)/page.tsx) — FULL REDESIGN
+Replace the current landing page with this structure:
+
+1. Hero Section
+   - Full-width, cream background (#FAF5EF)
+   - LEFT side: oversized Fraunces heading (3 lines, big — 6xl or 7xl on desktop):
+     Swap the / things they / outgrew.
+   - Subheading in Inter: "A community for Brooklyn moms to swap, share, and simplify."
+   - Two CTA buttons: primary (Join the collective in terracotta) + ghost (Browse swaps)
+   - RIGHT side: large rounded rectangle in sunshine yellow (#F5C842) with text "Real swaps, real moms" centered (placeholder for lifestyle photo)
+   - Add small floating badge elements: terracotta pill "Free to join" and sky blue pill "2,400+ moms"
+   - Wavy SVG divider at the bottom in terracotta
+
+2. How It Works (3 steps, horizontal cards)
+   - Background: warm white
+   - Each step: large emoji, step number in tiny caps, bold heading, one-line description
+   - Step 1: List — Snap a photo. Add details. Post in seconds.
+   - Step 2: Match — Find something you love. Offer something you have.
+   - Step 3: Swap — Meet nearby. Exchange. Feel good about it.
+   - Cards have rounded corners, subtle shadow, hover lift animation (framer-motion)
+
+3. Featured Items (6 cards in a grid)
+   - Section heading: "Fresh Swaps Near You" in Fraunces
+   - Use existing ItemCard component with mock data
+   - Add "View all swaps" link
+
+4. Community Circles Teaser
+   - Background: terracotta (#C96A3A), white text
+   - Heading: "Find your people."
+   - Subheading: "Join neighborhood circles and meet moms near you."
+   - 3 circle pills: Park Slope Moms, DUMBO Families, Brooklyn Heights Parents
+   - CTA button in sunshine yellow with dark text: "Explore circles"
+
+5. Baby Stage Guide Teaser
+   - Background: sunshine yellow (#F5C842)
+   - Heading in Fraunces: "Know what to swap, when."
+   - Body: "Our Baby Stage Guide tells you exactly what to let go of — and what to hold onto — at every age."
+   - CTA: "Open the guide" in forest green
+
+6. Footer — clean, minimal, brand colors
+
+### Item Cards (src/components/item-card.tsx)
+- Add color-coded category dot in top-left corner:
+  Clothing = terracotta, Toys = sunshine, Gear = sky blue, Books = mint
+- Condition badge colors: Like New = mint green bg, Good = sky blue bg, Loved = blush bg
+- Listing type badge: Swap = terracotta, Free = sunshine, Sale = forest green
+- Hover: card lifts translateY -4px + shadow deepens
+- Border radius: 16px
+
+### Browse Page (src/app/(app)/browse/page.tsx)
+- Add category pill row at top: All, Clothing, Toys, Gear, Books (with emojis)
+- Active pill = terracotta bg + white text, inactive = cream + dark text
+- Page heading: "Swaps near you" in Fraunces
+
+### Font Setup (src/app/layout.tsx)
+- Import Fraunces from next/font/google, variable: --font-heading, subsets: latin
+- Import Inter from next/font/google, variable: --font-body, subsets: latin
+- Apply both variables to html element
+
+### Global CSS additions (src/app/globals.css)
+Add keyframes for float animation:
+  0% and 100%: translateY 0px
+  50%: translateY -8px
+
+Add to tailwind.config.ts animation: float with 3s ease-in-out infinite
+
+### Copy Tone
+Warm, direct, community-driven. Examples:
+- NOT "List your items for trade" — YES "Share what they outgrew"
+- NOT "Browse available items" — YES "See what's swapping near you"
+
+Run npm run build at the end to confirm clean compile.
+When completely finished, run: openclaw system event --text "Done: Skifte redesign complete — Fraunces, new colors, new landing page, colorful cards" --mode now

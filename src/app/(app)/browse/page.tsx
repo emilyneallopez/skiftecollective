@@ -54,11 +54,47 @@ export default function BrowsePage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <FadeIn>
-        <div className="mb-8">
-          <h1 className="font-heading text-3xl font-bold text-ink mb-2">Browse</h1>
+        <div className="mb-6">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold text-ink mb-2">
+            Swaps near you
+          </h1>
           <p className="text-muted-foreground">
             {filtered.length} items available in your neighborhood
           </p>
+        </div>
+      </FadeIn>
+
+      {/* Category pills */}
+      <FadeIn delay={0.05}>
+        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+          <button
+            onClick={() => setCategory("")}
+            className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+              !category
+                ? "bg-terracotta text-white"
+                : "bg-cream text-ink/70 hover:bg-cream-200"
+            }`}
+          >
+            All
+          </button>
+          {[
+            { value: "clothing" as ItemCategory, label: "Clothing", emoji: "👗" },
+            { value: "toys" as ItemCategory, label: "Toys", emoji: "🧸" },
+            { value: "gear" as ItemCategory, label: "Gear", emoji: "🍼" },
+            { value: "books" as ItemCategory, label: "Books", emoji: "📚" },
+          ].map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setCategory(category === cat.value ? "" : cat.value)}
+              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                category === cat.value
+                  ? "bg-terracotta text-white"
+                  : "bg-cream text-ink/70 hover:bg-cream-200"
+              }`}
+            >
+              {cat.emoji} {cat.label}
+            </button>
+          ))}
         </div>
       </FadeIn>
 

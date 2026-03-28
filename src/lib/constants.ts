@@ -25,15 +25,15 @@ export const CATEGORIES: { value: ItemCategory; label: string }[] = [
 ];
 
 export const CONDITIONS: { value: ItemCondition; label: string; color: string }[] = [
-  { value: "like-new", label: "Like New", color: "bg-forest-100 text-forest-700" },
-  { value: "good", label: "Good", color: "bg-terracotta-100 text-terracotta-700" },
-  { value: "loved", label: "Loved", color: "bg-cream-200 text-ink" },
+  { value: "like-new", label: "Like New", color: "bg-mint-100 text-forest-700" },
+  { value: "good", label: "Good", color: "bg-sky-100 text-sky-500" },
+  { value: "loved", label: "Loved", color: "bg-blush-100 text-blush-400" },
 ];
 
 export const LISTING_TYPES: { value: ListingType; label: string; color: string }[] = [
-  { value: "swap", label: "Swap", color: "bg-forest text-white" },
-  { value: "free", label: "Free", color: "bg-terracotta text-white" },
-  { value: "sell", label: "Sale", color: "bg-ink text-white" },
+  { value: "swap", label: "Swap", color: "bg-terracotta text-white" },
+  { value: "free", label: "Free", color: "bg-sunshine text-ink" },
+  { value: "sell", label: "Sale", color: "bg-forest text-white" },
 ];
 
 export const AGE_STAGES: { value: AgeStage; label: string; range: string }[] = [
