@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="inline-block">
-              <Image src="/logo.png" alt="Skifte Collective" width={120} height={48} className="h-12 w-auto object-contain" />
+              <Image src="/skifte-logo.png" alt="Skifte Collective" width={120} height={48} className="h-12 w-auto object-contain" />
             </Link>
             <p className="mt-2 text-sm text-terracotta/60">A community for moms, in every neighborhood.</p>
           </div>

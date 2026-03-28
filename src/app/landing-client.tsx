@@ -89,7 +89,7 @@ export function LandingPageClient() {
           {/* Top nav bar */}
           <div className="flex items-center justify-between mb-12 md:mb-16">
             <Link href="/" className="flex items-center">
-              <Image src="/logo.png" alt="Skifte Collective" width={180} height={72} className="h-14 w-auto object-contain" />
+              <Image src="/skifte-logo.png" alt="Skifte Collective" width={180} height={72} className="h-14 w-auto object-contain" />
             </Link>
             <div className="flex items-center gap-3">
               <Link href="/auth">
@@ -116,7 +116,7 @@ export function LandingPageClient() {
 
                 {/* Big logo above headline */}
                 <div className="mb-6">
-                  <Image src="/logo.png" alt="Skifte Collective" width={400} height={160} className="h-24 md:h-32 w-auto object-contain" />
+                  <Image src="/skifte-logo.png" alt="Skifte Collective" width={400} height={160} className="h-24 md:h-32 w-auto object-contain" />
                 </div>
                 <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] text-ink mb-6">
                   {/* Line 1: slightly smaller */}

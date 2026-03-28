@@ -33,7 +33,7 @@ export function SiteHeader() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
-            <Image src="/logo.png" alt="Skifte Collective" width={100} height={40} className="h-10 w-auto object-contain" />
+            <Image src="/skifte-logo.png" alt="Skifte Collective" width={100} height={40} className="h-10 w-auto object-contain" />
           </Link>
 
           {/* Desktop Nav */}
@@ -114,7 +114,7 @@ export function SiteHeader() {
               </SheetTrigger>
               <SheetContent side="right" className="w-72 bg-warm-white">
                 <SheetTitle>
-                  <Image src="/logo.png" alt="Skifte Collective" width={100} height={40} className="h-10 w-auto object-contain" />
+                  <Image src="/skifte-logo.png" alt="Skifte Collective" width={100} height={40} className="h-10 w-auto object-contain" />
                 </SheetTitle>
                 <nav className="flex flex-col gap-1 mt-8">
                   {NAV_LINKS.map((link) => (

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { FunBackground } from "@/components/fun-background";
+import { Fredoka, Outfit } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const fraunces = Fraunces({
+const fredoka = Fredoka({
   subsets: ["latin"],
   variable: "--font-heading",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -32,9 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(fraunces.variable, inter.variable)}>
+    <html lang="en" className={cn(fredoka.variable, outfit.variable)}>
       <body className="antialiased font-body bg-warm-white text-ink">
-        {children}
+        <FunBackground />
+        <div className="relative z-10">
+          {children}
+        </div>
       </body>
     </html>
   );
