@@ -24,7 +24,6 @@ export default function ListItemPage() {
   const [brand, setBrand] = useState("");
   const [condition, setCondition] = useState("");
   const [listingType, setListingType] = useState("swap");
-  const [price, setPrice] = useState("");
   const [neighborhood, setNeighborhood] = useState("Park Slope");
   const [zip, setZip] = useState("11215");
   const [submitted, setSubmitted] = useState(false);
@@ -298,18 +297,7 @@ export default function ListItemPage() {
                 </div>
               </div>
 
-              {listingType === "sell" && (
-                <div>
-                  <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Price ($)</label>
-                  <Input
-                    type="number"
-                    placeholder="25"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="h-11 rounded-lg w-32"
-                  />
-                </div>
-              )}
+
             </div>
           </motion.div>
         )}
@@ -372,7 +360,7 @@ export default function ListItemPage() {
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
                       {neighborhood} · {LISTING_TYPES.find(l => l.value === listingType)?.label}
-                      {listingType === "sell" && price ? ` · $${price}` : ""}
+                      
                     </p>
                   </div>
                 </div>

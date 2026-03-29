@@ -33,7 +33,6 @@ export const CONDITIONS: { value: ItemCondition; label: string; color: string }[
 export const LISTING_TYPES: { value: ListingType; label: string; color: string }[] = [
   { value: "swap", label: "Swap", color: "bg-terracotta text-white" },
   { value: "free", label: "Free", color: "bg-sunshine text-ink" },
-  { value: "sell", label: "Sale", color: "bg-forest text-white" },
 ];
 
 export const AGE_STAGES: { value: AgeStage; label: string; range: string }[] = [
