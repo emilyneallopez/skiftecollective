@@ -41,19 +41,7 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease }}
       >
-        <div className="flex items-center justify-between mb-3">
-          <Image src="/skifte-logo.png" alt="Skifte Collective" width={160} height={64} className="h-10 w-auto object-contain" />
-          <button
-            onClick={handleSignOut}
-            className="font-body text-xs text-[#3B1F0E]/40 hover:text-[#C96A3A] transition-colors"
-          >
-            Sign out
-          </button>
-        </div>
-        <p className="text-sm font-body text-[#C96A3A] mt-1">The neighborhood network for modern motherhood</p>
-        <p className="text-sm font-body mt-2 max-w-sm text-[#3B1F0E]/60 leading-relaxed">
-          Swap baby clothes, toys, and gear with moms nearby while building real community in your neighborhood.
-        </p>
+
         <div className="flex gap-3 mt-4">
           <motion.button
             whileHover={{ scale: 1.02 }}
