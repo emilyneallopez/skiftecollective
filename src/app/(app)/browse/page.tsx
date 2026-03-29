@@ -205,7 +205,7 @@ export default function BrowsePage() {
 
       {/* Results */}
       <p className="text-xs text-muted-foreground font-body">{filtered.length} items</p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3 items-stretch">
         {filtered.map((item, index) => (
           <motion.div
             key={item.id}

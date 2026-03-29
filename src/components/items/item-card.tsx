@@ -60,7 +60,7 @@ const ItemCard = ({ item, onPress, onFavorite }: ItemCardProps) => {
       className="bg-card rounded-2xl overflow-hidden shadow-sm border border-border cursor-pointer group"
     >
       {/* Image */}
-      <div className="aspect-square bg-muted relative overflow-hidden">
+      <div className="aspect-square bg-muted relative overflow-hidden flex-shrink-0">
         {hasImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -95,7 +95,7 @@ const ItemCard = ({ item, onPress, onFavorite }: ItemCardProps) => {
       </div>
 
       {/* Info */}
-      <div className="p-3">
+      <div className="p-3 flex flex-col flex-1">
         <h3 className="font-heading font-medium text-[15px] text-foreground leading-tight line-clamp-1">
           {item.title}
         </h3>

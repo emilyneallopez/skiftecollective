@@ -76,7 +76,7 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, ease }}
       >
-        <h2 className="text-2xl font-heading text-[#3B1F0E] mb-4">How Skifte Works</h2>
+        <h2 className="text-2xl font-heading text-[#3A6349] mb-4">How Skifte Works</h2>
         <div className="relative flex flex-col gap-0">
           {steps.map((step, i) => (
             <div key={step.title} className="flex items-start gap-4 relative">
@@ -123,7 +123,7 @@ export default function HomePage() {
 
       {/* Browse Categories */}
       <div>
-        <h2 className="text-2xl font-heading text-[#3B1F0E] mb-3">Browse Categories</h2>
+        <h2 className="text-2xl font-heading text-[#3A6349] mb-3">Browse Categories</h2>
         <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
           {CATEGORIES.map((cat, i) => (
             <motion.button
@@ -144,12 +144,12 @@ export default function HomePage() {
       {/* New For You */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-2xl font-heading text-[#3B1F0E]">New For You</h2>
+          <h2 className="text-2xl font-heading text-[#3A6349]">New For You</h2>
           <Link href="/browse" className="flex items-center gap-1 text-xs font-body text-[#C96A3A]">
             See all <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 items-stretch">
           {sampleItems.map((item, i) => (
             <motion.div
               key={item.id}
