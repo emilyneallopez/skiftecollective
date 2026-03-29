@@ -138,9 +138,9 @@ export function SwapRequestModal({ open, onOpenChange, item }: SwapRequestModalP
                 <Button
                   onClick={handleSubmit}
                   disabled={!selectedItem || !message.trim()}
-                  className="w-full bg-terracotta hover:bg-terracotta-600 text-white rounded-full"
+                  className="w-full bg-[#C96A3A] hover:bg-[#A85530] text-white rounded-full cursor-pointer"
                 >
-                  Send Swap Request
+                  Send swap request
                 </Button>
               </div>
             </motion.div>

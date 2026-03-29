@@ -3,6 +3,7 @@
 import { Home, Search, PlusCircle, Users, User } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 const tabs = [
   { icon: Home, label: 'Home', path: '/home' },
@@ -15,17 +16,25 @@ const tabs = [
 const BottomNav = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const [tapped, setTapped] = useState<string | null>(null);
+
+  const handleTap = (path: string) => {
+    setTapped(path);
+    router.push(path);
+    setTimeout(() => setTapped(null), 300);
+  };
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border safe-area-bottom">
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-1">
         {tabs.map((tab) => {
           const isActive = pathname === tab.path || (tab.path === '/circles' && pathname.startsWith('/circles')) || (tab.path === '/profile/me' && pathname.startsWith('/profile'));
+          const isTapped = tapped === tab.path;
           return (
             <button
               key={tab.path}
-              onClick={() => router.push(tab.path)}
-              className={`flex flex-col items-center justify-center gap-0.5 flex-1 py-1 relative rounded-xl transition-colors ${isActive ? 'bg-primary/5' : ''}`}
+              onClick={() => handleTap(tab.path)}
+              className={`flex flex-col items-center justify-center gap-0.5 flex-1 py-1 relative rounded-xl transition-colors cursor-pointer ${isActive ? 'bg-primary/5' : ''}`}
             >
               {isActive && (
                 <motion.div
@@ -34,10 +43,17 @@ const BottomNav = () => {
                   transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                 />
               )}
+              {/* Tap flash */}
+              {isTapped && (
+                <motion.div
+                  initial={{ opacity: 0.5, scale: 0.5 }}
+                  animate={{ opacity: 0, scale: 2 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 rounded-xl bg-primary/20"
+                />
+              )}
               <motion.div
-                key={`${tab.path}-${isActive}`}
-                initial={false}
-                animate={isActive ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+                animate={isActive ? { scale: 1.1 } : { scale: 1 }}
                 transition={{ type: 'spring', stiffness: 500, damping: 20 }}
               >
                 <tab.icon

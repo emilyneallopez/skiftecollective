@@ -67,18 +67,18 @@ export default function ListItemPage() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-forest/10 mb-6"
+          className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-[#7A9E8A]/10 mb-6"
         >
-          <Check className="h-10 w-10 text-forest" />
+          <Check className="h-10 w-10 text-[#7A9E8A]" />
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h1 className="font-heading text-2xl font-bold mb-2">Listed!</h1>
-          <p className="text-muted-foreground">
-            Your item is now live. We&apos;ll notify you when someone is interested.
+          <h1 className="font-heading text-2xl text-[#5C3D2E] mb-2">It&apos;s live!</h1>
+          <p className="font-body text-[#5C3D2E]/60">
+            Your item is out there. We&apos;ll let you know when someone nearby is interested.
           </p>
         </motion.div>
       </div>
@@ -171,7 +171,7 @@ export default function ListItemPage() {
               {photos.length < 5 && (
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="aspect-square rounded-xl border-2 border-dashed border-cream-300 flex flex-col items-center justify-center gap-2 hover:border-terracotta/50 hover:bg-cream transition-all"
+                  className="aspect-square rounded-xl border-2 border-dashed border-[#E5D5BD] flex flex-col items-center justify-center gap-2 hover:border-[#C96A3A]/50 hover:bg-[#C96A3A]/5 hover:shadow-[0_0_12px_rgba(201,106,58,0.15)] transition-all cursor-pointer"
                 >
                   <Camera className="h-6 w-6 text-muted-foreground" />
                   <span className="text-xs text-muted-foreground">Add Photo</span>
@@ -399,7 +399,7 @@ export default function ListItemPage() {
           <Button
             onClick={() => setStep(step + 1)}
             disabled={!canProceed()}
-            className="bg-terracotta hover:bg-terracotta-600 text-white rounded-full px-6 gap-1"
+            className="bg-[#C96A3A] hover:bg-[#A85530] text-white rounded-full px-6 gap-1 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
           >
             Next
             <ChevronRight className="h-4 w-4" />
@@ -407,9 +407,9 @@ export default function ListItemPage() {
         ) : (
           <Button
             onClick={handleSubmit}
-            className="bg-forest hover:bg-forest-600 text-white rounded-full px-8"
+            className="bg-[#7A9E8A] hover:bg-[#6B8F7B] text-white rounded-full px-8"
           >
-            Publish Listing
+            Share it
           </Button>
         )}
       </div>

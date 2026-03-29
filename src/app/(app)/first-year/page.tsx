@@ -98,7 +98,7 @@ export default function FirstYearPage() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   className="overflow-hidden"
                 >
                   <div className="px-5 pb-5 space-y-4 border-t border-[#E5D5BD]">

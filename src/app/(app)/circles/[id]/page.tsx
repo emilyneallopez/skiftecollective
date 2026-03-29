@@ -75,7 +75,7 @@ export default function CircleDetailPage() {
       <div className="relative h-52 bg-gradient-to-br from-primary/30 to-secondary/30">
         <button
           onClick={() => router.back()}
-          className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center"
+          className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 text-white" />
         </button>
@@ -102,7 +102,7 @@ export default function CircleDetailPage() {
               animate={{ opacity: 1, scale: 1 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleJoin}
-              className="w-full h-12 bg-primary text-white rounded-full font-heading text-base active:opacity-80"
+              className="w-full h-12 bg-primary text-white rounded-full font-heading text-base active:opacity-80 cursor-pointer"
             >
               Join this circle
             </motion.button>

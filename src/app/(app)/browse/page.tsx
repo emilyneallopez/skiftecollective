@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, MapPin, Navigation } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import ItemCard from '@/components/items/item-card';
 import { sampleListings, categoryLabels } from '@/lib/sample-data';
@@ -29,6 +29,7 @@ export default function BrowsePage() {
   const [radiusMiles, setRadiusMiles] = useState(10);
   const [, setLocationFilterEnabled] = useState(false);
   const [detectingLocation, setDetectingLocation] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
 
   const detectLocation = () => {
     if (!navigator.geolocation) return;
@@ -83,77 +84,111 @@ export default function BrowsePage() {
       </div>
 
       {/* Search */}
-      <div className="relative">
+      <motion.div
+        className="relative"
+        animate={{ scale: searchFocused ? 1.02 : 1 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+      >
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <input
           type="text"
           placeholder="Search items, brands, sizes..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-2xl text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+          onFocus={() => setSearchFocused(true)}
+          onBlur={() => setSearchFocused(false)}
+          className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-2xl text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all"
         />
-      </div>
+      </motion.div>
 
       {/* Location Filter */}
-      <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-            {detectingLocation ? (
-              <span className="text-sm font-body text-muted-foreground">Finding your location...</span>
-            ) : userLocation ? (
-              <span className="text-sm font-body font-medium text-foreground">{userLocation}</span>
-            ) : (
-              <span className="text-sm font-body text-muted-foreground">Location not set</span>
-            )}
-          </div>
-          <button
-            onClick={detectLocation}
-            className="flex items-center gap-1.5 text-xs font-body font-medium text-primary hover:text-primary/70 transition-colors"
+      <AnimatePresence>
+        {(userLocation || detectingLocation) && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            transition={{ duration: 0.3, ease }}
+            className="bg-card border border-border rounded-2xl p-4 space-y-3 overflow-hidden"
           >
-            <Navigation className="w-3.5 h-3.5" />
-            {userLocation ? 'Update' : 'Use my location'}
-          </button>
-        </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                {detectingLocation ? (
+                  <span className="text-sm font-body text-muted-foreground">Finding your location...</span>
+                ) : userLocation ? (
+                  <span className="text-sm font-body font-medium text-foreground">{userLocation}</span>
+                ) : (
+                  <span className="text-sm font-body text-muted-foreground">Location not set</span>
+                )}
+              </div>
+              <button
+                onClick={detectLocation}
+                className="flex items-center gap-1.5 text-xs font-body font-medium text-primary hover:text-primary/70 transition-colors cursor-pointer"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                {userLocation ? 'Update' : 'Use my location'}
+              </button>
+            </div>
 
-        {/* Distance slider — always visible */}
-        <div className="space-y-2">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-body text-muted-foreground">Distance</span>
+                <span className="text-xs font-heading text-primary">
+                  {radiusMiles >= 20 ? 'Any distance' : `Within ${radiusMiles} miles`}
+                </span>
+              </div>
+              <input
+                type="range"
+                value={radiusMiles}
+                onChange={(e) => setRadiusMiles(Number(e.target.value))}
+                min={1}
+                max={20}
+                step={1}
+                className="w-full h-2 rounded-full appearance-none bg-primary/20 accent-primary cursor-pointer"
+                style={{ accentColor: '#C96A3A' }}
+              />
+              <div className="flex justify-between text-[10px] font-body text-muted-foreground">
+                <span>1 mi</span>
+                <span>5 mi</span>
+                <span>10 mi</span>
+                <span>20 mi</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!userLocation && !detectingLocation && (
+        <div className="bg-card border border-border rounded-2xl p-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-body text-muted-foreground">Distance</span>
-            <span className="text-xs font-heading text-primary">
-              {radiusMiles >= 20 ? 'Any distance' : `Within ${radiusMiles} miles`}
-            </span>
-          </div>
-          <input
-            type="range"
-            value={radiusMiles}
-            onChange={(e) => setRadiusMiles(Number(e.target.value))}
-            min={1}
-            max={20}
-            step={1}
-            className="w-full h-2 rounded-full appearance-none bg-primary/20 accent-primary cursor-pointer"
-            style={{ accentColor: '#C96A3A' }}
-          />
-          <div className="flex justify-between text-[10px] font-body text-muted-foreground">
-            <span>1 mi</span>
-            <span>5 mi</span>
-            <span>10 mi</span>
-            <span>20 mi</span>
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="text-sm font-body text-muted-foreground">Location not set</span>
+            </div>
+            <button
+              onClick={detectLocation}
+              className="flex items-center gap-1.5 text-xs font-body font-medium text-primary hover:text-primary/70 transition-colors cursor-pointer"
+            >
+              <Navigation className="w-3.5 h-3.5" />
+              Use my location
+            </button>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Category Filters */}
       <div className="flex gap-2 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide">
         <motion.button
           whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileTap={{ scale: 0.92 }}
           onClick={() => { setSelectedCategory('all'); setSelectedSize('all'); }}
-          className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all ${
+          className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all cursor-pointer ${
             selectedCategory === 'all'
-              ? 'bg-primary text-primary-foreground scale-105'
+              ? 'bg-primary text-primary-foreground'
               : 'bg-card border border-border text-foreground'
           }`}
+          animate={selectedCategory === 'all' ? { scale: [1, 1.08, 1] } : { scale: 1 }}
+          transition={selectedCategory === 'all' ? { type: 'spring', stiffness: 400, damping: 15 } : {}}
         >
           All
         </motion.button>
@@ -161,13 +196,15 @@ export default function BrowsePage() {
           <motion.button
             key={key}
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.92 }}
             onClick={() => { setSelectedCategory(key); setSelectedSize('all'); }}
-            className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all ${
+            className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all cursor-pointer ${
               selectedCategory === key
-                ? 'bg-primary text-primary-foreground scale-105'
+                ? 'bg-primary text-primary-foreground'
                 : 'bg-card border border-border text-foreground'
             }`}
+            animate={selectedCategory === key ? { scale: [1, 1.08, 1] } : { scale: 1 }}
+            transition={selectedCategory === key ? { type: 'spring', stiffness: 400, damping: 15 } : {}}
           >
             {label}
           </motion.button>
@@ -179,7 +216,7 @@ export default function BrowsePage() {
         <div className="flex gap-2 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide">
           <button
             onClick={() => setSelectedSize('all')}
-            className={`flex-shrink-0 px-3 py-1 rounded-full text-[11px] font-body font-medium transition-colors ${
+            className={`flex-shrink-0 px-3 py-1 rounded-full text-[11px] font-body font-medium transition-colors cursor-pointer ${
               selectedSize === 'all'
                 ? 'bg-secondary text-secondary-foreground'
                 : 'bg-card border border-border text-foreground'
@@ -191,7 +228,7 @@ export default function BrowsePage() {
             <button
               key={size}
               onClick={() => setSelectedSize(size)}
-              className={`flex-shrink-0 px-3 py-1 rounded-full text-[11px] font-body font-medium transition-colors ${
+              className={`flex-shrink-0 px-3 py-1 rounded-full text-[11px] font-body font-medium transition-colors cursor-pointer ${
                 selectedSize === size
                   ? 'bg-secondary text-secondary-foreground'
                   : 'bg-card border border-border text-foreground'
@@ -209,9 +246,10 @@ export default function BrowsePage() {
         {filtered.map((item, index) => (
           <motion.div
             key={item.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05, duration: 0.5, ease }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ delay: (index % 4) * 0.06, duration: 0.5, ease }}
           >
             <ItemCard
               item={item}
@@ -223,11 +261,18 @@ export default function BrowsePage() {
 
       {filtered.length === 0 && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
-          <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#7A9E8A]/10 flex items-center justify-center"><span className="text-[#7A9E8A] font-heading text-xl">S</span></div>
-          <h3 className="font-heading text-xl text-primary mb-2">Your neighborhood is just getting started.</h3>
-          <p className="font-body text-sm text-foreground/50 mb-6">Be the first mom to list something — someone nearby will thank you.</p>
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#7A9E8A]/10 flex items-center justify-center">
+            <span className="text-2xl">🌱</span>
+          </div>
+          <h3 className="font-heading text-xl text-[#5C3D2E] mb-2">Your neighborhood is just getting started</h3>
+          <p className="font-body text-sm text-[#5C3D2E]/50 mb-6 leading-relaxed">Be the first to list something — another mom nearby is probably looking for it.</p>
           <Link href="/list">
-            <button className="bg-primary text-white rounded-full px-6 py-2.5 font-heading text-sm">Share something →</button>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              className="bg-primary text-white rounded-full px-6 py-2.5 font-heading text-sm cursor-pointer"
+            >
+              Share something →
+            </motion.button>
           </Link>
         </motion.div>
       )}

@@ -86,7 +86,7 @@ export default function EditProfilePage() {
         <div className="relative">
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="w-24 h-24 rounded-full bg-primary/10 border-2 border-dashed border-primary/30 flex items-center justify-center cursor-pointer overflow-hidden"
+            className="w-24 h-24 rounded-full bg-primary/10 border-2 border-dashed border-primary/30 flex items-center justify-center cursor-pointer overflow-hidden animate-[pulse-ring_2s_ease-in-out_infinite] ring-4 ring-primary/0 hover:ring-primary/20 transition-all"
           >
             {avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -182,9 +182,14 @@ export default function EditProfilePage() {
           className="w-full h-12 bg-primary hover:bg-primary/90 text-white rounded-full font-heading text-base flex items-center justify-center gap-2 transition-colors mt-4"
         >
           {saved ? (
-            <><Check className="w-4 h-4" /> Saved!</>
+            <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex items-center gap-2">
+              <Check className="w-4 h-4" /> Saved!
+            </motion.span>
           ) : loading ? (
-            "Saving..."
+            <span className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              Saving...
+            </span>
           ) : (
             "Save profile"
           )}

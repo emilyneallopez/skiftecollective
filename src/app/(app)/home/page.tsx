@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Camera, Handshake, Baby } from "lucide-react";
 import ItemCard from "@/components/items/item-card";
@@ -9,8 +10,6 @@ import { mockProfiles } from "@/lib/data/mock/profiles";
 import { CATEGORIES } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
-
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const steps = [
@@ -24,14 +23,28 @@ const sampleItems = mockItems.slice(0, 4).map((item) => ({
   user: mockProfiles.find((p) => p.id === item.user_id),
 }));
 
+function useCountUp(target: number, duration = 1800) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let start = 0;
+    const step = Math.ceil(target / (duration / 30));
+    const interval = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(interval);
+      } else {
+        setCount(start);
+      }
+    }, 30);
+    return () => clearInterval(interval);
+  }, [target, duration]);
+  return count;
+}
+
 export default function HomePage() {
   const router = useRouter();
-  const supabase = createClient();
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/");
-  };
+  const impactCount = useCountUp(1247);
 
   return (
     <div className="px-4 pt-8 pb-4 space-y-8">
@@ -41,7 +54,6 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease }}
       >
-        {/* Logo — same size as auth page */}
         <div className="flex justify-center mb-4">
           <Image src="/skifte-logo.png" alt="Skifte Collective" width={280} height={112} className="h-24 w-auto object-contain" />
         </div>
@@ -55,7 +67,7 @@ export default function HomePage() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => router.push("/circles")}
-            className="px-5 py-2.5 rounded-full bg-[#C96A3A] text-[#FEFCFA] text-sm font-heading hover:bg-[#A85530] transition-colors"
+            className="px-5 py-2.5 rounded-full bg-[#C96A3A] text-[#FEFCFA] text-sm font-heading hover:bg-[#A85530] transition-colors cursor-pointer"
           >
             Join your neighborhood
           </motion.button>
@@ -63,7 +75,7 @@ export default function HomePage() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => router.push("/browse")}
-            className="px-5 py-2.5 rounded-full border border-[#C96A3A] text-[#C96A3A] text-sm font-heading hover:bg-[#C96A3A]/5 transition-colors"
+            className="px-5 py-2.5 rounded-full border border-[#C96A3A] text-[#C96A3A] text-sm font-heading hover:bg-[#C96A3A]/5 transition-colors cursor-pointer"
           >
             Browse swaps
           </motion.button>
@@ -74,12 +86,18 @@ export default function HomePage() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, ease }}
+        transition={{ delay: 0.05, ease }}
       >
         <h2 className="text-2xl font-heading text-[#7A9E8A] mb-4">How Skifte Works</h2>
         <div className="relative flex flex-col gap-0">
           {steps.map((step, i) => (
-            <div key={step.title} className="flex items-start gap-4 relative">
+            <motion.div
+              key={step.title}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 + i * 0.1, duration: 0.5, ease }}
+              className="flex items-start gap-4 relative"
+            >
               {i < steps.length - 1 && (
                 <div className="absolute left-[19px] top-12 w-[2px] h-[calc(100%-16px)] bg-[#E5D5BD]" />
               )}
@@ -91,7 +109,7 @@ export default function HomePage() {
                 <h3 className="text-base font-heading text-[#5C3D2E] mt-0.5">{step.title}</h3>
                 <p className="text-xs text-[#5C3D2E]/50 font-body mt-0.5 leading-relaxed">{step.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
@@ -100,8 +118,9 @@ export default function HomePage() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, ease }}
+        transition={{ delay: 0.1, ease }}
         whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.98 }}
         className="bg-gradient-to-r from-[#C96A3A]/10 to-[#7A9E8A]/10 rounded-2xl p-5 cursor-pointer hover:shadow-md transition-shadow border border-[#E5D5BD]"
         onClick={() => router.push("/first-year")}
       >
@@ -122,7 +141,11 @@ export default function HomePage() {
       </motion.div>
 
       {/* Browse Categories */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15, ease }}
+      >
         <h2 className="text-2xl font-heading text-[#7A9E8A] mb-3">Browse Categories</h2>
         <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
           {CATEGORIES.map((cat, i) => (
@@ -130,19 +153,24 @@ export default function HomePage() {
               key={cat.value}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.05 }}
-              whileTap={{ scale: 0.95 }}
+              transition={{ delay: 0.2 + i * 0.05 }}
+              whileTap={{ scale: 0.92 }}
+              whileHover={{ scale: 1.05 }}
               onClick={() => router.push(`/browse?category=${cat.value}`)}
-              className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FEFCFA] border border-[#E5D5BD] text-sm font-heading text-[#5C3D2E] hover:border-[#C96A3A]/40 transition-colors"
+              className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FEFCFA] border border-[#E5D5BD] text-sm font-heading text-[#5C3D2E] hover:border-[#C96A3A]/40 hover:bg-[#C96A3A]/5 transition-colors cursor-pointer active:bg-[#C96A3A] active:text-white"
             >
               {cat.label}
             </motion.button>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* New For You */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, ease }}
+      >
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-2xl font-heading text-[#7A9E8A]">New For You</h2>
           <Link href="/browse" className="flex items-center gap-1 text-xs font-body text-[#C96A3A]">
@@ -153,26 +181,28 @@ export default function HomePage() {
           {sampleItems.map((item, i) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + i * 0.05, ease }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.08, duration: 0.5, ease }}
             >
               <ItemCard item={item} onPress={() => router.push(`/items/${item.id}`)} />
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Collective Impact */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1, ease }}
         className="bg-[#7A9E8A]/10 rounded-2xl p-5 text-center border border-[#E5D5BD]"
       >
         <Image src="/skifte-icon.png" alt="Skifte" width={48} height={48} className="w-12 h-12 mx-auto mb-2 object-contain rounded-2xl" />
         <h3 className="font-heading text-[#5C3D2E] text-2xl">Our Collective Impact</h3>
-        <p className="text-3xl font-heading text-[#7A9E8A] mt-1">1,247 items</p>
+        <p className="text-3xl font-heading text-[#7A9E8A] mt-1">{impactCount.toLocaleString()} items</p>
         <p className="text-sm font-body text-[#5C3D2E]/60 mt-1">passed from one family to another</p>
       </motion.div>
     </div>
