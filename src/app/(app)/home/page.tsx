@@ -87,9 +87,9 @@ export default function HomePage() {
                 <step.icon className="w-4 h-4 text-[#7A9E8A]" />
               </div>
               <div className="pb-6">
-                <p className="text-[10px] uppercase tracking-widest text-[#3B1F0E]/40 font-body">Step {i + 1}</p>
-                <h3 className="text-base font-heading text-[#3B1F0E] mt-0.5">{step.title}</h3>
-                <p className="text-xs text-[#3B1F0E]/50 font-body mt-0.5 leading-relaxed">{step.desc}</p>
+                <p className="text-[10px] uppercase tracking-widest text-[#5C3D2E]/40 font-body">Step {i + 1}</p>
+                <h3 className="text-base font-heading text-[#5C3D2E] mt-0.5">{step.title}</h3>
+                <p className="text-xs text-[#5C3D2E]/50 font-body mt-0.5 leading-relaxed">{step.desc}</p>
               </div>
             </div>
           ))}
@@ -110,8 +110,8 @@ export default function HomePage() {
             <Baby className="w-6 h-6 text-[#C96A3A]" />
           </div>
           <div className="flex-1">
-            <h2 className="text-lg font-heading text-[#3B1F0E]">The First Year Map</h2>
-            <p className="text-xs text-[#3B1F0E]/50 font-body mt-0.5 leading-relaxed">
+            <h2 className="text-lg font-heading text-[#5C3D2E]">The First Year Map</h2>
+            <p className="text-xs text-[#5C3D2E]/50 font-body mt-0.5 leading-relaxed">
               A gentle guide to what you&apos;ll need, when to swap, and how to make the most of every stage.
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function HomePage() {
               transition={{ delay: i * 0.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => router.push(`/browse?category=${cat.value}`)}
-              className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FEFCFA] border border-[#E5D5BD] text-sm font-heading text-[#3B1F0E] hover:border-[#C96A3A]/40 transition-colors"
+              className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FEFCFA] border border-[#E5D5BD] text-sm font-heading text-[#5C3D2E] hover:border-[#C96A3A]/40 transition-colors"
             >
               {cat.label}
             </motion.button>
@@ -171,9 +171,9 @@ export default function HomePage() {
         className="bg-[#7A9E8A]/10 rounded-2xl p-5 text-center border border-[#E5D5BD]"
       >
         <Image src="/skifte-icon.png" alt="Skifte" width={48} height={48} className="w-12 h-12 mx-auto mb-2 object-contain rounded-2xl" />
-        <h3 className="font-heading text-[#3B1F0E] text-2xl">Our Collective Impact</h3>
+        <h3 className="font-heading text-[#5C3D2E] text-2xl">Our Collective Impact</h3>
         <p className="text-3xl font-heading text-[#7A9E8A] mt-1">1,247 items</p>
-        <p className="text-sm font-body text-[#3B1F0E]/60 mt-1">passed from one family to another</p>
+        <p className="text-sm font-body text-[#5C3D2E]/60 mt-1">passed from one family to another</p>
       </motion.div>
     </div>
   );

@@ -95,7 +95,7 @@ function AuthInner() {
                 <h1 className="text-3xl font-heading text-[#C96A3A]">
                   {isSignUp ? "Join the collective" : "Welcome to the neighborhood"}
                 </h1>
-                <p className="text-sm text-[#3B1F0E]/50 font-body mt-1.5">
+                <p className="text-sm text-[#5C3D2E]/50 font-body mt-1.5">
                   {isSignUp
                     ? "A safe space for every mom."
                     : "The neighborhood network for modern motherhood."}
@@ -133,43 +133,43 @@ function AuthInner() {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25 }}
               >
-                <label className="block text-xs font-body text-[#3B1F0E]/50 mb-1.5 ml-1">Display name</label>
+                <label className="block text-xs font-body text-[#5C3D2E]/50 mb-1.5 ml-1">Display name</label>
                 <input
                   type="text"
                   placeholder="How others will see you"
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
-                  className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl text-sm font-body text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
+                  className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl text-sm font-body text-[#5C3D2E] placeholder:text-[#5C3D2E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
                 />
               </motion.div>
             )}
           </AnimatePresence>
 
           <div>
-            <label className="block text-xs font-body text-[#3B1F0E]/50 mb-1.5 ml-1">Email</label>
+            <label className="block text-xs font-body text-[#5C3D2E]/50 mb-1.5 ml-1">Email</label>
             <input
               type="email"
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl text-sm font-body text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
+              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl text-sm font-body text-[#5C3D2E] placeholder:text-[#5C3D2E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-body text-[#3B1F0E]/50 mb-1.5 ml-1">Password</label>
+            <label className="block text-xs font-body text-[#5C3D2E]/50 mb-1.5 ml-1">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder={isSignUp ? "At least 6 characters" : "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-11 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl text-sm font-body text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
+                className="w-full px-4 py-3 pr-11 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl text-sm font-body text-[#5C3D2E] placeholder:text-[#5C3D2E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#3B1F0E]/50 hover:text-[#3B1F0E] transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#5C3D2E]/50 hover:text-[#5C3D2E] transition-colors"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -203,7 +203,7 @@ function AuthInner() {
 
         {/* Toggle */}
         <div className="text-center space-y-4">
-          <p className="text-sm text-[#3B1F0E]/50 font-body">
+          <p className="text-sm text-[#5C3D2E]/50 font-body">
             {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
             <button
               onClick={() => setIsSignUp(!isSignUp)}
@@ -219,7 +219,7 @@ function AuthInner() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-center text-[11px] text-[#3B1F0E]/40 font-body"
+          className="text-center text-[11px] text-[#5C3D2E]/40 font-body"
         >
           A safe, verified community for families
         </motion.p>

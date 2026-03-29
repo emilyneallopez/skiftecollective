@@ -88,8 +88,8 @@ export default function ListItemPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
       <FadeIn>
-        <h1 className="font-heading text-2xl text-[#3B1F0E] mb-2">Share something</h1>
-        <p className="font-body text-[#3B1F0E]/50 mb-8">
+        <h1 className="font-heading text-2xl text-[#5C3D2E] mb-2">Share something</h1>
+        <p className="font-body text-[#5C3D2E]/50 mb-8">
           Give something great a second life.
         </p>
       </FadeIn>
@@ -199,7 +199,7 @@ export default function ListItemPage() {
 
             <div className="space-y-4">
               <div>
-                <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Title</label>
+                <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Title</label>
                 <Input
                   placeholder="e.g., Organic Cotton Romper Set"
                   value={title}
@@ -209,7 +209,7 @@ export default function ListItemPage() {
               </div>
 
               <div>
-                <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Description</label>
+                <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Description</label>
                 <Textarea
                   placeholder="Describe the item — condition details, what it comes with, why you love it..."
                   value={description}
@@ -221,7 +221,7 @@ export default function ListItemPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Category</label>
+                  <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Category</label>
                   <div className="flex flex-wrap gap-2">
                     {CATEGORIES.map((cat) => (
                       <button
@@ -240,7 +240,7 @@ export default function ListItemPage() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Size</label>
+                  <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Size</label>
                   <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
                     {SIZES.map((s) => (
                       <button
@@ -260,7 +260,7 @@ export default function ListItemPage() {
               </div>
 
               <div>
-                <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Brand</label>
+                <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Brand</label>
                 <Input
                   placeholder="e.g., Carter's, Hanna Andersson"
                   value={brand}
@@ -270,7 +270,7 @@ export default function ListItemPage() {
               </div>
 
               <div>
-                <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Condition</label>
+                <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Condition</label>
                 <div className="flex flex-wrap gap-2">
                   {CONDITIONS.map((cond) => (
                     <button
@@ -289,7 +289,7 @@ export default function ListItemPage() {
               </div>
 
               <div>
-                <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Listing Type</label>
+                <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Listing Type</label>
                 <div className="flex flex-wrap gap-2">
                   {LISTING_TYPES.map((type) => (
                     <button
@@ -331,7 +331,7 @@ export default function ListItemPage() {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">Neighborhood</label>
+                  <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">Neighborhood</label>
                   <Input
                     value={neighborhood}
                     onChange={(e) => setNeighborhood(e.target.value)}
@@ -339,7 +339,7 @@ export default function ListItemPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-body font-medium text-[#3B1F0E]/70 mb-1.5 block">ZIP Code</label>
+                  <label className="text-sm font-body font-medium text-[#5C3D2E]/70 mb-1.5 block">ZIP Code</label>
                   <Input
                     value={zip}
                     onChange={(e) => setZip(e.target.value)}

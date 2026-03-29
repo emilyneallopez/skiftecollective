@@ -10,17 +10,17 @@ export function SiteFooter() {
             <Link href="/" className="inline-block">
               <Image src="/skifte-logo.png" alt="Skifte Collective" width={120} height={48} className="h-10 w-auto object-contain" />
             </Link>
-            <p className="mt-2 font-body text-sm text-[#3B1F0E]/50">The neighborhood network for modern motherhood.</p>
+            <p className="mt-2 font-body text-sm text-[#5C3D2E]/50">The neighborhood network for modern motherhood.</p>
           </div>
           <div className="flex flex-wrap gap-x-8 gap-y-2 md:justify-end">
-            <Link href="/browse" className="font-body text-sm text-[#3B1F0E]/60 hover:text-[#C96A3A] transition-colors">Browse</Link>
-            <Link href="/circles" className="font-body text-sm text-[#3B1F0E]/60 hover:text-[#C96A3A] transition-colors">Circles</Link>
-            <Link href="/first-year" className="font-body text-sm text-[#3B1F0E]/60 hover:text-[#C96A3A] transition-colors">First Year Map</Link>
-            <Link href="/trust" className="font-body text-sm text-[#3B1F0E]/60 hover:text-[#C96A3A] transition-colors">Trust & Safety</Link>
+            <Link href="/browse" className="font-body text-sm text-[#5C3D2E]/60 hover:text-[#C96A3A] transition-colors">Browse</Link>
+            <Link href="/circles" className="font-body text-sm text-[#5C3D2E]/60 hover:text-[#C96A3A] transition-colors">Circles</Link>
+            <Link href="/first-year" className="font-body text-sm text-[#5C3D2E]/60 hover:text-[#C96A3A] transition-colors">First Year Map</Link>
+            <Link href="/trust" className="font-body text-sm text-[#5C3D2E]/60 hover:text-[#C96A3A] transition-colors">Trust & Safety</Link>
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-[#E5D5BD]">
-          <p className="font-body text-xs text-[#3B1F0E]/40 italic">
+          <p className="font-body text-xs text-[#5C3D2E]/40 italic">
             Made with love for moms everywhere.
           </p>
         </div>

@@ -63,8 +63,8 @@ export default function FirstYearPage() {
         transition={{ duration: 0.5, ease }}
         className="mb-8 text-center"
       >
-        <h1 className="font-heading text-3xl text-[#3B1F0E] mb-2">The First Year Map</h1>
-        <p className="font-body text-sm text-[#3B1F0E]/60 leading-relaxed">
+        <h1 className="font-heading text-3xl text-[#5C3D2E] mb-2">The First Year Map</h1>
+        <p className="font-body text-sm text-[#5C3D2E]/60 leading-relaxed">
           A gentle guide to what you&apos;ll need, when to swap, and how to make the most of every stage. From someone who&apos;s been there.
         </p>
       </motion.div>
@@ -84,8 +84,8 @@ export default function FirstYearPage() {
               className="w-full flex items-center gap-4 p-5 text-left"
             >
               <div className="flex-1">
-                <p className="font-heading text-lg text-[#3B1F0E]">{stage.name}</p>
-                <p className="font-body text-xs text-[#3B1F0E]/50">{stage.range}</p>
+                <p className="font-heading text-lg text-[#5C3D2E]">{stage.name}</p>
+                <p className="font-body text-xs text-[#5C3D2E]/50">{stage.range}</p>
               </div>
               <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.2 }}>
                 <ChevronDown className="h-5 w-5 text-[#C96A3A]/60" />
@@ -106,7 +106,7 @@ export default function FirstYearPage() {
                       <p className="font-heading text-sm text-[#7A9E8A] mb-2">What to get</p>
                       <ul className="space-y-1">
                         {stage.get.map((item, j) => (
-                          <li key={j} className="font-body text-sm text-[#3B1F0E]/70 flex items-start gap-2">
+                          <li key={j} className="font-body text-sm text-[#5C3D2E]/70 flex items-start gap-2">
                             <span className="text-[#7A9E8A] mt-0.5">&#x2022;</span> {item}
                           </li>
                         ))}
@@ -116,7 +116,7 @@ export default function FirstYearPage() {
                       <p className="font-heading text-sm text-[#C96A3A] mb-2">What to swap now</p>
                       <ul className="space-y-1">
                         {stage.swap.map((item, j) => (
-                          <li key={j} className="font-body text-sm text-[#3B1F0E]/70 flex items-start gap-2">
+                          <li key={j} className="font-body text-sm text-[#5C3D2E]/70 flex items-start gap-2">
                             <span className="text-[#C96A3A] mt-0.5">&rarr;</span> {item}
                           </li>
                         ))}
@@ -124,7 +124,7 @@ export default function FirstYearPage() {
                     </div>
                     <div className="bg-[#FAF5EF] rounded-2xl p-4 border-l-4 border-[#C96A3A]">
                       <p className="font-heading text-xs text-[#C96A3A] mb-1">Skifte tip</p>
-                      <p className="font-body text-sm text-[#3B1F0E]/70 leading-relaxed italic">{stage.tip}</p>
+                      <p className="font-body text-sm text-[#5C3D2E]/70 leading-relaxed italic">{stage.tip}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -140,7 +140,7 @@ export default function FirstYearPage() {
         transition={{ delay: 0.5 }}
         className="mt-8 text-center"
       >
-        <p className="font-body text-sm text-[#3B1F0E]/40">
+        <p className="font-body text-sm text-[#5C3D2E]/40">
           Every baby is different. This is a guide, not a rulebook.
         </p>
       </motion.div>
