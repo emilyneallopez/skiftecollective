@@ -65,7 +65,7 @@ export const mockMessages: Message[] = [
     id: "msg-5",
     conversation_id: "conv-1",
     sender_id: "maya-johnson",
-    content: "See you there! 🌿",
+    content: "See you there!",
     created_at: "2024-08-12T10:35:00Z",
   },
 

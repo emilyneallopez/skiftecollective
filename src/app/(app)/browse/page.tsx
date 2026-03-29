@@ -223,7 +223,7 @@ export default function BrowsePage() {
 
       {filtered.length === 0 && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
-          <p className="text-4xl mb-4">🌿</p>
+          <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#3A6349]/10 flex items-center justify-center"><span className="text-[#3A6349] font-heading text-xl">S</span></div>
           <h3 className="font-heading text-xl text-primary mb-2">Your neighborhood is just getting started.</h3>
           <p className="font-body text-sm text-foreground/50 mb-6">Be the first mom to list something — someone nearby will thank you.</p>
           <Link href="/list">

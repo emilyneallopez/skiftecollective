@@ -79,7 +79,7 @@ export function SiteHeader() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                   <Avatar className="h-9 w-9">
-                    <AvatarImage src="https://picsum.photos/seed/sarah/200/200" />
+                    <AvatarImage src="" />
                     <AvatarFallback className="bg-cream text-terracotta text-sm">SC</AvatarFallback>
                   </Avatar>
                 </Button>

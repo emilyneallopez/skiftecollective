@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Upload, X, ChevronRight, ChevronLeft, Camera, Check } from "lucide-react";
+import { X, ChevronRight, ChevronLeft, Camera, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,8 +31,8 @@ export default function ListItemPage() {
 
   const addPlaceholderPhoto = () => {
     if (photos.length < 5) {
-      const seed = Math.random().toString(36).slice(2, 8);
-      setPhotos([...photos, `https://picsum.photos/seed/${seed}/600/600`]);
+      const localPhotos = ["/linen-bloomers.jpg", "/wooden-toy.jpg", "/onesie-bundle.jpg", "/board-books.jpg", "/baby-bouncer.jpg", "/maternity-dress.jpg"];
+      setPhotos([...photos, localPhotos[photos.length % localPhotos.length]]);
     }
   };
 
