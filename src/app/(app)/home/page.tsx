@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Camera, Handshake, Baby } from "lucide-react";
-import { ItemCard } from "@/components/item-card";
+import ItemCard from "@/components/items/item-card";
 import { mockItems } from "@/lib/data/mock/items";
 import { mockProfiles } from "@/lib/data/mock/profiles";
 import { CATEGORIES } from "@/lib/constants";
