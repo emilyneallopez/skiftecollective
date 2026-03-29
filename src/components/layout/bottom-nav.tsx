@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 const tabs = [
-  { icon: Home, label: 'Home', path: '/' },
+  { icon: Home, label: 'Home', path: '/home' },
   { icon: Search, label: 'Browse', path: '/browse' },
   { icon: PlusCircle, label: 'Share', path: '/list' },
   { icon: Users, label: 'Community', path: '/circles' },

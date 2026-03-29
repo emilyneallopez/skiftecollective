@@ -54,7 +54,7 @@ function AuthInner() {
           password,
         });
         if (signInError) throw signInError;
-        const redirect = searchParams.get('redirect') || '/browse';
+        const redirect = searchParams.get('redirect') || '/home';
         router.push(redirect);
       }
     } catch (err: unknown) {
