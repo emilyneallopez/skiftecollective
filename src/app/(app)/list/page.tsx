@@ -141,7 +141,7 @@ export default function ListItemPage() {
             <div>
               <h2 className="font-heading text-lg font-semibold mb-1">Add Photos</h2>
               <p className="text-sm text-muted-foreground">
-                Up to 5 photos. Tap to add a placeholder image.
+                Tap to add photos from your camera roll. Up to 5.
               </p>
             </div>
 
@@ -169,15 +169,25 @@ export default function ListItemPage() {
                 </div>
               ))}
               {photos.length < 5 && (
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="aspect-square rounded-xl border-2 border-dashed border-[#E5D5BD] flex flex-col items-center justify-center gap-2 hover:border-[#C96A3A]/50 hover:bg-[#C96A3A]/5 hover:shadow-[0_0_12px_rgba(201,106,58,0.15)] transition-all cursor-pointer"
+                <label
+                  htmlFor="photo-upload"
+                  className="aspect-square rounded-xl border-2 border-dashed border-[#C96A3A]/40 flex flex-col items-center justify-center gap-2 bg-[#C96A3A]/5 active:bg-[#C96A3A]/10 transition-all cursor-pointer"
                 >
-                  <Camera className="h-6 w-6 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">Add Photo</span>
-                </button>
+                  <Camera className="h-7 w-7 text-[#C96A3A]" />
+                  <span className="text-xs font-body text-[#C96A3A] font-medium">Add Photo</span>
+                </label>
               )}
             </div>
+
+            {/* Hidden file input — label triggers this */}
+            <input
+              id="photo-upload"
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handlePhotoSelect}
+              className="hidden"
+            />
           </motion.div>
         )}
 
