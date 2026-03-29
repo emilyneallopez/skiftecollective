@@ -41,10 +41,21 @@ export default function CirclesPage() {
         transition={{ duration: 0.5, ease }}
         className="mb-6"
       >
-        <h1 className="font-heading text-3xl text-foreground mb-1">Circles</h1>
-        <p className="font-body text-sm text-foreground/50">
-          Join neighborhood groups to swap locally and build community.
-        </p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="font-heading text-3xl text-foreground mb-1">Circles</h1>
+            <p className="font-body text-sm text-foreground/50">
+              Join neighborhood groups to swap locally.
+            </p>
+          </div>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => alert("Start a Circle coming soon! Email us at hello@skiftecollective.com")}
+            className="flex-shrink-0 px-4 py-2 bg-[#3A6349] text-white rounded-full font-heading text-sm mt-1"
+          >
+            + Start a circle
+          </motion.button>
+        </div>
       </motion.div>
 
       <div className="grid grid-cols-1 gap-4">
