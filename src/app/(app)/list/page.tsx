@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -28,11 +28,21 @@ export default function ListItemPage() {
   const [zip, setZip] = useState("11215");
   const [submitted, setSubmitted] = useState(false);
 
-  const addPlaceholderPhoto = () => {
-    if (photos.length < 5) {
-      const localPhotos = ["/linen-bloomers.jpg", "/wooden-toy.jpg", "/onesie-bundle.jpg", "/board-books.jpg", "/baby-bouncer.jpg", "/maternity-dress.jpg"];
-      setPhotos([...photos, localPhotos[photos.length % localPhotos.length]]);
-    }
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handlePhotoSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    files.forEach((file) => {
+      if (photos.length < 5) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          setPhotos((prev) => prev.length < 5 ? [...prev, ev.target?.result as string] : prev);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    // reset so same file can be selected again
+    if (e.target) e.target.value = "";
   };
 
   const removePhoto = (index: number) => {
@@ -160,7 +170,7 @@ export default function ListItemPage() {
               ))}
               {photos.length < 5 && (
                 <button
-                  onClick={addPlaceholderPhoto}
+                  onClick={() => fileInputRef.current?.click()}
                   className="aspect-square rounded-xl border-2 border-dashed border-cream-300 flex flex-col items-center justify-center gap-2 hover:border-terracotta/50 hover:bg-cream transition-all"
                 >
                   <Camera className="h-6 w-6 text-muted-foreground" />
@@ -377,7 +387,7 @@ export default function ListItemPage() {
       <div className="flex justify-between mt-10 pt-6 border-t border-cream-200">
         <Button
           variant="ghost"
-          onClick={() => setStep(step - 1)}
+          onClick={() => step === 0 ? router.back() : setStep(step - 1)}
           disabled={step === 0}
           className="gap-1 rounded-full"
         >
