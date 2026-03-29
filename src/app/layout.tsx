@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { FunBackground } from "@/components/fun-background";
-import { Baloo_2, Nunito, Quicksand } from "next/font/google";
+import { Boogaloo, Nunito, Quicksand } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const baloo2 = Baloo_2({
+const boogaloo = Boogaloo({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-heading",
+  weight: ["400"],
   display: "swap",
 });
 
@@ -42,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(baloo2.variable, nunito.variable, quicksand.variable)}>
+    <html lang="en" className={cn(boogaloo.variable, nunito.variable, quicksand.variable)}>
       <body className="antialiased bg-background text-foreground font-body">
         <FunBackground />
         <div className="relative z-10">

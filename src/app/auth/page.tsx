@@ -87,19 +87,23 @@ function AuthInner() {
             <img src="/skifte-icon.png" alt="Skifte" className="w-full h-full object-cover" />
           </motion.div>
           <div>
-            <h1 className="text-3xl font-heading text-foreground">Skifte Collective</h1>
             <AnimatePresence mode="wait">
-              <motion.p
-                key={isSignUp ? 'signup' : 'signin'}
+              <motion.div
+                key={isSignUp ? 'signup-header' : 'signin-header'}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
-                className="text-sm text-muted-foreground font-body mt-1.5"
+                className="space-y-1"
               >
-                {isSignUp
-                  ? 'Join the neighborhood network for modern motherhood.'
-                  : 'The neighborhood network for modern motherhood.'}
-              </motion.p>
+                <h1 className="text-3xl font-display text-primary">
+                  {isSignUp ? 'Join the collective 🌿' : 'Welcome to the neighborhood 🏡'}
+                </h1>
+                <p className="text-sm text-foreground/50 font-body mt-1.5">
+                  {isSignUp
+                    ? 'A safe space for every mom.'
+                    : 'Good to have you back.'}
+                </p>
+              </motion.div>
             </AnimatePresence>
           </div>
         </div>
@@ -114,7 +118,7 @@ function AuthInner() {
         {/* Form */}
         <motion.form
           onSubmit={handleSubmit}
-          className="space-y-3"
+          className="space-y-3 bg-card/60 backdrop-blur-sm rounded-2xl p-5 border border-border shadow-lg shadow-primary/5"
           layout
         >
           <AnimatePresence>
@@ -125,43 +129,43 @@ function AuthInner() {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25 }}
               >
-                <label className="block text-xs font-body text-muted-foreground mb-1.5 ml-1">Display name</label>
+                <label className="block text-xs font-body text-foreground/50 mb-1.5 ml-1">Display name</label>
                 <input
                   type="text"
                   placeholder="How others will see you"
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
-                  className="w-full px-4 py-3 bg-card border border-border rounded-xl text-sm font-body text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
+                  className="w-full px-4 py-3 bg-card border border-border rounded-2xl text-sm font-body text-foreground placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
                 />
               </motion.div>
             )}
           </AnimatePresence>
 
           <div>
-            <label className="block text-xs font-body text-muted-foreground mb-1.5 ml-1">Email</label>
+            <label className="block text-xs font-body text-foreground/50 mb-1.5 ml-1">Email</label>
             <input
               type="email"
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 bg-card border border-border rounded-xl text-sm font-body text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
+              className="w-full px-4 py-3 bg-card border border-border rounded-2xl text-sm font-body text-foreground placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-body text-muted-foreground mb-1.5 ml-1">Password</label>
+            <label className="block text-xs font-body text-foreground/50 mb-1.5 ml-1">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder={isSignUp ? 'At least 6 characters' : '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-11 bg-card border border-border rounded-xl text-sm font-body text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
+                className="w-full px-4 py-3 pr-11 bg-card border border-border rounded-2xl text-sm font-body text-foreground placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/50 hover:text-foreground transition-colors"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -172,7 +176,7 @@ function AuthInner() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-12 rounded-xl bg-primary text-primary-foreground font-body font-medium text-sm flex items-center justify-center gap-2 group disabled:opacity-60"
+              className="w-full h-12 rounded-full bg-primary text-primary-foreground font-heading font-semibold text-sm flex items-center justify-center gap-2 group disabled:opacity-60 px-6"
             >
               {loading ? (
                 <motion.div
@@ -182,7 +186,7 @@ function AuthInner() {
                 />
               ) : (
                 <>
-                  {isSignUp ? 'Create Account' : 'Welcome Back'}
+                  {isSignUp ? 'Create Account' : 'Welcome back 👋'}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </>
               )}
@@ -192,11 +196,11 @@ function AuthInner() {
 
         {/* Toggle */}
         <div className="text-center space-y-4">
-          <p className="text-sm text-muted-foreground font-body">
+          <p className="text-sm text-foreground/50 font-body">
             {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
             <button
               onClick={() => setIsSignUp(!isSignUp)}
-              className="text-primary font-medium hover:underline underline-offset-2"
+              className="text-primary font-heading font-medium hover:underline underline-offset-2"
             >
               {isSignUp ? 'Sign In' : 'Sign Up'}
             </button>
@@ -208,7 +212,7 @@ function AuthInner() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-center text-[11px] text-muted-foreground/60 font-body"
+          className="text-center text-[11px] text-foreground/40 font-body"
         >
           🌿 A safe, verified community for families
         </motion.p>
