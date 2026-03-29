@@ -68,10 +68,7 @@ function AuthInner() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-background relative overflow-hidden">
       <FunBackground />
-      {/* Decorative background shapes */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3" />
-      <div className="absolute top-1/4 right-0 w-48 h-48 bg-accent/20 rounded-full translate-x-1/2" />
+
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -82,13 +79,13 @@ function AuthInner() {
         {/* Brand header */}
         <div className="text-center space-y-3">
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 15 }}
-            className="w-24 h-24 rounded-2xl overflow-hidden mx-auto"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="mx-auto"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/skifte-icon.png" alt="Skifte" className="w-full h-full object-cover" />
+            <img src="/skifte-logo.png" alt="Skifte Collective" className="h-20 w-auto object-contain mx-auto" />
           </motion.div>
           <div>
             <AnimatePresence mode="wait">
@@ -201,7 +198,7 @@ function AuthInner() {
                 />
               ) : (
                 <>
-                  {isSignUp ? 'Join the neighborhood' : 'Welcome back 👋'}
+                  {isSignUp ? 'Join the neighborhood' : 'Welcome back'}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </>
               )}
