@@ -16,6 +16,7 @@ interface ItemCardProps {
     condition: string;
     location?: string | null;
     image_urls?: string[] | null;
+    images?: string[] | null;
     profiles?: {
       display_name?: string | null;
       avatar_url?: string | null;
@@ -36,7 +37,8 @@ const conditionColors: Record<string, string> = {
 };
 
 const ItemCard = ({ item, onPress, onFavorite }: ItemCardProps) => {
-  const hasImage = item.image_urls && item.image_urls.length > 0;
+  const imageUrl = item.image_urls?.[0] || (item as any).images?.[0] || null;
+  const hasImage = !!imageUrl;
   const [favorited, setFavorited] = useState(false);
 
   useEffect(() => {
@@ -64,7 +66,7 @@ const ItemCard = ({ item, onPress, onFavorite }: ItemCardProps) => {
         {hasImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={item.image_urls![0]}
+            src={imageUrl!}
             alt={item.title}
             loading="lazy"
             decoding="async"
