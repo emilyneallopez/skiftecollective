@@ -1,0 +1,178 @@
+You are doing the final production build of Skifte Collective. Emily is stepping away and expects to return to a fully polished, deployable app. Do everything below. Be thorough. Fix every issue you find along the way.
+
+## VISUAL DIRECTION (non-negotiable)
+- Fonts: Lilita One (font-heading) for ALL headings, titles, buttons. Gaegu (font-body) for ALL body text, labels, descriptions.
+- Colors: terracotta #C96A3A, cream #FAF5EF, forest #3A6349, sunshine #F5C842, warm-white #FEFCFA, ink #3B1F0E
+- NO decorative emojis anywhere. Only functional ones (category icons in Browse).
+- Warm, childlike, community feel. NOT tech startup. NOT marketplace.
+- References: Bobo Choses, Primary.com, Maisonette
+
+## TASK 1: LANDING PAGE (src/app/landing-client.tsx)
+This is the most important page. It should make every mom want to join immediately.
+
+Replace the current hero with this exact structure:
+```
+- Nav: logo left (skifte-logo.png, h-12), "Sign In" ghost button + "Join Free" terracotta pill right
+- Hero: two-column layout
+  LEFT:
+    - Big Lilita One headline (text-5xl md:text-6xl lg:text-7xl): "Swap the things they outgrew."
+    - Gaegu subheading: "The neighborhood network for modern motherhood."  
+    - Second line Gaegu: "Swap baby clothes, toys, and gear with moms nearby while building real community in your neighborhood."
+    - Two buttons: "Join the neighborhood" (terracotta, rounded-full) + "Sign in" (ghost, rounded-full)
+    - Two small floating pills (animated float): "Free to join" (terracotta/10 bg, terracotta text) + "2,400+ moms" (forest/10 bg, forest text)
+  RIGHT:
+    - 2x2 photo grid (offset — left column starts at top, right column starts 2rem lower)
+    - Photos: /linen-bloomers.jpg, /wooden-toy.jpg, /onesie-bundle.jpg, /board-books.jpg
+    - Each photo: rounded-2xl, shadow-md, hover:scale-[1.02] transition
+    - Floating badge BELOW the grid (not overlapping): "1,247 items swapped" in white card with forest text
+```
+
+How It Works section:
+- Background: white
+- 3 cards in a row, each rotated slightly (-1deg, 0deg, +1deg)
+- Card: cream bg, rounded-2xl, shadow-sm, border border-[#E5D5BD]
+- Step number in tiny terracotta caps, Lilita One title, Gaegu description
+- On hover: card lifts 4px + shadow deepens (framer-motion whileHover)
+- Steps: "Share what you've outgrown" / "Find something you love" / "Meet up and exchange"
+
+Featured Items section:
+- Heading: "Fresh Swaps Near You" in Lilita One text-3xl
+- 2x3 grid of ItemCard components using mockItems
+- Staggered fade-in on scroll (whileInView, viewport once:true)
+
+Circles teaser:
+- Full-width terracotta background
+- Lilita One heading: "Find your people." white
+- Gaegu body: "Join neighborhood circles and meet moms near you."
+- 4 circle pills (warm white/20 bg, white text): "Local Moms" "Organic & Eco" "New Mom Support" "Toy Swappers"
+- Sunshine yellow CTA button: "Explore circles"
+
+First Year Map teaser:
+- Sunshine yellow background
+- Lilita One heading: "Know what to swap, when." text-[#3B1F0E]
+- Gaegu body: "Our First Year Map tells you exactly what to let go of — and what to hold onto — at every stage."
+- Forest green CTA button: "Open the map"
+
+Footer:
+- Cream background
+- Logo + tagline left
+- Links: Browse, Circles, First Year Map, Trust & Safety
+- "Made with love for moms everywhere." in Gaegu italic
+
+## TASK 2: FIX ALL NAVIGATION LINKS
+Check every page and fix:
+- Landing page "Join the neighborhood" → /auth?tab=signup
+- Landing page "Sign in" → /auth
+- Landing page "Explore circles" → /auth?tab=signup
+- Landing page "Open the map" → /auth?tab=signup
+- After login → /home
+- After signup → /onboarding
+- After onboarding → /home
+- Bottom nav: Home→/home, Browse→/browse, Share→/list, Community→/circles, You→/profile/me
+
+## TASK 3: FIX /home PAGE (src/app/(app)/home/page.tsx)
+If this file doesn't exist, create it. It should be the Lovable-style home for logged-in users:
+- Header: logo (h-10) + "Sign out" option
+- Tagline in terracotta Gaegu: "The neighborhood network for modern motherhood"
+- Description in Gaegu: "Swap baby clothes, toys, and gear with moms nearby while building real community in your neighborhood."
+- Two CTA buttons: "Join your neighborhood" (→/circles) + "Browse swaps" (→/browse)
+- "How Skifte Works" section with 3 steps (vertical list with connector line, icon circles)
+- "The First Year Map" card (→/first-year)
+- "Browse Categories" horizontal scrollable pills
+- "New For You" 2-col item grid using sampleListings
+- "Our Collective Impact" section: "1,247 items passed from one family to another"
+- All motions from framer-motion: staggered entrance, hover effects
+
+## TASK 4: AUTH PAGE POLISH
+- Big wordmark logo centered (skifte-logo.png, h-20)
+- Lilita One heading: "Welcome to the neighborhood" (sign in) / "Join the collective" (sign up)
+- Gaegu subtext: "Good to have you back." / "A safe space for every mom."
+- Clean form fields: rounded-2xl, warm border, Gaegu labels
+- Terracotta rounded-full submit button with Lilita One text
+- Toggle between sign in/sign up with smooth AnimatePresence
+- "Welcome back" button (no emoji)
+- Trust line at bottom: "A safe, verified community for families" in small Gaegu
+
+## TASK 5: ONBOARDING PAGE
+- Logo centered (h-16)
+- Lilita One: "We're so glad you're here."
+- Gaegu subtext: "Tell us a little about yourself so other moms nearby can find you."
+- Two inputs: "What should we call you?" + "What neighborhood are you in?" (Gaegu labels, rounded-2xl inputs)
+- Helper text under neighborhood: "Only your neighborhood name is shown — never your address."
+- "Join the neighborhood" terracotta rounded-full button
+- "Skip for now" small text link
+
+## TASK 6: FIRST YEAR MAP PAGE
+Already built at src/app/(app)/first-year/page.tsx — review and polish:
+- Make sure Lilita One is on stage names and main heading
+- Make sure Gaegu is on all body text and tip text
+- Ensure accordion animations are smooth
+- The "Skifte tip" sections: warm cream bg, left border in terracotta
+
+## TASK 7: TRUST PAGE
+Already built at src/app/(app)/trust/page.tsx — review and polish:
+- Lilita One on all headings
+- Gaegu on all body text
+- Warm card styling consistent with rest of app
+
+## TASK 8: CIRCLES PAGE
+Review src/app/(app)/circles/page.tsx:
+- Lilita One heading "Circles"
+- Each circle card: image placeholder (cream bg with initial letter), name, member count, description, "Join" button
+- Cards animate in with stagger
+- whileHover: y:-4
+
+## TASK 9: LIST ITEM PAGE
+Review src/app/(app)/list/page.tsx:
+- Lilita One heading: "Share something"
+- Multi-step form feeling warm, not clinical
+- Step labels in Gaegu
+- Progress bar in terracotta
+
+## TASK 10: ITEM DETAIL PAGE
+Check src/app/(app)/items/[id]/page.tsx:
+- Large photo at top
+- Lilita One item title
+- Seller info card
+- "Request Swap" terracotta button
+- "Save" ghost button
+- Related items below
+
+## TASK 11: PROFILE PAGE
+Check src/app/(app)/profile/[username]/page.tsx:
+- Avatar placeholder (initial letter, terracotta bg)
+- Lilita One for name
+- Stats row: Listed, Swapped, Circles
+- Tabs: Closet | Wishlist | Reviews
+- Items in 2-col grid
+
+## TASK 12: GLOBAL CLEANUP
+1. Remove ALL remaining decorative emojis from every file (search for 🌿, ✨, 💛, 🤝, 👶, 🧸, 🏡, 🌱, etc. in non-functional contexts)
+2. Make sure every button is rounded-full
+3. Make sure every card is rounded-2xl minimum
+4. Make sure no pure white (#fff or white) — use warm-white or cream
+5. Make sure no pure black text — use text-[#3B1F0E] or text-foreground
+6. Check all pages have proper metadata titles
+
+## TASK 13: SAMPLE DATA
+Update src/lib/data/mock/items.ts to use local photos:
+- All picsum.photos URLs → local files: /linen-bloomers.jpg, /wooden-toy.jpg, /onesie-bundle.jpg, /board-books.jpg, /baby-bouncer.jpg, /maternity-dress.jpg (rotate through these)
+- Remove any "Brooklyn" from neighborhoods → use diverse neighborhoods: Park Slope, Wicker Park, Silver Lake, Capitol Hill, Midtown, Montrose, Nob Hill, etc.
+
+## TASK 14: ANIMATIONS FINAL PASS
+Apply to every page that's missing motion:
+- Page entrance: fade in (opacity 0→1, y 20→0, duration 0.5)
+- Cards: stagger (0.05s per item), whileInView, viewport once:true
+- Buttons: whileHover scale 1.02, whileTap scale 0.98
+- Hero elements: spring entrance
+
+## CRITICAL: BEFORE FINISHING
+Run npm run build. Fix EVERY error and warning. The build must be clean.
+Check for:
+- Missing imports
+- Unused variables (fix or suppress)
+- Type errors
+- Missing 'use client' directives on pages with hooks
+- Missing export const dynamic = 'force-dynamic' on pages with Supabase
+
+When completely done: openclaw system event --text "Done: Skifte production build complete — all pages polished, fonts applied, animations, clean build, ready to deploy" --mode now
