@@ -25,9 +25,10 @@ export const CATEGORIES: { value: ItemCategory; label: string }[] = [
 ];
 
 export const CONDITIONS: { value: ItemCondition; label: string; color: string }[] = [
-  { value: "like-new", label: "Like New", color: "bg-mint-100 text-forest-700" },
-  { value: "good", label: "Good", color: "bg-sky-100 text-sky-500" },
-  { value: "loved", label: "Loved", color: "bg-blush-100 text-blush-400" },
+  { value: "new-with-tags", label: "New with Tags", color: "bg-sunshine text-ink" },
+  { value: "like-new", label: "Like New", color: "bg-mint text-forest" },
+  { value: "good", label: "Good", color: "bg-sky text-white" },
+  { value: "loved", label: "Loved", color: "bg-blush text-ink" },
 ];
 
 export const LISTING_TYPES: { value: ListingType; label: string; color: string }[] = [

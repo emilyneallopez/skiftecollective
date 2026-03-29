@@ -1,5 +1,5 @@
 export type ItemCategory = "clothing" | "toys" | "gear" | "books" | "essentials";
-export type ItemCondition = "like-new" | "good" | "loved";
+export type ItemCondition = "new-with-tags" | "like-new" | "good" | "loved";
 export type ListingType = "swap" | "free" | "sell";
 export type ItemStatus = "active" | "pending" | "swapped" | "sold" | "archived";
 export type SwapStatus = "pending" | "accepted" | "declined" | "completed";
