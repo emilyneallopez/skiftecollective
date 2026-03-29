@@ -98,7 +98,7 @@ function AuthInner() {
                 <p className="text-sm text-[#3B1F0E]/50 font-body mt-1.5">
                   {isSignUp
                     ? "A safe space for every mom."
-                    : "Good to have you back."}
+                    : "The neighborhood network for modern motherhood."}
                 </p>
               </motion.div>
             </AnimatePresence>
