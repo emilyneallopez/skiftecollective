@@ -83,12 +83,8 @@ export default function HomePage() {
               {i < steps.length - 1 && (
                 <div className="absolute left-[19px] top-12 w-[2px] h-[calc(100%-16px)] bg-[#E5D5BD]" />
               )}
-              <div className={`relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border-2 \${
-                i === 0 ? 'bg-[#C96A3A]/15 border-[#C96A3A]/30' :
-                i === 1 ? 'bg-[#3A6349]/15 border-[#3A6349]/30' :
-                'bg-[#F5C842]/20 border-[#F5C842]/50'
-              }\`}>
-                <step.icon className={`w-4 h-4 \${i === 0 ? 'text-[#C96A3A]' : i === 1 ? 'text-[#3A6349]' : 'text-[#C96A3A]'}\`} />
+              <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border-2 bg-[#3A6349]/15 border-[#3A6349]/30">
+                <step.icon className="w-4 h-4 text-[#3A6349]" />
               </div>
               <div className="pb-6">
                 <p className="text-[10px] uppercase tracking-widest text-[#3B1F0E]/40 font-body">Step {i + 1}</p>
