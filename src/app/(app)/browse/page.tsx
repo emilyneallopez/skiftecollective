@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Search, MapPin } from 'lucide-react';
+import { Search, MapPin, Navigation } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ItemCard from '@/components/items/item-card';
@@ -26,8 +26,36 @@ export default function BrowsePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>(searchParams.get('category') || 'all');
   const [selectedSize, setSelectedSize] = useState<string>('all');
   const [userLocation, setUserLocation] = useState('');
-  const [radiusMiles, setRadiusMiles] = useState(20);
+  const [radiusMiles, setRadiusMiles] = useState(10);
   const [locationFilterEnabled, setLocationFilterEnabled] = useState(false);
+  const [detectingLocation, setDetectingLocation] = useState(false);
+
+  const detectLocation = () => {
+    if (!navigator.geolocation) return;
+    setDetectingLocation(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`);
+          const data = await res.json();
+          const city = data.address?.city || data.address?.town || data.address?.village || data.address?.suburb || '';
+          const state = data.address?.state_code || data.address?.state || '';
+          const location = city && state ? `${city}, ${state}` : city || 'Near you';
+          setUserLocation(location);
+          setLocationFilterEnabled(true);
+        } catch {
+          setUserLocation('Near you');
+          setLocationFilterEnabled(true);
+        }
+        setDetectingLocation(false);
+      },
+      () => setDetectingLocation(false)
+    );
+  };
+
+  useEffect(() => {
+    detectLocation();
+  }, []);
 
   const allListings = [...sampleListings];
   const availableSizes = selectedCategory !== 'all' ? (sizeOptions[selectedCategory] || []) : [];
@@ -67,43 +95,52 @@ export default function BrowsePage() {
       </div>
 
       {/* Location Filter */}
-      <div className="bg-card border border-border rounded-xl p-3 space-y-2.5">
-        <div className="flex items-center gap-2">
-          <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-          <input
-            type="text"
-            placeholder="Your location (e.g. Austin, TX)"
-            value={userLocation}
-            onChange={(e) => {
-              setUserLocation(e.target.value);
-              setLocationFilterEnabled(!!e.target.value.trim());
-            }}
-            className="flex-1 text-sm font-body text-foreground bg-transparent placeholder:text-muted-foreground focus:outline-none"
-          />
-        </div>
-        {locationFilterEnabled && userLocation && (
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] text-muted-foreground font-body">Distance</span>
-              <span className="text-[11px] font-medium text-primary font-body">
-                {radiusMiles >= 20 ? 'Any distance' : `Within ${radiusMiles} mi`}
-              </span>
-            </div>
-            <input
-              type="range"
-              value={radiusMiles}
-              onChange={(e) => setRadiusMiles(Number(e.target.value))}
-              min={1}
-              max={20}
-              step={1}
-              className="w-full accent-primary"
-            />
-            <div className="flex justify-between text-[10px] text-muted-foreground font-body">
-              <span>1 mi</span>
-              <span>20 mi</span>
-            </div>
+      <div className="bg-card border border-border rounded-2xl p-4 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+            {detectingLocation ? (
+              <span className="text-sm font-body text-muted-foreground">Finding your location...</span>
+            ) : userLocation ? (
+              <span className="text-sm font-body font-medium text-foreground">{userLocation}</span>
+            ) : (
+              <span className="text-sm font-body text-muted-foreground">Location not set</span>
+            )}
           </div>
-        )}
+          <button
+            onClick={detectLocation}
+            className="flex items-center gap-1.5 text-xs font-body font-medium text-primary hover:text-primary/70 transition-colors"
+          >
+            <Navigation className="w-3.5 h-3.5" />
+            {userLocation ? 'Update' : 'Use my location'}
+          </button>
+        </div>
+
+        {/* Distance slider — always visible */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-body text-muted-foreground">Distance</span>
+            <span className="text-xs font-heading text-primary">
+              {radiusMiles >= 20 ? 'Any distance' : `Within ${radiusMiles} miles`}
+            </span>
+          </div>
+          <input
+            type="range"
+            value={radiusMiles}
+            onChange={(e) => setRadiusMiles(Number(e.target.value))}
+            min={1}
+            max={20}
+            step={1}
+            className="w-full h-2 rounded-full appearance-none bg-primary/20 accent-primary cursor-pointer"
+            style={{ accentColor: '#C96A3A' }}
+          />
+          <div className="flex justify-between text-[10px] font-body text-muted-foreground">
+            <span>1 mi</span>
+            <span>5 mi</span>
+            <span>10 mi</span>
+            <span>20 mi</span>
+          </div>
+        </div>
       </div>
 
       {/* Category Filters */}
