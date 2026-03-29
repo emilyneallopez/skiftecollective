@@ -51,13 +51,13 @@ export function LandingPageClient() {
             {/* Left */}
             <FadeIn direction="none" duration={0.7}>
               <div>
-                <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] text-[#3B1F0E] mb-5">
+                <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-[#3B1F0E] mb-4">
                   Swap the things they outgrew.
                 </h1>
                 <p className="text-lg text-[#3B1F0E]/60 max-w-md mb-8 leading-relaxed">
                   Swap baby clothes, toys, and gear with moms nearby while building real community in your neighborhood.
                 </p>
-                <div className="flex flex-wrap gap-3 mb-6">
+                <div className="flex flex-col sm:flex-row gap-3 mb-6">
                   <Link href="/auth?tab=signup">
                     <Button size="lg" className="bg-[#C96A3A] hover:bg-[#A85530] text-white rounded-full px-7 text-base font-semibold gap-2">
                       Join the collective <ArrowRight className="h-4 w-4" />
@@ -70,6 +70,15 @@ export function LandingPageClient() {
                   </Link>
                 </div>
 
+
+                {/* Mobile photo strip */}
+                <div className="flex gap-2 overflow-x-auto scrollbar-hide -mx-5 px-5 pb-2 lg:hidden mt-4 mb-2">
+                  {["/linen-bloomers.jpg", "/wooden-toy.jpg", "/onesie-bundle.jpg", "/board-books.jpg"].map((src, i) => (
+                    <div key={i} className="flex-shrink-0 w-28 h-28 rounded-2xl overflow-hidden shadow-sm">
+                      <Image src={src} alt="Swap item" width={112} height={112} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
                 {/* Trust badges — dark text on light bg so they're visible */}
                 <div className="flex gap-3 flex-wrap">
                   <motion.span
@@ -90,9 +99,9 @@ export function LandingPageClient() {
               </div>
             </FadeIn>
 
-            {/* Right — photo collage */}
+            {/* Right — photo collage: only on desktop */}
             <FadeIn delay={0.25} direction="none" duration={0.7}>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="hidden lg:grid grid-cols-2 gap-3">
                 <div className="space-y-3">
                   <div className="rounded-2xl overflow-hidden aspect-square shadow-md">
                     <Image src="/linen-bloomers.jpg" alt="Linen bloomers" width={300} height={300} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -121,8 +130,7 @@ export function LandingPageClient() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="inline-flex items-center gap-2 bg-white rounded-2xl shadow-md px-5 py-3 border border-[#E5D5BD]"
               >
-                <span className="text-base">🌿</span>
-                <span className="text-sm font-semibold text-[#3A6349]">1,247 items swapped so far</span>
+<span className="text-sm font-semibold text-[#3A6349]">1,247 items swapped so far</span>
               </motion.div>
             </div>
           </FadeIn>
