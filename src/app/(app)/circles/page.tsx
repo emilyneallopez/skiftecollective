@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Users, MapPin, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -13,6 +14,7 @@ import { getInitials } from "@/lib/utils";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function CirclesPage() {
+  const router = useRouter();
   const [joinedCircles, setJoinedCircles] = useState<string[]>([
     "circle-1",
     "circle-4",
@@ -56,7 +58,8 @@ export default function CirclesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5, ease }}
               whileHover={{ y: -4 }}
-              className="bg-[#FEFCFA] rounded-2xl border border-[#E5D5BD] overflow-hidden transition-shadow hover:shadow-lg"
+              onClick={() => router.push(`/circles/${circle.id}`)}
+              className="bg-[#FEFCFA] rounded-2xl border border-[#E5D5BD] overflow-hidden transition-shadow hover:shadow-lg cursor-pointer"
             >
               {/* Cover Image */}
               <div className="relative h-40 overflow-hidden">
@@ -132,16 +135,10 @@ export default function CirclesPage() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      setExpandedCircle(isExpanded ? null : circle.id)
-                    }
+                    onClick={() => router.push(`/circles/${circle.id}`)}
                     className="rounded-full"
                   >
-                    <ChevronRight
-                      className={`h-4 w-4 transition-transform ${
-                        isExpanded ? "rotate-90" : ""
-                      }`}
-                    />
+                    <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
 
