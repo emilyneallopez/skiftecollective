@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Trust & Safety | Skifte Collective",
+};
+
 export default function TrustPage() {
   return (
     <div className="px-4 pt-8 pb-24 max-w-lg mx-auto">

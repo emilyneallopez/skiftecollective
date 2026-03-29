@@ -33,7 +33,7 @@ export function SiteFooter() {
             <h4 className="font-heading font-medium text-sm mb-3 text-ink">About</h4>
             <ul className="space-y-2">
               <li><span className="text-sm text-terracotta/60">How It Works</span></li>
-              <li><span className="text-sm text-terracotta/60">Trust & Safety</span></li>
+              <li><Link href="/trust" className="text-sm text-terracotta/60 hover:text-terracotta transition-colors">Trust & Safety</Link></li>
               <li><span className="text-sm text-terracotta/60">Contact Us</span></li>
             </ul>
           </div>
