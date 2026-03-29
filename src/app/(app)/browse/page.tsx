@@ -27,7 +27,7 @@ export default function BrowsePage() {
   const [selectedSize, setSelectedSize] = useState<string>('all');
   const [userLocation, setUserLocation] = useState('');
   const [radiusMiles, setRadiusMiles] = useState(10);
-  const [locationFilterEnabled, setLocationFilterEnabled] = useState(false);
+  const [, setLocationFilterEnabled] = useState(false);
   const [detectingLocation, setDetectingLocation] = useState(false);
 
   const detectLocation = () => {

@@ -12,7 +12,7 @@ import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerChildren, StaggerItem } from "@/components/motion/stagger-children";
 import { mockProfiles } from "@/lib/data/mock/profiles";
 import { mockItems } from "@/lib/data/mock/items";
-import { mockSwapRequests } from "@/lib/data/mock/swaps";
+
 import { getInitials } from "@/lib/utils";
 
 export default function ProfilePage() {
@@ -37,9 +37,6 @@ export default function ProfilePage() {
     .map((item) => ({ ...item, user: profile }));
 
   const isOwnProfile = profile.id === "sarah-chen";
-  const completedSwaps = mockSwapRequests.filter(
-    (sr) => sr.status === "completed" && (sr.requester_id === profile.id || mockItems.find(i => i.id === sr.item_id)?.user_id === profile.id)
-  );
 
   const badges = [];
   if (profile.swaps_completed >= 20) badges.push("Super Swapper");
@@ -85,12 +82,14 @@ export default function ProfilePage() {
                 </div>
               </div>
               {isOwnProfile && (
-                <Button
-                  variant="outline"
-                  className="rounded-full border-cream-300 text-sm"
-                >
-                  Edit Profile
-                </Button>
+                <Link href="/profile/edit">
+                  <Button
+                    variant="outline"
+                    className="rounded-full border-primary/30 text-primary text-sm font-heading"
+                  >
+                    Edit Profile
+                  </Button>
+                </Link>
               )}
             </div>
 

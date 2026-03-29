@@ -1,8 +1,10 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import { Heart, MapPin, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { categoryEmojis, conditionLabels } from '@/lib/sample-data';
+import { isFavorite, toggleFavorite } from '@/lib/favorites';
 
 interface ItemCardProps {
   item: {
@@ -22,7 +24,7 @@ interface ItemCardProps {
   };
   onPress?: () => void;
   onFavorite?: () => void;
-  isFavorited?: boolean;
+  
 }
 
 const conditionColors: Record<string, string> = {
@@ -33,8 +35,20 @@ const conditionColors: Record<string, string> = {
   new_with_tags: 'bg-[#FEF3C7] text-[#92400E]',
 };
 
-const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardProps) => {
+const ItemCard = ({ item, onPress, onFavorite }: ItemCardProps) => {
   const hasImage = item.image_urls && item.image_urls.length > 0;
+  const [favorited, setFavorited] = useState(false);
+
+  useEffect(() => {
+    setFavorited(isFavorite(item.id));
+  }, [item.id]);
+
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newState = toggleFavorite(item.id);
+    setFavorited(newState);
+    onFavorite?.();
+  };
   const badgeColor = conditionColors[item.condition] || 'bg-card/80 text-foreground';
 
   return (
@@ -63,16 +77,13 @@ const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardPr
         )}
         {/* Favorite button */}
         <motion.button
-          onClick={(e) => {
-            e.stopPropagation();
-            onFavorite?.();
-          }}
+          onClick={handleFavorite}
           whileTap={{ scale: 1.4 }}
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           className="absolute top-2 right-2 w-8 h-8 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center"
         >
           <Heart
-            className={`w-4 h-4 transition-colors ${isFavorited ? 'fill-primary text-primary' : 'text-foreground/50'}`}
+            className={`w-4 h-4 transition-colors ${favorited ? 'fill-primary text-primary' : 'text-foreground/50'}`}
           />
         </motion.button>
         {/* Condition badge */}
