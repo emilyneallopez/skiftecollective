@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, ArrowLeft, MessageCircle } from "lucide-react";
@@ -88,12 +90,9 @@ export default function MessagesPage() {
                 <p className="font-body text-sm text-foreground/50 leading-relaxed mb-4">
                   When you send a swap request or someone reaches out about your items, the conversation starts here.
                 </p>
-                <button
-                  onClick={() => router.push('/browse')}
-                  className="px-6 py-2.5 bg-primary text-white rounded-full font-heading text-sm"
-                >
+                <Link href="/browse" className="px-6 py-2.5 bg-primary text-white rounded-full font-heading text-sm inline-block text-center">
                   Browse swaps
-                </button>
+                </Link>
               </div>
             ) : (
               <div className="flex-1 overflow-y-auto">
