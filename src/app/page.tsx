@@ -1,5 +1,5 @@
-import { LandingPageClient } from "./landing-client";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return <LandingPageClient />;
+export default function RootPage() {
+  redirect("/auth");
 }

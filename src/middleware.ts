@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Public routes — accessible without auth
-const PUBLIC_ROUTES = ["/", "/auth", "/onboarding"];
-// Note: "/" shows the landing page (public). "/home" is the logged-in home (protected).
+const PUBLIC_ROUTES = ["/auth", "/onboarding"];
+// "/" redirects to /auth — the auth page is the entry point
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
