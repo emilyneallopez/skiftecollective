@@ -20,14 +20,23 @@ export default function ProfilePage() {
   const profile = mockProfiles.find((p) => p.id === params.username);
 
   if (!profile) {
+    // Show current user's empty profile
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <p className="text-lg text-muted-foreground">Profile not found.</p>
-        <Link href="/browse">
-          <Button variant="link" className="text-terracotta mt-4">
-            Back to browse
-          </Button>
-        </Link>
+      <div className="px-4 pt-10 pb-24 max-w-lg mx-auto">
+        <div className="flex flex-col items-center text-center py-10">
+          <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <span className="font-heading text-3xl text-primary">?</span>
+          </div>
+          <h2 className="font-heading text-2xl text-foreground mb-2">Set up your profile</h2>
+          <p className="font-body text-sm text-foreground/50 max-w-xs mb-6 leading-relaxed">
+            Add your name, neighborhood, and a photo so other moms can find you.
+          </p>
+          <Link href="/profile/edit">
+            <button className="px-8 py-3 bg-primary text-white rounded-full font-heading text-base">
+              Set up my profile
+            </button>
+          </Link>
+        </div>
       </div>
     );
   }
