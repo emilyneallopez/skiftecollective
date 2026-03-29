@@ -264,8 +264,8 @@ export default function BrowsePage() {
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#7A9E8A]/10 flex items-center justify-center">
             <span className="text-2xl">🌱</span>
           </div>
-          <h3 className="font-heading text-xl text-[#5C3D2E] mb-2">Your neighborhood is just getting started</h3>
-          <p className="font-body text-sm text-[#5C3D2E]/50 mb-6 leading-relaxed">Be the first to list something — another mom nearby is probably looking for it.</p>
+          <h3 className="font-heading text-xl text-[#8B6E5A] mb-2">Your neighborhood is just getting started</h3>
+          <p className="font-body text-sm text-[#8B6E5A]/50 mb-6 leading-relaxed">Be the first to list something — another mom nearby is probably looking for it.</p>
           <Link href="/list">
             <motion.button
               whileTap={{ scale: 0.95 }}

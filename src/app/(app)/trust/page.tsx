@@ -8,8 +8,8 @@ export default function TrustPage() {
   return (
     <div className="px-4 pt-8 pb-24 max-w-lg mx-auto">
       <div className="mb-8">
-        <h1 className="font-heading text-3xl text-[#5C3D2E] mb-2">A safe space for every mom.</h1>
-        <p className="font-body text-sm text-[#5C3D2E]/60 leading-relaxed">
+        <h1 className="font-heading text-3xl text-[#8B6E5A] mb-2">A safe space for every mom.</h1>
+        <p className="font-body text-sm text-[#8B6E5A]/60 leading-relaxed">
           Skifte was built by moms, for moms. We take safety seriously — not with fine print, but with real care.
         </p>
       </div>
@@ -34,14 +34,14 @@ export default function TrustPage() {
           },
         ].map((item, i) => (
           <div key={i} className="bg-[#FEFCFA] rounded-2xl p-5 border border-[#E5D5BD]">
-            <h3 className="font-heading text-base text-[#5C3D2E] mb-1">{item.title}</h3>
-            <p className="font-body text-sm text-[#5C3D2E]/60 leading-relaxed">{item.body}</p>
+            <h3 className="font-heading text-base text-[#8B6E5A] mb-1">{item.title}</h3>
+            <p className="font-body text-sm text-[#8B6E5A]/60 leading-relaxed">{item.body}</p>
           </div>
         ))}
       </div>
 
       <div className="bg-[#FAF5EF] rounded-2xl p-6 border border-[#E5D5BD]">
-        <h2 className="font-heading text-xl text-[#5C3D2E] mb-4">Community guidelines</h2>
+        <h2 className="font-heading text-xl text-[#8B6E5A] mb-4">Community guidelines</h2>
         <div className="space-y-3">
           {[
             "Be kind. Every mom here is doing her best.",
@@ -52,7 +52,7 @@ export default function TrustPage() {
           ].map((rule, i) => (
             <div key={i} className="flex items-start gap-3">
               <span className="font-heading text-sm text-[#C96A3A] mt-0.5">{i + 1}.</span>
-              <p className="font-body text-sm text-[#5C3D2E]/70 leading-relaxed">{rule}</p>
+              <p className="font-body text-sm text-[#8B6E5A]/70 leading-relaxed">{rule}</p>
             </div>
           ))}
         </div>

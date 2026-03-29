@@ -56,7 +56,7 @@ export default function OnboardingPage() {
           <h1 className="font-heading text-3xl text-[#C96A3A] leading-tight mb-2">
             We&apos;re so glad you&apos;re here.
           </h1>
-          <p className="text-[#5C3D2E]/60 font-body text-base leading-relaxed">
+          <p className="text-[#8B6E5A]/60 font-body text-base leading-relaxed">
             Tell us a little about yourself so other moms nearby can find you.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function OnboardingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5, ease }}
           >
-            <label className="block font-body text-sm font-semibold text-[#5C3D2E]/70 mb-2">
+            <label className="block font-body text-sm font-semibold text-[#8B6E5A]/70 mb-2">
               What should we call you?
             </label>
             <input
@@ -75,7 +75,7 @@ export default function OnboardingPage() {
               placeholder="Sarah, mama bear, whatever feels right"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#5C3D2E] placeholder:text-[#5C3D2E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
+              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#8B6E5A] placeholder:text-[#8B6E5A]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
             />
           </motion.div>
 
@@ -84,7 +84,7 @@ export default function OnboardingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5, ease }}
           >
-            <label className="block font-body text-sm font-semibold text-[#5C3D2E]/70 mb-2">
+            <label className="block font-body text-sm font-semibold text-[#8B6E5A]/70 mb-2">
               What neighborhood are you in?
             </label>
             <input
@@ -92,9 +92,9 @@ export default function OnboardingPage() {
               placeholder="e.g. Park Slope, Brooklyn or Wicker Park, Chicago"
               value={neighborhood}
               onChange={(e) => setNeighborhood(e.target.value)}
-              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#5C3D2E] placeholder:text-[#5C3D2E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
+              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#8B6E5A] placeholder:text-[#8B6E5A]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
             />
-            <p className="text-[11px] font-body text-[#5C3D2E]/40 mt-1.5 ml-1">
+            <p className="text-[11px] font-body text-[#8B6E5A]/40 mt-1.5 ml-1">
               Only your neighborhood name is shown — never your address.
             </p>
           </motion.div>
@@ -118,7 +118,7 @@ export default function OnboardingPage() {
             <button
               type="button"
               onClick={() => router.push("/home")}
-              className="w-full text-center text-sm font-body text-[#5C3D2E]/40 hover:text-[#5C3D2E]/70 transition-colors"
+              className="w-full text-center text-sm font-body text-[#8B6E5A]/40 hover:text-[#8B6E5A]/70 transition-colors"
             >
               Skip for now
             </button>
@@ -129,7 +129,7 @@ export default function OnboardingPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-center text-xs font-body text-[#5C3D2E]/30 mt-8"
+          className="text-center text-xs font-body text-[#8B6E5A]/30 mt-8"
         >
           A safe, real community for families everywhere
         </motion.p>

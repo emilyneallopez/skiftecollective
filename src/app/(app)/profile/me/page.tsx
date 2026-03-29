@@ -205,8 +205,8 @@ export default function MyProfilePage() {
         className="mt-8 bg-[#7A9E8A]/10 rounded-2xl p-5 text-center border border-[#E5D5BD]"
       >
         <p className="text-2xl mb-2">🌿</p>
-        <p className="font-heading text-base text-[#5C3D2E] mb-1">Share your first item</p>
-        <p className="font-body text-sm text-[#5C3D2E]/50 leading-relaxed">Another mom nearby is probably looking for exactly what you have.</p>
+        <p className="font-heading text-base text-[#8B6E5A] mb-1">Share your first item</p>
+        <p className="font-body text-sm text-[#8B6E5A]/50 leading-relaxed">Another mom nearby is probably looking for exactly what you have.</p>
         <Link href="/list">
           <motion.button
             whileTap={{ scale: 0.95 }}

@@ -86,8 +86,8 @@ export default function MessagesPage() {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <MessageCircle className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-heading text-xl text-[#5C3D2E] mb-2">Nothing here yet</h3>
-                <p className="font-body text-sm text-[#5C3D2E]/50 leading-relaxed mb-4">
+                <h3 className="font-heading text-xl text-[#8B6E5A] mb-2">Nothing here yet</h3>
+                <p className="font-body text-sm text-[#8B6E5A]/50 leading-relaxed mb-4">
                   Browse swaps to start a conversation — moms nearby are sharing great stuff every day.
                 </p>
                 <Link href="/browse" className="px-6 py-2.5 bg-primary text-white rounded-full font-heading text-sm inline-block text-center cursor-pointer">
