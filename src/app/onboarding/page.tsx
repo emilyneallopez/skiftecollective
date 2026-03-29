@@ -15,7 +15,6 @@ export default function OnboardingPage() {
   const supabase = createClient();
   const [displayName, setDisplayName] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
-  const [bio, setBio] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,15 +27,14 @@ export default function OnboardingPage() {
           user_id: user.id,
           display_name: displayName || user.email?.split("@")[0],
           location: neighborhood || null,
-          bio: bio.trim() || null,
           updated_at: new Date().toISOString(),
         }, { onConflict: "user_id" });
       }
-    } catch (_) {
+    } catch {
       // continue anyway
     } finally {
       setLoading(false);
-      router.push("/browse");
+      router.push("/home");
     }
   };
 
@@ -51,25 +49,10 @@ export default function OnboardingPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/skifte-icon.png" alt="Skifte Collective" className="h-16 w-16 rounded-2xl object-contain mx-auto mb-6" />
-
-          {/* Bouncing welcome emojis */}
-          <div className="flex justify-center gap-3 mb-4">
-            {['👶', '🧸', '🌿', '🤝', '✨'].map((emoji, i) => (
-              <motion.span
-                key={emoji}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.1, type: 'spring', stiffness: 300, damping: 15 }}
-                className="text-2xl"
-              >
-                {emoji}
-              </motion.span>
-            ))}
-          </div>
+          <img src="/skifte-logo.png" alt="Skifte Collective" className="h-16 w-auto object-contain mx-auto mb-6" />
 
           <h1 className="font-heading text-3xl text-[#C96A3A] leading-tight mb-2">
-            Tell us about yourself
+            We&apos;re so glad you&apos;re here.
           </h1>
           <p className="text-[#3B1F0E]/60 font-body text-base leading-relaxed">
             Tell us a little about yourself so other moms nearby can find you.
@@ -90,7 +73,7 @@ export default function OnboardingPage() {
               placeholder="Sarah, mama bear, whatever feels right"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
+              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
             />
           </motion.div>
 
@@ -107,53 +90,35 @@ export default function OnboardingPage() {
               placeholder="e.g. Park Slope, Brooklyn or Wicker Park, Chicago"
               value={neighborhood}
               onChange={(e) => setNeighborhood(e.target.value)}
-              className="w-full px-4 py-3 bg-white border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
+              className="w-full px-4 py-3 bg-[#FEFCFA] border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
             />
             <p className="text-[11px] font-body text-[#3B1F0E]/40 mt-1.5 ml-1">
-              This helps moms nearby find you. Only your neighborhood name is shown — never your address.
+              Only your neighborhood name is shown — never your address.
             </p>
           </motion.div>
 
-          {/* Bio */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5, ease }}
-          >
-            <label className="block font-body text-sm font-semibold text-[#3B1F0E]/70 mb-2">
-              Bio (optional)
-            </label>
-            <textarea
-              placeholder="A little about you and your family"
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              rows={3}
-              className="w-full px-4 py-3 bg-white border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all resize-none"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.5, ease }}
             className="pt-2 space-y-3"
           >
             <motion.button
               type="submit"
               disabled={loading}
-              whileHover={{ scale: 1.02, backgroundColor: "#A85530" }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="w-full h-12 bg-[#C96A3A] text-white rounded-full font-heading text-base font-semibold flex items-center justify-center gap-2"
+              className="w-full h-12 bg-[#C96A3A] text-[#FEFCFA] rounded-full font-heading text-base flex items-center justify-center gap-2"
             >
               {loading ? "One sec..." : <>Join the neighborhood <ArrowRight className="h-4 w-4" /></>}
             </motion.button>
             <button
               type="button"
-              onClick={() => router.push("/browse")}
+              onClick={() => router.push("/home")}
               className="w-full text-center text-sm font-body text-[#3B1F0E]/40 hover:text-[#3B1F0E]/70 transition-colors"
             >
-              Skip for now →
+              Skip for now
             </button>
           </motion.div>
         </form>

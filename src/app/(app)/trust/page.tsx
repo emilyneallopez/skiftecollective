@@ -8,7 +8,7 @@ export default function TrustPage() {
   return (
     <div className="px-4 pt-8 pb-24 max-w-lg mx-auto">
       <div className="mb-8">
-        <h1 className="font-heading text-3xl text-[#3B1F0E] mb-2">A safe space for every mom. 🌿</h1>
+        <h1 className="font-heading text-3xl text-[#3B1F0E] mb-2">A safe space for every mom.</h1>
         <p className="font-body text-sm text-[#3B1F0E]/60 leading-relaxed">
           Skifte was built by moms, for moms. We take safety seriously — not with fine print, but with real care.
         </p>
@@ -17,34 +17,25 @@ export default function TrustPage() {
       <div className="space-y-4 mb-8">
         {[
           {
-            emoji: "✅",
             title: "Verified community",
             body: "Every member is a real person. We verify accounts and keep the community family-focused. You'll never feel like you're meeting a stranger — you're meeting a neighbor.",
           },
           {
-            emoji: "🤝",
             title: "Swap safely",
             body: "Meet in public places, use our in-app chat to coordinate, and rate every swap. Our community holds itself accountable — and we back that up.",
           },
           {
-            emoji: "🔒",
             title: "Private by design",
             body: "Your personal info stays yours. Only your first name and neighborhood are visible to other moms. No address, no last name, no surprises.",
           },
           {
-            emoji: "💛",
             title: "A community, not a marketplace",
             body: "Skifte isn't about transactions. It's about relationships. We care more about the connection you make than the item you swap.",
           },
         ].map((item, i) => (
-          <div key={i} className="bg-white rounded-2xl p-5 border border-[#E5D5BD]">
-            <div className="flex items-start gap-4">
-              <span className="text-2xl mt-0.5">{item.emoji}</span>
-              <div>
-                <h3 className="font-heading text-base text-[#3B1F0E] mb-1">{item.title}</h3>
-                <p className="font-body text-sm text-[#3B1F0E]/60 leading-relaxed">{item.body}</p>
-              </div>
-            </div>
+          <div key={i} className="bg-[#FEFCFA] rounded-2xl p-5 border border-[#E5D5BD]">
+            <h3 className="font-heading text-base text-[#3B1F0E] mb-1">{item.title}</h3>
+            <p className="font-body text-sm text-[#3B1F0E]/60 leading-relaxed">{item.body}</p>
           </div>
         ))}
       </div>

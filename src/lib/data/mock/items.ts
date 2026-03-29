@@ -1,5 +1,18 @@
 import { type Item } from "@/lib/types";
 
+const localImages = [
+  "/linen-bloomers.jpg",
+  "/wooden-toy.jpg",
+  "/onesie-bundle.jpg",
+  "/board-books.jpg",
+  "/baby-bouncer.jpg",
+  "/maternity-dress.jpg",
+];
+
+function img(index: number): string {
+  return localImages[index % localImages.length];
+}
+
 export const mockItems: Item[] = [
   {
     id: "item-1",
@@ -29,8 +42,8 @@ export const mockItems: Item[] = [
     listing_type: "sell",
     status: "active",
     images: ["/baby-bouncer.jpg"],
-    neighborhood: "Brooklyn Heights",
-    zip: "11201",
+    neighborhood: "Wicker Park",
+    zip: "60622",
     price: 350,
     created_at: "2024-08-08T09:15:00Z",
   },
@@ -46,8 +59,8 @@ export const mockItems: Item[] = [
     listing_type: "swap",
     status: "active",
     images: ["/wooden-toy.jpg"],
-    neighborhood: "DUMBO",
-    zip: "11201",
+    neighborhood: "Silver Lake",
+    zip: "90026",
     created_at: "2024-08-12T16:45:00Z",
   },
   {
@@ -62,8 +75,8 @@ export const mockItems: Item[] = [
     listing_type: "free",
     status: "active",
     images: ["/board-books.jpg"],
-    neighborhood: "Cobble Hill",
-    zip: "11231",
+    neighborhood: "Capitol Hill",
+    zip: "98102",
     created_at: "2024-08-14T11:20:00Z",
   },
   {
@@ -78,8 +91,8 @@ export const mockItems: Item[] = [
     listing_type: "swap",
     status: "active",
     images: ["/onesie-bundle.jpg"],
-    neighborhood: "Fort Greene",
-    zip: "11217",
+    neighborhood: "Midtown",
+    zip: "30308",
     created_at: "2024-08-09T13:00:00Z",
   },
   {
@@ -94,8 +107,8 @@ export const mockItems: Item[] = [
     listing_type: "swap",
     status: "active",
     images: ["/linen-bloomers.jpg"],
-    neighborhood: "Carroll Gardens",
-    zip: "11231",
+    neighborhood: "Montrose",
+    zip: "77006",
     created_at: "2024-08-11T08:30:00Z",
   },
   {
@@ -109,10 +122,7 @@ export const mockItems: Item[] = [
     condition: "good",
     listing_type: "free",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/newborn1/600/600",
-      "https://picsum.photos/seed/newborn2/600/600",
-    ],
+    images: [img(0), img(2)],
     neighborhood: "Park Slope",
     zip: "11215",
     created_at: "2024-08-13T15:00:00Z",
@@ -128,12 +138,9 @@ export const mockItems: Item[] = [
     condition: "good",
     listing_type: "swap",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/playgym1/600/600",
-      "https://picsum.photos/seed/playgym2/600/600",
-    ],
-    neighborhood: "Boerum Hill",
-    zip: "11217",
+    images: [img(1), img(3)],
+    neighborhood: "Nob Hill",
+    zip: "94109",
     created_at: "2024-08-07T10:45:00Z",
   },
   {
@@ -143,16 +150,13 @@ export const mockItems: Item[] = [
     description: "Mesh bouncer in anthracite. Both twins lived in these for the first year. Natural bouncing motion — no batteries needed. This one still has plenty of life left.",
     category: "gear",
     size: "0-2y",
-    brand: "BabyBjörn",
+    brand: "BabyBjorn",
     condition: "good",
     listing_type: "swap",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/bouncer1/600/600",
-      "https://picsum.photos/seed/bouncer2/600/600",
-    ],
-    neighborhood: "DUMBO",
-    zip: "11201",
+    images: [img(4), img(5)],
+    neighborhood: "Silver Lake",
+    zip: "90026",
     created_at: "2024-08-06T12:00:00Z",
   },
   {
@@ -166,11 +170,7 @@ export const mockItems: Item[] = [
     condition: "like-new",
     listing_type: "swap",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/tiles1/600/600",
-      "https://picsum.photos/seed/tiles2/600/600",
-      "https://picsum.photos/seed/tiles3/600/600",
-    ],
+    images: [img(1), img(2), img(3)],
     neighborhood: "Park Slope",
     zip: "11215",
     created_at: "2024-08-15T09:00:00Z",
@@ -186,12 +186,9 @@ export const mockItems: Item[] = [
     condition: "like-new",
     listing_type: "swap",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/dresses1/600/600",
-      "https://picsum.photos/seed/dresses2/600/600",
-    ],
-    neighborhood: "Cobble Hill",
-    zip: "11231",
+    images: [img(0), img(5)],
+    neighborhood: "Capitol Hill",
+    zip: "98102",
     created_at: "2024-08-05T14:00:00Z",
   },
   {
@@ -205,12 +202,9 @@ export const mockItems: Item[] = [
     condition: "good",
     listing_type: "free",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/sheets1/600/600",
-      "https://picsum.photos/seed/sheets2/600/600",
-    ],
-    neighborhood: "Carroll Gardens",
-    zip: "11231",
+    images: [img(2), img(0)],
+    neighborhood: "Montrose",
+    zip: "77006",
     created_at: "2024-08-04T16:30:00Z",
   },
   {
@@ -224,11 +218,9 @@ export const mockItems: Item[] = [
     condition: "loved",
     listing_type: "swap",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/boardbooks1/600/600",
-    ],
-    neighborhood: "Fort Greene",
-    zip: "11217",
+    images: [img(3)],
+    neighborhood: "Midtown",
+    zip: "30308",
     created_at: "2024-08-03T11:00:00Z",
   },
   {
@@ -242,12 +234,9 @@ export const mockItems: Item[] = [
     condition: "good",
     listing_type: "sell",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/snoo1/600/600",
-      "https://picsum.photos/seed/snoo2/600/600",
-    ],
-    neighborhood: "Brooklyn Heights",
-    zip: "11201",
+    images: [img(4), img(5)],
+    neighborhood: "Wicker Park",
+    zip: "60622",
     price: 600,
     created_at: "2024-08-02T08:00:00Z",
   },
@@ -262,28 +251,23 @@ export const mockItems: Item[] = [
     condition: "like-new",
     listing_type: "swap",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/montessori1/600/600",
-    ],
-    neighborhood: "Boerum Hill",
-    zip: "11217",
+    images: [img(1)],
+    neighborhood: "Nob Hill",
+    zip: "94109",
     created_at: "2024-08-01T13:15:00Z",
   },
   {
     id: "item-16",
     user_id: "sarah-chen",
     title: "Winter Coat Bundle (2 coats)",
-    description: "Patagonia Nano Puff in classic navy and a North Face fleece in pink. Both size 3T. Perfect for Brooklyn winters. No stains, zippers work great.",
+    description: "Patagonia Nano Puff in classic navy and a North Face fleece in pink. Both size 3T. Perfect for winters. No stains, zippers work great.",
     category: "clothing",
     size: "3T",
     brand: "Patagonia / North Face",
     condition: "good",
     listing_type: "swap",
     status: "active",
-    images: [
-      "https://picsum.photos/seed/coats1/600/600",
-      "https://picsum.photos/seed/coats2/600/600",
-    ],
+    images: [img(5), img(0)],
     neighborhood: "Park Slope",
     zip: "11215",
     created_at: "2024-07-30T10:00:00Z",
