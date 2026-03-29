@@ -35,10 +35,10 @@ export default function CirclesPage() {
         transition={{ duration: 0.5, ease }}
         className="mb-8"
       >
-        <h1 className="font-heading text-3xl text-primary mb-2">
+        <h1 className="font-heading text-3xl text-[#3B1F0E] mb-2">
           Circles
         </h1>
-        <p className="text-muted-foreground font-body">
+        <p className="text-[#3B1F0E]/50 font-body">
           Join neighborhood groups to swap locally and build community.
         </p>
       </motion.div>
@@ -56,7 +56,7 @@ export default function CirclesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5, ease }}
               whileHover={{ y: -4 }}
-              className="bg-white rounded-xl border border-border overflow-hidden transition-shadow hover:shadow-lg"
+              className="bg-[#FEFCFA] rounded-2xl border border-[#E5D5BD] overflow-hidden transition-shadow hover:shadow-lg"
             >
               {/* Cover Image */}
               <div className="relative h-40 overflow-hidden">

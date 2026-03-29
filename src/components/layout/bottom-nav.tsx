@@ -9,7 +9,7 @@ const tabs = [
   { icon: Search, label: 'Browse', path: '/browse' },
   { icon: PlusCircle, label: 'Share', path: '/list' },
   { icon: Users, label: 'Community', path: '/circles' },
-  { icon: User, label: 'Profile', path: '/profile/me' },
+  { icon: User, label: 'You', path: '/profile/me' },
 ];
 
 const BottomNav = () => {

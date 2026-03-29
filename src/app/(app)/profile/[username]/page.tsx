@@ -62,7 +62,7 @@ export default function ProfilePage() {
         <div className="flex flex-col sm:flex-row items-start gap-6 mb-10">
           <Avatar className="h-24 w-24 border-4 border-white shadow-md">
             <AvatarImage src={profile.avatar_url} />
-            <AvatarFallback className="text-2xl bg-cream text-terracotta">
+            <AvatarFallback className="text-2xl bg-[#C96A3A]/10 text-[#C96A3A]">
               {getInitials(profile.name)}
             </AvatarFallback>
           </Avatar>
@@ -194,21 +194,21 @@ export default function ProfilePage() {
             {[
               {
                 reviewer: "Maya Johnson",
-                avatar: "https://picsum.photos/seed/maya/200/200",
+                avatar: "",
                 rating: 5,
                 comment: "Sarah is the best! The rompers were in perfect condition and she was so friendly at pickup. Would swap again anytime.",
                 date: "2 weeks ago",
               },
               {
                 reviewer: "Priya Patel",
-                avatar: "https://picsum.photos/seed/priya/200/200",
+                avatar: "",
                 rating: 5,
                 comment: "Quick to respond, items exactly as described. Love being in the same circle!",
                 date: "1 month ago",
               },
               {
                 reviewer: "Olivia Nguyen",
-                avatar: "https://picsum.photos/seed/olivia/200/200",
+                avatar: "",
                 rating: 5,
                 comment: "The magnetic tiles were amazing — my son is obsessed. Thank you Sarah!",
                 date: "1 month ago",
