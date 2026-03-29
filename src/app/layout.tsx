@@ -1,27 +1,20 @@
 import type { Metadata } from "next";
 import { FunBackground } from "@/components/fun-background";
-import { Boogaloo, Nunito, Quicksand } from "next/font/google";
+import { Lilita_One, Gaegu } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const boogaloo = Boogaloo({
+const lilitaOne = Lilita_One({
   subsets: ["latin"],
   variable: "--font-heading",
   weight: ["400"],
   display: "swap",
 });
 
-const nunito = Nunito({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const quicksand = Quicksand({
+const gaegu = Gaegu({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -42,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(boogaloo.variable, nunito.variable, quicksand.variable)}>
+    <html lang="en" className={cn(lilitaOne.variable, gaegu.variable)}>
       <body className="antialiased bg-background text-foreground font-body">
         <FunBackground />
         <div className="relative z-10">

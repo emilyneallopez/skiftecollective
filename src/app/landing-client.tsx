@@ -55,7 +55,7 @@ export function LandingPageClient() {
                   Swap the things they outgrew.
                 </h1>
                 <p className="text-lg text-[#3B1F0E]/60 max-w-md mb-8 leading-relaxed">
-                  A community for moms, in every neighborhood. Swap baby clothes, toys, and gear with families nearby.
+                  Swap baby clothes, toys, and gear with moms nearby while building real community in your neighborhood.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-6">
                   <Link href="/auth?tab=signup">
