@@ -395,15 +395,13 @@ export default function ListItemPage() {
 
       {/* Navigation */}
       <div className="flex justify-between mt-10 pt-6 border-t border-cream-200">
-        <Button
-          variant="ghost"
+        <button
           onClick={() => step === 0 ? router.back() : setStep(step - 1)}
-          disabled={step === 0}
-          className="gap-1 rounded-full"
+          className="flex items-center gap-1 px-4 py-2 rounded-full font-body text-sm text-[#8B6E5A] hover:bg-[#F5EDE4] active:bg-[#F5EDE4] transition-colors"
         >
           <ChevronLeft className="h-4 w-4" />
           Back
-        </Button>
+        </button>
 
         {step < STEPS.length - 1 ? (
           <Button
