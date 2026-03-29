@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function OnboardingPage() {
   const router = useRouter();
   const supabase = createClient();
@@ -43,15 +45,31 @@ export default function OnboardingPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, ease }}
         className="w-full max-w-sm"
       >
         {/* Logo */}
         <div className="text-center mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/skifte-icon.png" alt="Skifte Collective" className="h-16 w-16 rounded-2xl object-contain mx-auto mb-6" />
+
+          {/* Bouncing welcome emojis */}
+          <div className="flex justify-center gap-3 mb-4">
+            {['👶', '🧸', '🌿', '🤝', '✨'].map((emoji, i) => (
+              <motion.span
+                key={emoji}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.1, type: 'spring', stiffness: 300, damping: 15 }}
+                className="text-2xl"
+              >
+                {emoji}
+              </motion.span>
+            ))}
+          </div>
+
           <h1 className="font-heading text-3xl text-[#C96A3A] leading-tight mb-2">
-            Tell us about yourself 🌿
+            Tell us about yourself
           </h1>
           <p className="text-[#3B1F0E]/60 font-body text-base leading-relaxed">
             Tell us a little about yourself so other moms nearby can find you.
@@ -59,7 +77,11 @@ export default function OnboardingPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5, ease }}
+          >
             <label className="block font-body text-sm font-semibold text-[#3B1F0E]/70 mb-2">
               What should we call you?
             </label>
@@ -70,9 +92,13 @@ export default function OnboardingPage() {
               onChange={(e) => setDisplayName(e.target.value)}
               className="w-full px-4 py-3 bg-white border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all"
             />
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5, ease }}
+          >
             <label className="block font-body text-sm font-semibold text-[#3B1F0E]/70 mb-2">
               What neighborhood are you in?
             </label>
@@ -86,10 +112,14 @@ export default function OnboardingPage() {
             <p className="text-[11px] font-body text-[#3B1F0E]/40 mt-1.5 ml-1">
               This helps moms nearby find you. Only your neighborhood name is shown — never your address.
             </p>
-          </div>
+          </motion.div>
 
           {/* Bio */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5, ease }}
+          >
             <label className="block font-body text-sm font-semibold text-[#3B1F0E]/70 mb-2">
               Bio (optional)
             </label>
@@ -100,16 +130,24 @@ export default function OnboardingPage() {
               rows={3}
               className="w-full px-4 py-3 bg-white border border-[#E5D5BD] rounded-2xl font-body text-sm text-[#3B1F0E] placeholder:text-[#3B1F0E]/30 focus:outline-none focus:ring-2 focus:ring-[#C96A3A]/30 focus:border-[#C96A3A]/40 transition-all resize-none"
             />
-          </div>
+          </motion.div>
 
-          <div className="pt-2 space-y-3">
-            <button
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5, ease }}
+            className="pt-2 space-y-3"
+          >
+            <motion.button
               type="submit"
               disabled={loading}
-              className="w-full h-12 bg-[#C96A3A] hover:bg-[#A85530] text-white rounded-full font-heading text-base font-semibold flex items-center justify-center gap-2 transition-colors"
+              whileHover={{ scale: 1.02, backgroundColor: "#A85530" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+              className="w-full h-12 bg-[#C96A3A] text-white rounded-full font-heading text-base font-semibold flex items-center justify-center gap-2"
             >
-              {loading ? "One sec..." : <>Let&apos;s go! <ArrowRight className="h-4 w-4" /></>}
-            </button>
+              {loading ? "One sec..." : <>Join the neighborhood <ArrowRight className="h-4 w-4" /></>}
+            </motion.button>
             <button
               type="button"
               onClick={() => router.push("/browse")}
@@ -117,7 +155,7 @@ export default function OnboardingPage() {
             >
               Skip for now →
             </button>
-          </div>
+          </motion.div>
         </form>
 
         <motion.p
@@ -126,7 +164,7 @@ export default function OnboardingPage() {
           transition={{ delay: 0.8 }}
           className="text-center text-xs font-body text-[#3B1F0E]/30 mt-8"
         >
-          🌿 A safe, real community for families everywhere
+          A safe, real community for families everywhere
         </motion.p>
       </motion.div>
     </div>

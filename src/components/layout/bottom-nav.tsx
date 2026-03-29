@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 const tabs = [
   { icon: Home, label: 'Home', path: '/' },
   { icon: Search, label: 'Browse', path: '/browse' },
-  { icon: PlusCircle, label: 'Add', path: '/list' },
+  { icon: PlusCircle, label: 'Share', path: '/list' },
   { icon: Users, label: 'Community', path: '/circles' },
   { icon: User, label: 'Profile', path: '/profile/me' },
 ];
@@ -25,7 +25,7 @@ const BottomNav = () => {
             <button
               key={tab.path}
               onClick={() => router.push(tab.path)}
-              className="flex flex-col items-center justify-center gap-0.5 flex-1 py-1 relative"
+              className={`flex flex-col items-center justify-center gap-0.5 flex-1 py-1 relative rounded-xl transition-colors ${isActive ? 'bg-primary/5' : ''}`}
             >
               {isActive && (
                 <motion.div
@@ -34,9 +34,16 @@ const BottomNav = () => {
                   transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                 />
               )}
-              <tab.icon
-                className={`w-5 h-5 transition-colors ${isActive ? 'text-primary' : 'text-muted-foreground'}`}
-              />
+              <motion.div
+                key={`${tab.path}-${isActive}`}
+                initial={false}
+                animate={isActive ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+              >
+                <tab.icon
+                  className={`w-5 h-5 transition-colors ${isActive ? 'text-primary' : 'text-muted-foreground'}`}
+                />
+              </motion.div>
               <span
                 className={`text-[10px] font-body transition-colors ${isActive ? 'text-primary font-medium' : 'text-muted-foreground'}`}
               >

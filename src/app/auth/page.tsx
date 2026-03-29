@@ -11,6 +11,8 @@ import { createClient } from '@/lib/supabase/client';
 
 import { Suspense } from 'react';
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 function AuthInner() {
   const router = useRouter();
   const supabase = createClient();
@@ -26,11 +28,11 @@ function AuthInner() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) {
-      setError('Please fill in all fields');
+      setError('Looks like you missed a field — fill in your email and password to continue.');
       return;
     }
     if (isSignUp && password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError('Your password needs at least 6 characters to keep things safe.');
       return;
     }
     setLoading(true);
@@ -56,7 +58,7 @@ function AuthInner() {
         router.push(redirect);
       }
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Authentication failed';
+      const message = err instanceof Error ? err.message : "Something went wrong — let's try that again.";
       setError(message);
     } finally {
       setLoading(false);
@@ -74,7 +76,7 @@ function AuthInner() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, ease }}
         className="w-full max-w-sm space-y-8 relative z-10"
       >
         {/* Brand header */}
@@ -92,13 +94,14 @@ function AuthInner() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={isSignUp ? 'signup-header' : 'signin-header'}
-                initial={{ opacity: 0, y: 6 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease }}
                 className="space-y-1"
               >
-                <h1 className="text-3xl font-display text-primary">
-                  {isSignUp ? 'Join the collective 🌿' : 'Welcome to the neighborhood 🏡'}
+                <h1 className="text-3xl font-heading text-primary">
+                  {isSignUp ? 'Join the collective' : 'Welcome to the neighborhood'}
                 </h1>
                 <p className="text-sm text-foreground/50 font-body mt-1.5">
                   {isSignUp
@@ -111,11 +114,18 @@ function AuthInner() {
         </div>
 
         {/* Error display */}
-        {error && (
-          <div className="bg-destructive/10 text-destructive text-sm font-body px-4 py-2 rounded-xl text-center">
-            {error}
-          </div>
-        )}
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className="bg-destructive/10 text-destructive text-sm font-body px-4 py-2 rounded-xl text-center"
+            >
+              {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Form */}
         <motion.form
@@ -175,9 +185,12 @@ function AuthInner() {
           </div>
 
           <div className="pt-1">
-            <button
+            <motion.button
               type="submit"
               disabled={loading}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
               className="w-full h-12 rounded-full bg-primary text-primary-foreground font-heading font-semibold text-sm flex items-center justify-center gap-2 group disabled:opacity-60 px-6"
             >
               {loading ? (
@@ -188,11 +201,11 @@ function AuthInner() {
                 />
               ) : (
                 <>
-                  {isSignUp ? 'Create Account' : 'Welcome back 👋'}
+                  {isSignUp ? 'Join the neighborhood' : 'Welcome back 👋'}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </>
               )}
-            </button>
+            </motion.button>
           </div>
         </motion.form>
 
@@ -216,7 +229,7 @@ function AuthInner() {
           transition={{ delay: 0.5 }}
           className="text-center text-[11px] text-foreground/40 font-body"
         >
-          🌿 A safe, verified community for families
+          A safe, verified community for families
         </motion.p>
       </motion.div>
     </div>

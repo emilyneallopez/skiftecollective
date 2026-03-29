@@ -55,18 +55,32 @@ const stages = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function FirstYearPage() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <div className="px-4 pt-8 pb-24 max-w-lg mx-auto">
-      {/* Header */}
-      <div className="mb-8">
+      {/* Warm hero */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease }}
+        className="mb-8 text-center"
+      >
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="text-5xl mb-4"
+        >
+          👶
+        </motion.div>
         <h1 className="font-heading text-3xl text-[#3B1F0E] mb-2">The First Year Map 🗺️</h1>
         <p className="font-body text-sm text-[#3B1F0E]/60 leading-relaxed">
           A gentle guide to what you&apos;ll need, when to swap, and how to make the most of every stage. From someone who&apos;s been there.
         </p>
-      </div>
+      </motion.div>
 
       {/* Stages */}
       <div className="space-y-3">
@@ -75,7 +89,7 @@ export default function FirstYearPage() {
             key={i}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
+            transition={{ delay: i * 0.07, duration: 0.5, ease }}
             className="bg-white rounded-2xl border border-[#E5D5BD] overflow-hidden"
           >
             <button
@@ -134,11 +148,16 @@ export default function FirstYearPage() {
         ))}
       </div>
 
-      <div className="mt-8 text-center">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="mt-8 text-center"
+      >
         <p className="font-body text-sm text-[#3B1F0E]/40">
           Every baby is different. This is a guide, not a rulebook. 🌿
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

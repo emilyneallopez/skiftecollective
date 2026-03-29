@@ -25,17 +25,25 @@ interface ItemCardProps {
   isFavorited?: boolean;
 }
 
+const conditionColors: Record<string, string> = {
+  like_new: 'bg-[#D1FAE5] text-[#065F46]',
+  good: 'bg-[#DBEAFE] text-[#1E40AF]',
+  fair: 'bg-[#FEE2E2] text-[#991B1B]',
+  loved: 'bg-[#FEE2E2] text-[#991B1B]',
+  new_with_tags: 'bg-[#FEF3C7] text-[#92400E]',
+};
+
 const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardProps) => {
   const hasImage = item.image_urls && item.image_urls.length > 0;
+  const badgeColor = conditionColors[item.condition] || 'bg-card/80 text-foreground';
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
       whileTap={{ scale: 0.98 }}
-      whileHover={{ y: -3, boxShadow: '0 8px 25px -5px rgba(201, 106, 58, 0.12)' }}
+      whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       onClick={onPress}
-      className="bg-card rounded-2xl overflow-hidden shadow-sm border border-border cursor-pointer group transition-colors"
+      className="bg-card rounded-2xl overflow-hidden shadow-sm border border-border cursor-pointer group"
     >
       {/* Image */}
       <div className="aspect-square bg-muted relative overflow-hidden">
@@ -46,7 +54,7 @@ const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardPr
             alt={item.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl">
@@ -59,7 +67,7 @@ const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardPr
             e.stopPropagation();
             onFavorite?.();
           }}
-          whileTap={{ scale: 1.3 }}
+          whileTap={{ scale: 1.4 }}
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           className="absolute top-2 right-2 w-8 h-8 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center"
         >
@@ -69,7 +77,7 @@ const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardPr
         </motion.button>
         {/* Condition badge */}
         <div className="absolute bottom-2 left-2">
-          <span className="text-[10px] font-heading font-medium bg-card/80 backdrop-blur-sm px-2.5 py-1 rounded-full text-foreground">
+          <span className={`text-[10px] font-heading font-medium px-2.5 py-1 rounded-full ${badgeColor}`}>
             {conditionLabels[item.condition] || item.condition}
           </span>
         </div>
@@ -82,13 +90,13 @@ const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardPr
         </h3>
         <div className="flex items-center gap-1 mt-1">
           {item.size && (
-            <span className="text-[11px] text-foreground/50">Size {item.size}</span>
+            <span className="text-[11px] font-body text-foreground/50">Size {item.size}</span>
           )}
           {item.size && item.brand && (
             <span className="text-foreground/50 text-[11px]">&middot;</span>
           )}
           {item.brand && (
-            <span className="text-[11px] text-foreground/50">{item.brand}</span>
+            <span className="text-[11px] font-body text-foreground/50">{item.brand}</span>
           )}
         </div>
         {item.profiles && (
@@ -96,7 +104,7 @@ const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardPr
             <div className="w-4 h-4 rounded-full bg-accent flex items-center justify-center text-[8px] font-medium text-accent-foreground">
               {item.profiles.display_name?.charAt(0) || '?'}
             </div>
-            <span className="text-[11px] text-foreground/50">{item.profiles.display_name}</span>
+            <span className="text-[11px] font-body text-primary/70">{item.profiles.display_name}</span>
             {item.profiles.is_verified && (
               <CheckCircle2 className="w-3 h-3 text-secondary" />
             )}
@@ -104,8 +112,8 @@ const ItemCard = ({ item, onPress, onFavorite, isFavorited = false }: ItemCardPr
         )}
         {item.location && (
           <div className="flex items-center gap-0.5 mt-1">
-            <MapPin className="w-3 h-3 text-foreground/50" />
-            <span className="text-[10px] text-foreground/50">{item.location}</span>
+            <MapPin className="w-3 h-3 text-primary/50" />
+            <span className="text-[10px] font-body text-primary/50">{item.location}</span>
           </div>
         )}
       </div>

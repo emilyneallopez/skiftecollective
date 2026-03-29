@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 import ItemCard from '@/components/items/item-card';
 import { sampleListings, categoryLabels } from '@/lib/sample-data';
 
@@ -14,6 +16,8 @@ const sizeOptions: Record<string, string[]> = {
   gear: ['0-6M', '6-12M', '12M+', '2+', '3+'],
   other: [],
 };
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function BrowsePage() {
   const router = useRouter();
@@ -39,7 +43,16 @@ export default function BrowsePage() {
 
   return (
     <div className="px-4 pt-12 pb-4 space-y-4">
-      <h1 className="text-2xl font-heading text-foreground">Browse</h1>
+      <div className="relative inline-block">
+        <h1 className="text-3xl font-heading text-primary">Browse</h1>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 0.3, duration: 0.4, ease }}
+          style={{ transformOrigin: 'left' }}
+          className="h-[3px] bg-primary/30 rounded-full mt-1"
+        />
+      </div>
 
       {/* Search */}
       <div className="relative">
@@ -49,7 +62,7 @@ export default function BrowsePage() {
           placeholder="Search items, brands, sizes..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-xl text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-2xl text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
         />
       </div>
 
@@ -95,28 +108,32 @@ export default function BrowsePage() {
 
       {/* Category Filters */}
       <div className="flex gap-2 overflow-x-auto pb-3 -mx-4 px-4 scrollbar-hide">
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => { setSelectedCategory('all'); setSelectedSize('all'); }}
-          className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-body font-medium transition-colors ${
+          className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all ${
             selectedCategory === 'all'
-              ? 'bg-primary text-primary-foreground'
+              ? 'bg-primary text-primary-foreground scale-105'
               : 'bg-card border border-border text-foreground'
           }`}
         >
           All
-        </button>
+        </motion.button>
         {Object.entries(categoryLabels).map(([key, label]) => (
-          <button
+          <motion.button
             key={key}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => { setSelectedCategory(key); setSelectedSize('all'); }}
-            className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-body font-medium transition-colors ${
+            className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-heading font-medium transition-all ${
               selectedCategory === key
-                ? 'bg-primary text-primary-foreground'
+                ? 'bg-primary text-primary-foreground scale-105'
                 : 'bg-card border border-border text-foreground'
             }`}
           >
             {label}
-          </button>
+          </motion.button>
         ))}
       </div>
 
@@ -152,27 +169,30 @@ export default function BrowsePage() {
       {/* Results */}
       <p className="text-xs text-muted-foreground font-body">{filtered.length} items</p>
       <div className="grid grid-cols-2 gap-3">
-        {filtered.map((item) => (
-          <ItemCard
+        {filtered.map((item, index) => (
+          <motion.div
             key={item.id}
-            item={item}
-            onPress={() => router.push(`/item/${item.id}`)}
-          />
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05, duration: 0.5, ease }}
+          >
+            <ItemCard
+              item={item}
+              onPress={() => router.push(`/item/${item.id}`)}
+            />
+          </motion.div>
         ))}
       </div>
 
       {filtered.length === 0 && (
-        <div className="text-center py-16 space-y-3">
-          <p className="text-5xl">🌿</p>
-          <h3 className="text-lg font-heading text-foreground">Nothing here yet</h3>
-          <p className="text-sm font-body text-foreground/50">Be the first to list something in your neighborhood.</p>
-          <button
-            onClick={() => router.push('/list')}
-            className="inline-flex items-center gap-1.5 mt-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-heading font-medium"
-          >
-            List an item →
-          </button>
-        </div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
+          <p className="text-4xl mb-4">🌿</p>
+          <h3 className="font-heading text-xl text-primary mb-2">Your neighborhood is just getting started.</h3>
+          <p className="font-body text-sm text-foreground/50 mb-6">Be the first mom to list something — someone nearby will thank you.</p>
+          <Link href="/list">
+            <button className="bg-primary text-white rounded-full px-6 py-2.5 font-heading text-sm">Share something →</button>
+          </Link>
+        </motion.div>
       )}
     </div>
   );

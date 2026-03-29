@@ -1,0 +1,146 @@
+You are doing the final, definitive build of Skifte Collective. This is the version that makes every mom feel like she found her people. Do ALL of this. Do not skip anything.
+
+## THE VISION
+Skifte should feel like Bobo Choses meets Primary.com meets a warm neighborhood bulletin board. Childlike, joyful, real, moving, warm. NOT a tech startup. NOT a marketplace. A community.
+
+## FONTS (already in layout.tsx — make sure they're applied everywhere)
+- Lilita One → --font-heading → ALL h1, h2, h3, section titles, card titles, nav brand name, button text
+- Gaegu → --font-body → ALL body text, labels, descriptions, subheadings, input placeholders
+- Apply font-heading class to ANY element that should feel big and fun
+- Apply font-body to ALL other text
+
+## HOME PAGE (src/app/page.tsx) — FULL MOTION UPGRADE
+Wrap ALL sections in framer-motion animations. Import motion from framer-motion.
+
+1. HEADER: Add a spring entrance animation — logo slides in from left, buttons fade in from right
+   ```
+   initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
+   ```
+
+2. TAGLINE: Animate with a gentle fade-up after 0.2s delay
+
+3. CTA BUTTONS: 
+   - "Join your neighborhood" button: whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+   - Add spring bounce on hover to both buttons
+
+4. HOW SKIFTE WORKS steps: 
+   - Each step animates in with staggered delay (0, 0.1, 0.2)
+   - The connector line between steps: animate its height from 0 to full using a motion.div
+   - Step circles: whileInView={{ scale: [0.8, 1.1, 1] }} viewport={{ once: true }}
+
+5. WHY SKIFTE EXISTS pillars:
+   - Each pillar card: initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+   - Cards get whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.08)" }}
+
+6. FIRST YEAR MAP CTA card:
+   - Animate in from bottom
+   - Arrow icon: animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}
+
+7. BROWSE CATEGORIES pills:
+   - Stagger each pill: initial={{ opacity: 0, scale: 0.9 }} with 0.05s stagger
+
+8. NEW FOR YOU item grid:
+   - Each ItemCard: initial={{ opacity: 0, y: 16 }} whileInView with stagger
+   - On the ItemCard component itself: whileHover={{ y: -4 }} with shadow deepening
+
+9. ECO IMPACT section:
+   - The number "1,247" → animate it counting up using useEffect + useState
+   - Wrap in a motion.div that pulses gently: animate={{ scale: [1, 1.02, 1] }} transition={{ repeat: Infinity, duration: 3 }}
+
+10. ADD floating trust badges near the header:
+    ```jsx
+    <motion.div
+      animate={{ y: [0, -6, 0] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-heading border border-primary/20"
+    >
+      🌿 2,400+ moms swapping
+    </motion.div>
+    ```
+    Add two of these badges below the CTA buttons, staggered delay
+
+## ITEM CARD (src/components/items/item-card.tsx)
+Complete redesign with motion:
+- Card: whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }} transition={{ type: "spring", stiffness: 300 }}
+- Photo: group-hover:scale-105 transition-transform duration-500
+- Heart button: whileTap={{ scale: 1.4 }} with color burst animation
+- Condition badge: rounded-full, warm background colors
+  - "Like New" → bg-[#D1FAE5] text-[#065F46]
+  - "Good" → bg-[#DBEAFE] text-[#1E40AF]  
+  - "Fair" / "Loved" → bg-[#FEE2E2] text-[#991B1B]
+  - "New with Tags" → bg-[#FEF3C7] text-[#92400E]
+- Bottom: seller name in font-body, location with MapPin icon, both in muted terracotta
+
+## BROWSE PAGE (src/app/(app)/browse/page.tsx)
+- Page heading "Browse" → Lilita One, text-3xl, text-primary, with a small animated underline
+- Category pills: active pill gets terracotta bg + white text + scale(1.05) animation
+- Each item card loads with staggered fade-in: 
+  ```jsx
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: index * 0.05 }}
+  >
+  ```
+- Empty state: 
+  ```jsx
+  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
+    <p className="text-4xl mb-4">🌿</p>
+    <h3 className="font-heading text-xl text-primary mb-2">Your neighborhood is just getting started.</h3>
+    <p className="font-body text-sm text-foreground/50 mb-6">Be the first mom to list something — someone nearby will thank you.</p>
+    <Link href="/list"><button className="bg-primary text-white rounded-full px-6 py-2.5 font-heading text-sm">List something →</button></Link>
+  </motion.div>
+  ```
+
+## FIRST YEAR MAP (src/app/(app)/first-year/page.tsx)
+Already built — just add:
+- Page entrance: staggered fade-in for each stage card
+- Open accordion: animate height with AnimatePresence (already done, make sure it works)
+- Add a warm hero section at top with the baby emoji and a gentle floating animation
+
+## AUTH PAGE (src/app/auth/page.tsx)
+- "Welcome to the neighborhood 🏡" heading → Lilita One, text-3xl, text-primary
+- "Join the collective 🌿" heading → Lilita One, text-3xl, text-[#3A6349]
+- Both should animate in with spring: initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+- Input fields: rounded-2xl, on focus → ring-2 ring-primary/30 with smooth transition
+- Submit button: whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+- Add AnimatePresence so switching between sign in/sign up feels smooth
+
+## ONBOARDING PAGE (src/app/onboarding/page.tsx)
+- Already good — add motion to the form fields: stagger each input appearing
+- The "Join the neighborhood →" button: whileHover={{ scale: 1.02, backgroundColor: "#A85530" }}
+- Add a warm welcome illustration: just a row of emojis that bounce in: 👶 🧸 🌿 🤝 ✨
+
+## CIRCLES PAGE (src/app/(app)/circles/page.tsx)
+Look at the current file and add:
+- Each circle card: whileHover={{ y: -4 }} animation
+- "Join" button on each card: whileTap={{ scale: 0.95 }}
+
+## BOTTOM NAV (src/components/layout/bottom-nav.tsx)
+- Active tab icon: add a spring scale animation when switching
+- The active indicator line at top: layoutId="activeTab" (already there, keep it)
+- Add a subtle background fill to active tab: bg-primary/5 rounded-xl
+
+## GLOBAL CSS ADDITIONS (src/app/globals.css)
+Add smooth page transitions feeling by adding to body:
+```css
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+
+## COPY FIXES (apply everywhere you touch)
+- "Add" in nav → "Share"
+- Any "Submit" or "Save" buttons → warmer language
+- Any generic error messages → warm and human
+- Heading sizes: be generous. Lilita One looks best at text-2xl and above.
+
+## TECHNICAL REQUIREMENTS
+- All motion imports: import { motion, AnimatePresence } from 'framer-motion'
+- viewport={{ once: true }} on all whileInView animations (don't re-trigger on scroll back)
+- All whileHover transitions: { duration: 0.2 }
+- All entrance animations: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+
+Run npm run build at the end. Fix every TypeScript and ESLint error.
+When done: openclaw system event --text "Done: Skifte final build — Lilita One + Gaegu throughout, full motion pass, all gaps filled, amazing" --mode now

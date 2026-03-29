@@ -77,14 +77,14 @@ export function LandingPageClient() {
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     className="inline-flex items-center px-4 py-2 rounded-full bg-[#C96A3A]/10 text-[#C96A3A] text-sm font-semibold border border-[#C96A3A]/20"
                   >
-                    🌿 Free to join
+                    Free to join
                   </motion.span>
                   <motion.span
                     animate={{ y: [0, -5, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
                     className="inline-flex items-center px-4 py-2 rounded-full bg-[#3A6349]/10 text-[#3A6349] text-sm font-semibold border border-[#3A6349]/20"
                   >
-                    ✨ 2,400+ moms
+                    2,400+ moms
                   </motion.span>
                 </div>
               </div>
@@ -191,7 +191,7 @@ export function LandingPageClient() {
               Join neighborhood circles and meet moms near you.
             </p>
             <div className="flex flex-wrap justify-center gap-3 mb-10">
-              {["🌳 Local Moms", "🌿 Organic & Eco", "👶 New Mom Support", "🧸 Toy Swappers"].map((c) => (
+              {["Local Moms", "Organic & Eco", "New Mom Support", "Toy Swappers"].map((c) => (
                 <span key={c} className="inline-flex items-center px-5 py-2.5 rounded-full bg-white/20 text-white text-sm font-semibold">
                   {c}
                 </span>
