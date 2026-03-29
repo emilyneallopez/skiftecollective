@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Users, MapPin, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -14,13 +14,23 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function CirclesPage() {
   const router = useRouter();
-  const [joinedCircles, setJoinedCircles] = useState<string[]>(["circle-1", "circle-4"]);
+  const [joinedCircles, setJoinedCircles] = useState<string[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("skifte_joined_circles");
+    if (stored) setJoinedCircles(JSON.parse(stored));
+    else setJoinedCircles(["circle-1", "circle-4"]);
+  }, []);
 
   const toggleJoin = (circleId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setJoinedCircles((prev) =>
-      prev.includes(circleId) ? prev.filter((id) => id !== circleId) : [...prev, circleId]
-    );
+    setJoinedCircles((prev) => {
+      const updated = prev.includes(circleId)
+        ? prev.filter((id) => id !== circleId)
+        : [...prev, circleId];
+      localStorage.setItem("skifte_joined_circles", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   return (

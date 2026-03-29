@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Users, MapPin, Calendar, Check, Plus, MessageCircle } from "lucide-react";
@@ -43,12 +43,23 @@ export default function CircleDetailPage() {
   const members = mockProfiles.slice(0, 8);
 
   const [joined, setJoined] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("skifte_joined_circles");
+    const joinedList = stored ? JSON.parse(stored) : ["circle-1", "circle-4"];
+    if (joinedList.includes(params.id)) setJoined(true);
+  }, [params.id]);
   const [showJoinCelebration, setShowJoinCelebration] = useState(false);
   const [rsvpd, setRsvpd] = useState<string[]>([]);
 
   const handleJoin = () => {
     setJoined(true);
     setShowJoinCelebration(true);
+    const stored = localStorage.getItem("skifte_joined_circles");
+    const joinedList = stored ? JSON.parse(stored) : [];
+    if (!joinedList.includes(params.id)) {
+      localStorage.setItem("skifte_joined_circles", JSON.stringify([...joinedList, params.id]));
+    }
     setTimeout(() => setShowJoinCelebration(false), 3000);
   };
 
