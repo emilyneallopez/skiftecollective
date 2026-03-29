@@ -1,0 +1,73 @@
+Do a final 10-minute polish pass on the Skifte Collective Next.js app. Make every screen feel alive, every button tappable, every interaction satisfying. Focus on these specific improvements:
+
+## MOTION & INTERACTIONS
+
+1. src/app/(app)/home/page.tsx
+- Add staggered entrance for EVERY section (each section delays 0.05s more than previous)
+- Category pills: whileTap scale 0.92, active state with terracotta bg
+- "New For You" cards: whileInView stagger with viewport once:true
+- How Skifte Works steps: each step slides in from left with delay
+- Impact number: animate counting up from 0 to 1247 using useEffect + useState + setInterval
+
+2. src/app/(app)/browse/page.tsx
+- Each ItemCard in grid: staggered whileInView fade-up
+- Category pills: smooth color transition, selected pill bounces with spring
+- Search bar: focus animation (ring expands)
+- Location card: smooth slide-down when location detected
+
+3. src/components/items/item-card.tsx
+- Card: whileHover y:-4, shadow deepen (already has this — make sure it works)
+- Heart button: whileTap scale:1.4, color burst animation
+- Photo: group-hover scale-105 (already there — confirm)
+
+4. src/app/(app)/circles/[id]/page.tsx  
+- RSVP button: whileTap scale:0.9 (already there — make sure it fires)
+- Member list: each member slides in from left with 0.04s stagger
+- Event cards: stagger entrance
+
+5. src/app/(app)/first-year/page.tsx
+- Stage cards: staggered entrance
+- Open accordion: smooth spring animation
+
+6. src/app/(app)/messages/page.tsx
+- Conversation list: stagger each item
+- New message bubble: spring scale-in from bottom
+
+7. src/app/(app)/profile/me/page.tsx
+- Stats numbers: count up animation
+- Action cards: stagger entrance with hover lift
+
+## USABILITY FIXES
+
+8. src/app/(app)/list/page.tsx
+- Step indicator: animate progress bar fill between steps
+- Photo upload: show drag-and-drop zone with dashed border that glows on hover
+- "Next" button: disabled state clearly styled (opacity-40)
+
+9. src/app/(app)/profile/edit/page.tsx  
+- Photo tap area: pulsing ring animation to indicate it's tappable
+- Save button: loading spinner then checkmark on success
+
+10. Bottom nav (src/components/layout/bottom-nav.tsx)
+- Active icon: spring scale 1.1 when selected
+- Add haptic-like visual: brief flash of terracotta on tap
+
+## EMPTY STATES (make them warm and inviting)
+- Browse with no results: "Your neighborhood is just getting started. Be the first to list something."
+- Messages empty: warm illustration placeholder, "Browse swaps to start a conversation"
+- Profile with no items: "Share your first item — another mom nearby is probably looking for it"
+
+## COPY POLISH
+- Review every page for any remaining harsh/cold copy
+- "Submit" → "Share it" or "Post it"
+- "No items found" → "Nothing here yet"
+- Any error messages → warm and helpful
+
+## TECHNICAL
+- Make sure every interactive element has either whileTap OR active: CSS class
+- Add cursor-pointer to all clickable divs
+- Check all pages have proper font-heading on titles (Lilita One) and font-body on descriptions (Gaegu)
+- Colors: text should be #5C3D2E (warm soft brown), sections use terracotta/sage/sunshine/cream
+
+Run npm run build — fix ALL errors.
+When done: openclaw system event --text "Done: Skifte 10-min polish — motion everywhere, all interactions wired, warm copy, clean build" --mode now

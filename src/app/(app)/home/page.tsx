@@ -157,7 +157,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 + i * 0.05, ease }}
             >
-              <ItemCard item={item} />
+              <ItemCard item={item} onPress={() => router.push(`/items/${item.id}`)} />
             </motion.div>
           ))}
         </div>

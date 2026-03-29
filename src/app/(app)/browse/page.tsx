@@ -215,7 +215,7 @@ export default function BrowsePage() {
           >
             <ItemCard
               item={item}
-              onPress={() => router.push(`/item/${item.id}`)}
+              onPress={() => router.push(`/items/${item.id}`)}
             />
           </motion.div>
         ))}
