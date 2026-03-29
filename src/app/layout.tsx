@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
 import { FunBackground } from "@/components/fun-background";
-import { Fredoka, Outfit } from "next/font/google";
+import { Baloo_2, Nunito, Quicksand } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const fredoka = Fredoka({
+const baloo2 = Baloo_2({
   subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const outfit = Outfit({
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const quicksand = Quicksand({
   subsets: ["latin"],
   variable: "--font-body",
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -34,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(fredoka.variable, outfit.variable)}>
+    <html lang="en" className={cn(baloo2.variable, nunito.variable, quicksand.variable)}>
       <body className="antialiased bg-background text-foreground font-body">
         <FunBackground />
         <div className="relative z-10">

@@ -50,6 +50,7 @@ const config: Config = {
         golden: "hsl(var(--golden))",
       },
       fontFamily: {
+        display: ["var(--font-display)", "sans-serif"],
         heading: ["var(--font-heading)", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
         sans: ["var(--font-body)", "sans-serif"],
