@@ -20,6 +20,7 @@ export default function EditProfilePage() {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [saved, setSaved] = useState(false);
 
   const handlePhotoSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,14 +42,19 @@ export default function EditProfilePage() {
 
       // Upload photo if selected
       if (avatarFile) {
-        const ext = avatarFile.name.split(".").pop();
-        const path = `avatars/${user.id}.${ext}`;
-        const { error: uploadError } = await supabase.storage
-          .from("avatars")
-          .upload(path, avatarFile, { upsert: true });
-        if (!uploadError) {
-          const { data } = supabase.storage.from("avatars").getPublicUrl(path);
-          photoUrl = data.publicUrl;
+        try {
+          const ext = avatarFile.name.split(".").pop();
+          const path = `avatars/${user.id}.${ext}`;
+          const { error: uploadError } = await supabase.storage
+            .from("avatars")
+            .upload(path, avatarFile, { upsert: true });
+          if (!uploadError) {
+            const { data } = supabase.storage.from("avatars").getPublicUrl(path);
+            photoUrl = data.publicUrl;
+          }
+          // If upload fails (no bucket), keep the data URL preview
+        } catch {
+          // keep avatarUrl as data URL
         }
       }
 
