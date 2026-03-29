@@ -1,7 +1,7 @@
 export function FunBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <svg className="absolute inset-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         {/* Squiggles */}
         <path d="M80 120 Q110 80 140 120 Q170 160 200 120" fill="none" stroke="#C96A3A" strokeWidth="6" strokeLinecap="round" opacity="0.06"/>
         <path d="M650 80 Q680 40 710 80 Q740 120 770 80 Q800 40 830 80" fill="none" stroke="#3A6349" strokeWidth="5" strokeLinecap="round" opacity="0.07"/>

@@ -25,8 +25,6 @@ export default function Home() {
     <div className="px-4 pt-12 pb-4 space-y-8 max-w-lg mx-auto">
       {/* Header */}
       <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/skifte-logo.png" alt="Skifte Collective" className="h-28 w-auto" />
         <p className="text-sm font-body mt-1 text-primary">The neighborhood network for modern motherhood</p>
         <p className="text-xs font-body mt-2 max-w-sm text-foreground">
           Swap baby clothes, toys, and gear with moms nearby while building real community in your neighborhood.
