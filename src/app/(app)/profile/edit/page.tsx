@@ -40,22 +40,13 @@ export default function EditProfilePage() {
 
       let photoUrl = avatarUrl;
 
-      // Upload photo if selected
+      // Store photo as base64 data URL directly in the profile (no storage bucket needed)
       if (avatarFile) {
-        try {
-          const ext = avatarFile.name.split(".").pop();
-          const path = `avatars/${user.id}.${ext}`;
-          const { error: uploadError } = await supabase.storage
-            .from("avatars")
-            .upload(path, avatarFile, { upsert: true });
-          if (!uploadError) {
-            const { data } = supabase.storage.from("avatars").getPublicUrl(path);
-            photoUrl = data.publicUrl;
-          }
-          // If upload fails (no bucket), keep the data URL preview
-        } catch {
-          // keep avatarUrl as data URL
-        }
+        photoUrl = await new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (ev) => resolve(ev.target?.result as string);
+          reader.readAsDataURL(avatarFile);
+        });
       }
 
       await supabase.from("profiles").upsert({
