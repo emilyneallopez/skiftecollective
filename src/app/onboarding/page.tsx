@@ -15,6 +15,8 @@ export default function OnboardingPage() {
   const supabase = createClient();
   const [displayName, setDisplayName] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
+  const [children, setChildren] = useState<string[]>([]);
+  const [customAge, setCustomAge] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {

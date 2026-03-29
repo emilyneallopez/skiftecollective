@@ -16,6 +16,7 @@ export default function EditProfilePage() {
   const [displayName, setDisplayName] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [bio, setBio] = useState("");
+  const [children, setChildren] = useState<string[]>([]);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -56,6 +57,7 @@ export default function EditProfilePage() {
         display_name: displayName || undefined,
         location: neighborhood || undefined,
         bio: bio || undefined,
+          children_ages: children.length > 0 ? children.join(', ') : undefined,
         avatar_url: photoUrl || undefined,
         updated_at: new Date().toISOString(),
       });
@@ -143,6 +145,34 @@ export default function EditProfilePage() {
             rows={3}
             className="w-full px-4 py-3 bg-card border border-border rounded-2xl font-body text-sm text-foreground placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all resize-none"
           />
+        </div>
+
+
+        <div>
+          <label className="block font-body text-sm font-semibold text-foreground/60 mb-2">
+            How old are your little ones?
+          </label>
+          <p className="font-body text-xs text-foreground/30 mb-3">Helps match you with the right swaps nearby.</p>
+          <div className="flex flex-wrap gap-2">
+            {["Pregnant", "Newborn (0-3m)", "3-6 months", "6-12 months", "1-2 years", "2-3 years", "3-5 years", "5+ years"].map((stage) => {
+              const selected = children.includes(stage);
+              return (
+                <motion.button
+                  key={stage}
+                  type="button"
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setChildren(prev => selected ? prev.filter(s => s !== stage) : [...prev, stage])}
+                  className={`px-4 py-2 rounded-full text-sm font-body transition-colors border ${
+                    selected
+                      ? "bg-primary text-white border-primary"
+                      : "bg-card text-foreground/60 border-border hover:border-primary/40"
+                  }`}
+                >
+                  {stage}
+                </motion.button>
+              );
+            })}
+          </div>
         </div>
 
         <motion.button
