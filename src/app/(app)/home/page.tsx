@@ -41,6 +41,14 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease }}
       >
+        {/* Logo — same size as auth page */}
+        <div className="flex justify-center mb-4">
+          <Image src="/skifte-logo.png" alt="Skifte Collective" width={280} height={112} className="h-24 w-auto object-contain" />
+        </div>
+        <p className="font-body text-base text-[#C96A3A] text-center mb-1">The neighborhood network for modern motherhood</p>
+        <p className="font-body text-sm text-foreground/60 text-center leading-relaxed mb-4">
+          Swap baby clothes, toys, and gear with moms nearby while building real community in your neighborhood.
+        </p>
 
         <div className="flex gap-3 mt-4">
           <motion.button
@@ -75,8 +83,12 @@ export default function HomePage() {
               {i < steps.length - 1 && (
                 <div className="absolute left-[19px] top-12 w-[2px] h-[calc(100%-16px)] bg-[#E5D5BD]" />
               )}
-              <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-[#C96A3A]/10 border-2 border-[#C96A3A]/20 flex items-center justify-center">
-                <step.icon className="w-4 h-4 text-[#C96A3A]" />
+              <div className={`relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border-2 \${
+                i === 0 ? 'bg-[#C96A3A]/15 border-[#C96A3A]/30' :
+                i === 1 ? 'bg-[#3A6349]/15 border-[#3A6349]/30' :
+                'bg-[#F5C842]/20 border-[#F5C842]/50'
+              }\`}>
+                <step.icon className={`w-4 h-4 \${i === 0 ? 'text-[#C96A3A]' : i === 1 ? 'text-[#3A6349]' : 'text-[#C96A3A]'}\`} />
               </div>
               <div className="pb-6">
                 <p className="text-[10px] uppercase tracking-widest text-[#3B1F0E]/40 font-body">Step {i + 1}</p>
