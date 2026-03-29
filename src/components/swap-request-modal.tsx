@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -22,6 +23,7 @@ interface SwapRequestModalProps {
 }
 
 export function SwapRequestModal({ open, onOpenChange, item }: SwapRequestModalProps) {
+  const router = useRouter();
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [message, setMessage] = useState(
     `Hi! I'd love to swap for your ${item.title}. `
@@ -36,11 +38,9 @@ export function SwapRequestModal({ open, onOpenChange, item }: SwapRequestModalP
   const handleSubmit = () => {
     setSubmitted(true);
     setTimeout(() => {
-      setSubmitted(false);
-      setSelectedItem(null);
-      setMessage("");
       onOpenChange(false);
-    }, 2000);
+      router.push("/messages");
+    }, 1800);
   };
 
   return (
@@ -63,8 +63,8 @@ export function SwapRequestModal({ open, onOpenChange, item }: SwapRequestModalP
                 <CheckCircle className="h-16 w-16 text-forest" />
               </motion.div>
               <h3 className="font-heading text-xl font-semibold">Swap Request Sent!</h3>
-              <p className="text-sm text-muted-foreground text-center">
-                We&apos;ve notified {item.user?.name}. You&apos;ll get a message when they respond.
+              <p className="text-sm font-body text-muted-foreground text-center">
+                Your request is on its way to {item.user?.name?.split(" ")[0]}. Taking you to messages now.
               </p>
             </motion.div>
           ) : (

@@ -85,9 +85,15 @@ export default function MessagesPage() {
                   <MessageCircle className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="font-heading text-xl text-foreground mb-2">No messages yet</h3>
-                <p className="font-body text-sm text-foreground/50 leading-relaxed">
-                  When you request a swap or someone reaches out, your conversations will show up here.
+                <p className="font-body text-sm text-foreground/50 leading-relaxed mb-4">
+                  When you send a swap request or someone reaches out about your items, the conversation starts here.
                 </p>
+                <button
+                  onClick={() => router.push('/browse')}
+                  className="px-6 py-2.5 bg-primary text-white rounded-full font-heading text-sm"
+                >
+                  Browse swaps
+                </button>
               </div>
             ) : (
               <div className="flex-1 overflow-y-auto">
