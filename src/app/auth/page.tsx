@@ -52,7 +52,18 @@ function AuthInner() {
           password,
         });
         if (signInError) throw signInError;
+        // Wait for session to be fully established before redirecting
         const redirect = searchParams.get("redirect") || "/home";
+        await new Promise<void>((resolve) => {
+          const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+            if (event === "SIGNED_IN") {
+              subscription.unsubscribe();
+              resolve();
+            }
+          });
+          // Fallback after 1.5s in case event already fired
+          setTimeout(resolve, 1500);
+        });
         router.push(redirect);
       }
     } catch (err: unknown) {
