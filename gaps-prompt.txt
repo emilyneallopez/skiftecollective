@@ -1,0 +1,83 @@
+You are building critical missing features for Skifte Collective, a Next.js 14 app. The app is live at skiftecollective-silk.vercel.app. Fix and build everything below. Do NOT ask questions — just build.
+
+## GAP 1: Onboarding Flow (CRITICAL)
+After a user signs up, they currently land on /browse with no context. Build a proper onboarding page at src/app/onboarding/page.tsx
+
+The onboarding should:
+- Show after signup (redirect from auth page after signUp success → /onboarding instead of /browse)
+- Be a single warm, friendly screen with the Skifte logo
+- Ask for: Display Name, Neighborhood (text input, e.g. "Park Slope, Brooklyn"), and optionally a bio
+- A big friendly "Let's go! →" button that saves to Supabase profiles table and redirects to /browse
+- Supabase upsert to profiles table: { user_id, display_name, location: neighborhood, updated_at }
+- Skip link: "Skip for now →" that just goes to /browse
+- Design: cream background, Lilita One for heading "Tell us about yourself", Gaegu for labels, terracotta button, warm and welcoming
+
+Add /onboarding to the PUBLIC_ROUTES in middleware.ts so it's accessible.
+Update auth page: after signUp success, redirect to /onboarding instead of /browse.
+
+## GAP 2: First Year Map page
+Port the First Year Map from the Lovable app concept to src/app/(app)/first-year/page.tsx
+
+This is a key Skifte differentiator — no competitor has this.
+
+Build it as:
+- Page title: "The First Year Map" with subtitle "A gentle guide to what you'll need, when to swap, and how to make the most of every stage."
+- 6 stage cards in an accordion or expandable grid:
+  1. Newborn (0-3M): What you need, what to borrow, what to swap at 3 months
+  2. Early Baby (3-6M): Rolling, sitting, outgrowing everything fast
+  3. Sitter (6-9M): Solids starting, sitting toys, size jumps
+  4. Crawler (9-12M): Mobile! Safety gear, bigger clothes
+  5. Walker (12-18M): Shoes matter, outdoor gear, toys evolve
+  6. Toddler (18M+): Books, imaginative play, wardrobes grow
+- Each card has: emoji, stage name, "What to get", "What to swap now", "Skifte tip"
+- Warm cream/terracotta design, Lilita One headings, Gaegu body
+- Add to bottom nav and navigation
+
+## GAP 3: Trust & Safety page  
+Create src/app/(app)/trust/page.tsx
+
+Content:
+- Heading: "A safe space for every mom." 
+- Three sections with warm icons:
+  1. Verified Community — "Every member is a real person. We verify accounts and keep the community mom-focused."
+  2. Swap Safely — "Meet in public places, use our in-app chat, and rate every swap. Our community standards keep everyone accountable."  
+  3. Private by Design — "Your personal info stays private. Only your first name and neighborhood are visible to other moms."
+- A "Community Guidelines" section with 5 simple rules (be kind, honest descriptions, public meetups, report concerns, no reselling at markup)
+- Add link to footer
+
+## GAP 4: Fix the bottom nav
+The bottom nav at src/components/layout/bottom-nav.tsx needs to include the First Year Map:
+- Change the existing nav items to: Home (/), Browse (/browse), Add (/list), Community (/circles), Profile (/profile/me)
+- Make sure it shows on all (app) layout pages
+- Add the First Year Map as a link in the home page's "The First Year Map" CTA card
+
+## GAP 5: Improve empty states
+In src/app/(app)/browse/page.tsx, when no items match the filter, show a warm empty state:
+- Big emoji: 🌿
+- Heading: "Nothing here yet"
+- Body: "Be the first to list something in your neighborhood."
+- Button: "List an item →" linking to /list
+
+## GAP 6: Page titles and meta
+Add proper metadata to all main pages. In each page file, add:
+- /browse → title: "Browse Swaps | Skifte Collective"
+- /circles → title: "Neighborhood Circles | Skifte Collective"  
+- /guide → title: "Baby Stage Guide | Skifte Collective"
+- /first-year → title: "The First Year Map | Skifte Collective"
+- /list → title: "List an Item | Skifte Collective"
+
+## GAP 7: Profile redirect
+Currently /profile/me doesn't exist. Add a redirect:
+In src/app/(app)/profile/me/page.tsx:
+- It's a simple client component that reads the Supabase session and redirects to /profile/[username] using the user's id
+- If not logged in, redirect to /auth
+
+## Technical notes
+- Supabase client: import from @/lib/supabase/client
+- Font classes: font-heading = Lilita One, font-body = Gaegu  
+- Colors: terracotta #C96A3A, cream #FAF5EF, forest #3A6349, warm-white #FEFCFA, ink #3B1F0E
+- All buttons: rounded-full
+- All cards: rounded-2xl, cream/warm background, border border-[#E5D5BD]
+
+Run npm run build at the end. Fix any TypeScript errors.
+When done: openclaw system event --text "Done: Skifte gaps filled — onboarding flow, First Year Map, Trust & Safety, empty states, profile redirect, meta tags" --mode now

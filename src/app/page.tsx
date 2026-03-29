@@ -103,6 +103,7 @@ export default function Home() {
         transition={{ delay: 0.2 }}
         className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-5 cursor-pointer hover:shadow-md transition-shadow"
         onClick={() => router.push('/first-year')}
+
       >
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">

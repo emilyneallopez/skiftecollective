@@ -1,15 +1,15 @@
 "use client";
 
-import { Home, Search, PlusCircle, MessageCircle, User } from 'lucide-react';
+import { Home, Search, PlusCircle, Users, User } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 const tabs = [
   { icon: Home, label: 'Home', path: '/' },
   { icon: Search, label: 'Browse', path: '/browse' },
-  { icon: PlusCircle, label: 'Add', path: '/add-item' },
-  { icon: MessageCircle, label: 'Messages', path: '/messages' },
-  { icon: User, label: 'Profile', path: '/profile' },
+  { icon: PlusCircle, label: 'Add', path: '/list' },
+  { icon: Users, label: 'Community', path: '/circles' },
+  { icon: User, label: 'Profile', path: '/profile/me' },
 ];
 
 const BottomNav = () => {
@@ -20,7 +20,7 @@ const BottomNav = () => {
     <nav className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border safe-area-bottom">
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-1">
         {tabs.map((tab) => {
-          const isActive = pathname === tab.path || (tab.path === '/messages' && pathname.startsWith('/messages'));
+          const isActive = pathname === tab.path || (tab.path === '/circles' && pathname.startsWith('/circles')) || (tab.path === '/profile/me' && pathname.startsWith('/profile'));
           return (
             <button
               key={tab.path}

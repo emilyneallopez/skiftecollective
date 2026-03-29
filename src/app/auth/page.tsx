@@ -43,7 +43,7 @@ function AuthInner() {
           },
         });
         if (signUpError) throw signUpError;
-        router.push('/browse');
+        router.push('/onboarding');
       } else {
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
