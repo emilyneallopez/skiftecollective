@@ -155,7 +155,7 @@ export default function CircleDetailPage() {
           <>
             {/* Upcoming Events */}
             <div>
-              <h2 className="font-heading text-xl text-[#3A6349] mb-3">Upcoming Events</h2>
+              <h2 className="font-heading text-xl text-[#7A9E8A] mb-3">Upcoming Events</h2>
               <div className="space-y-3">
                 {mockEvents.map((event, i) => {
                   const isGoing = rsvpd.includes(event.id);
@@ -201,7 +201,7 @@ export default function CircleDetailPage() {
 
             {/* Members */}
             <div>
-              <h2 className="font-heading text-xl text-[#3A6349] mb-3">Members</h2>
+              <h2 className="font-heading text-xl text-[#7A9E8A] mb-3">Members</h2>
               <div className="space-y-3">
                 {members.map((member, i) => (
                   <motion.div

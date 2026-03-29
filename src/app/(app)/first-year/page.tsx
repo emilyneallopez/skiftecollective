@@ -103,11 +103,11 @@ export default function FirstYearPage() {
                 >
                   <div className="px-5 pb-5 space-y-4 border-t border-[#E5D5BD]">
                     <div className="pt-4">
-                      <p className="font-heading text-sm text-[#3A6349] mb-2">What to get</p>
+                      <p className="font-heading text-sm text-[#7A9E8A] mb-2">What to get</p>
                       <ul className="space-y-1">
                         {stage.get.map((item, j) => (
                           <li key={j} className="font-body text-sm text-[#3B1F0E]/70 flex items-start gap-2">
-                            <span className="text-[#3A6349] mt-0.5">&#x2022;</span> {item}
+                            <span className="text-[#7A9E8A] mt-0.5">&#x2022;</span> {item}
                           </li>
                         ))}
                       </ul>

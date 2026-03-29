@@ -76,15 +76,15 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, ease }}
       >
-        <h2 className="text-2xl font-heading text-[#3A6349] mb-4">How Skifte Works</h2>
+        <h2 className="text-2xl font-heading text-[#7A9E8A] mb-4">How Skifte Works</h2>
         <div className="relative flex flex-col gap-0">
           {steps.map((step, i) => (
             <div key={step.title} className="flex items-start gap-4 relative">
               {i < steps.length - 1 && (
                 <div className="absolute left-[19px] top-12 w-[2px] h-[calc(100%-16px)] bg-[#E5D5BD]" />
               )}
-              <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border-2 bg-[#3A6349]/15 border-[#3A6349]/30">
-                <step.icon className="w-4 h-4 text-[#3A6349]" />
+              <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border-2 bg-[#7A9E8A]/15 border-[#7A9E8A]/30">
+                <step.icon className="w-4 h-4 text-[#7A9E8A]" />
               </div>
               <div className="pb-6">
                 <p className="text-[10px] uppercase tracking-widest text-[#3B1F0E]/40 font-body">Step {i + 1}</p>
@@ -102,7 +102,7 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, ease }}
         whileHover={{ y: -2 }}
-        className="bg-gradient-to-r from-[#C96A3A]/10 to-[#3A6349]/10 rounded-2xl p-5 cursor-pointer hover:shadow-md transition-shadow border border-[#E5D5BD]"
+        className="bg-gradient-to-r from-[#C96A3A]/10 to-[#7A9E8A]/10 rounded-2xl p-5 cursor-pointer hover:shadow-md transition-shadow border border-[#E5D5BD]"
         onClick={() => router.push("/first-year")}
       >
         <div className="flex items-center gap-4">
@@ -123,7 +123,7 @@ export default function HomePage() {
 
       {/* Browse Categories */}
       <div>
-        <h2 className="text-2xl font-heading text-[#3A6349] mb-3">Browse Categories</h2>
+        <h2 className="text-2xl font-heading text-[#7A9E8A] mb-3">Browse Categories</h2>
         <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
           {CATEGORIES.map((cat, i) => (
             <motion.button
@@ -144,7 +144,7 @@ export default function HomePage() {
       {/* New For You */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-2xl font-heading text-[#3A6349]">New For You</h2>
+          <h2 className="text-2xl font-heading text-[#7A9E8A]">New For You</h2>
           <Link href="/browse" className="flex items-center gap-1 text-xs font-body text-[#C96A3A]">
             See all <ArrowRight className="w-3 h-3" />
           </Link>
@@ -168,11 +168,11 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="bg-[#3A6349]/10 rounded-2xl p-5 text-center border border-[#E5D5BD]"
+        className="bg-[#7A9E8A]/10 rounded-2xl p-5 text-center border border-[#E5D5BD]"
       >
         <Image src="/skifte-icon.png" alt="Skifte" width={48} height={48} className="w-12 h-12 mx-auto mb-2 object-contain rounded-2xl" />
         <h3 className="font-heading text-[#3B1F0E] text-2xl">Our Collective Impact</h3>
-        <p className="text-3xl font-heading text-[#3A6349] mt-1">1,247 items</p>
+        <p className="text-3xl font-heading text-[#7A9E8A] mt-1">1,247 items</p>
         <p className="text-sm font-body text-[#3B1F0E]/60 mt-1">passed from one family to another</p>
       </motion.div>
     </div>

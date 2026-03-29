@@ -51,7 +51,7 @@ export default function CirclesPage() {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => alert("Start a Circle coming soon! Email us at hello@skiftecollective.com")}
-            className="flex-shrink-0 px-4 py-2 bg-[#3A6349] text-white rounded-full font-heading text-sm mt-1"
+            className="flex-shrink-0 px-4 py-2 bg-[#7A9E8A] text-white rounded-full font-heading text-sm mt-1"
           >
             + Start a circle
           </motion.button>
