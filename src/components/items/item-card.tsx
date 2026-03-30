@@ -37,7 +37,7 @@ const conditionColors: Record<string, string> = {
 };
 
 const ItemCard = ({ item, onPress, onFavorite }: ItemCardProps) => {
-  const imageUrl = item.image_urls?.[0] || (item as any).images?.[0] || null;
+  const imageUrl = item.image_urls?.[0] || ((item as Record<string, unknown>)["images"] as string[] | undefined)?.[0] || null;
   const hasImage = !!imageUrl;
   const [favorited, setFavorited] = useState(false);
 
