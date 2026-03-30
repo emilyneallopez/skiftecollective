@@ -37,7 +37,7 @@ interface Profile {
   children_ages?: string;
 }
 
-d({ label, target }: { label: string; target: number }) {
+function StatCard({ label, target }: { label: string; target: number }) {
   const count = useCountUp(target);
   return (
     <div className="bg-card rounded-2xl p-3 text-center border border-border">
