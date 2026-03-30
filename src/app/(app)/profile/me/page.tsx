@@ -9,6 +9,24 @@ import { createClient } from "@/lib/supabase/client";
 
 export const dynamic = "force-dynamic";
 
+function useCountUp(target: number, duration = 1200) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (target === 0) return;
+    let start = 0;
+    const step = Math.ceil(target / (duration / 30));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { setCount(target); clearInterval(timer); }
+      else setCount(start);
+    }, 30);
+    return () => clearInterval(timer);
+  }, [target, duration]);
+  return count;
+}
+
+
+
 const ease = [0.22, 1, 0.36, 1] as const;
 
 interface Profile {
@@ -19,24 +37,14 @@ interface Profile {
   children_ages?: string;
 }
 
-function useCountUp(target: number, duration = 1200) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (target === 0) return;
-    let start = 0;
-    const step = Math.max(1, Math.ceil(target / (duration / 30)));
-    const interval = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(interval);
-      } else {
-        setCount(start);
-      }
-    }, 30);
-    return () => clearInterval(interval);
-  }, [target, duration]);
-  return count;
+d({ label, target }: { label: string; target: number }) {
+  const count = useCountUp(target);
+  return (
+    <div className="bg-card rounded-2xl p-3 text-center border border-border">
+      <p className="font-heading text-2xl text-primary">{target === 0 ? "—" : count}</p>
+      <p className="font-body text-xs text-foreground/50">{label}</p>
+    </div>
+  );
 }
 
 export default function MyProfilePage() {

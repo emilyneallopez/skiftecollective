@@ -108,9 +108,9 @@ export default function FirstYearPage() {
         {stages.map((stage, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
+            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.07, duration: 0.4 }}
             style={{ backgroundColor: stage.bg, borderColor: stage.border }}
             className="rounded-2xl border overflow-hidden"
           >

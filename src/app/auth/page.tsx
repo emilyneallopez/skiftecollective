@@ -86,8 +86,8 @@ function AuthInner() {
         <div className="text-center space-y-3">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+            animate={{ opacity: 1, y: [0, -6, 0] }}
+            transition={{ delay: 0.1, duration: 0.5, y: { delay: 1, duration: 3, repeat: Infinity, ease: "easeInOut" } }}
             className="mx-auto"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}

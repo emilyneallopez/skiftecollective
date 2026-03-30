@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Users, MapPin, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -11,6 +11,32 @@ import { mockProfiles } from "@/lib/data/mock/profiles";
 import { getInitials } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+function useCountUp(target: number) {
+  const [count, setCount] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    let n = 0;
+    const step = Math.max(1, Math.ceil(target / 30));
+    const t = setInterval(() => {
+      n += step;
+      if (n >= target) { setCount(target); clearInterval(t); }
+      else setCount(n);
+    }, 30);
+    return () => clearInterval(t);
+  }, [target]);
+  return count;
+}
+
+
+
+
+function MemberCount({ target }: { target: number }) {
+  const count = useCountUp(target);
+  return <span className="flex items-center gap-1"><Users className="h-3 w-3" />{count} members</span>;
+}
 
 export default function CirclesPage() {
   const router = useRouter();
@@ -88,7 +114,7 @@ export default function CirclesPage() {
                   <h3 className="font-heading text-xl text-white">{circle.name}</h3>
                   <div className="flex items-center gap-3 text-white/75 text-xs font-body mt-0.5">
                     <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{circle.neighborhood}</span>
-                    <span className="flex items-center gap-1"><Users className="h-3 w-3" />{circle.member_count} members</span>
+                    <MemberCount target={circle.member_count} />
                   </div>
                 </div>
               </div>
